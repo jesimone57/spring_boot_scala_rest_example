@@ -1,30 +1,26 @@
 package com.jsimone.controller
 
+import javax.servlet.http.HttpSession
+
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation._
 
 @RestController
-@RequestMapping(path = Array("/"))
+@RequestMapping(value = Array("/"), produces = Array(MediaType.TEXT_PLAIN_VALUE))
 class HelloWorldController {
 
-  //@RequestMapping(value = Array("/helloworld"), method = Array(RequestMethod.GET))
-  @GetMapping(path = Array("/helloworld"))
-  def sayHelloWorld = {
-    val x = "Hello World"
-    x
+  @GetMapping(value = Array("/"))
+  def hello() = {
+    "Hello World"
   }
 
-  @RequestMapping(value=Array("/greeting"))
-  def greeting(@RequestParam(value="name", required=false, defaultValue="World") name: String)  = {
+  @GetMapping(value = Array("/hello1"))
+  def helloByRequestParam(@RequestParam(value = "name", required = false, defaultValue = "World") name: String) = {
     String.format("Hello, %s!", name)
   }
 
-  @RequestMapping(value = Array("/hello1"), method = Array(RequestMethod.GET))
-  def sayHelloByParameter(@RequestParam("name") name: String) = {
-    "hello " + name
-  }
-
-  @RequestMapping(value = Array("/hello2/{name}"), method = Array(RequestMethod.GET))
-  def sayHelloByVariable(@PathVariable name: String) = {
+  @GetMapping(value = Array("/hello2/{name}"))
+  def helloByPathVariable(@PathVariable name: String) = {
     "hello " + name
   }
 

@@ -28,11 +28,14 @@ Firefox browser also does an excellent job of formatting the JSON results.
 ## Hello Example URL end-points
 
 ### Hello World
-[http://localhost:8080/helloworld](http://localhost:8080/helloworld)
+[http://localhost:8080](http://localhost:8080)
+
+### Hello World using a default name
+[http://localhost:8080/hello1](http://localhost:8080/hello1)
+
+### Hello World using a given name as a request parameter
+[http://localhost:8080/hello1?name=Frank](http://localhost:8080/hello1?name=Frank)
 
 ### Hello using a name as a path variable
-[http://localhost:8080/hello1/tom](http://localhost:8080/hello/tom)
-
-### Hello using a name as a request paramter
-[http://localhost:8080/hello2?name=fred](http://localhost:8080/hello2?name=fred)
+[http://localhost:8080/hello2/tom](http://localhost:8080/hello2/tom)
 
