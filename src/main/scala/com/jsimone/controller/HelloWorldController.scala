@@ -2,6 +2,8 @@ package com.jsimone.controller
 
 import javax.servlet.http.HttpSession
 
+import com.jsimone.error.ErrorResponseBody
+import com.jsimone.error.FieldError
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation._
 
