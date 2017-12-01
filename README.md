@@ -3,6 +3,8 @@
 This repository contains examples of how to use the Spring REST framework to implement 
 an API which does some simple things:
 1. Say hello
+2. Handle exceptions via a global exception handler
+3. Convert responses to JSON
 
 
 NOTE:
@@ -38,4 +40,13 @@ Firefox browser also does an excellent job of formatting the JSON results.
 
 ### Hello using a name as a path variable
 [http://localhost:8080/hello2/tom](http://localhost:8080/hello2/tom)
+
+### Example error response
+[http://localhost:8080/example_response](http://localhost:8080/example_response)
+
+### Sample JSON response of a nested Scala object
+[http://localhost:8080/json](http://localhost:8080/json)
+
+### Example of an arbitrarily thrown exception caught by an exception handler
+[http://localhost:8080//thrown_exception](http://localhost:8080//thrown_exception)
 

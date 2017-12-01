@@ -1,24 +1,17 @@
 package com.jsimone
 
-import com.jsimone.error.ErrorResponseBody
+import com.jsimone.util.JsonUtil
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 @ControllerAdvice
 class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-  import org.springframework.http.{HttpHeaders, HttpStatus, ResponseEntity}
-  import org.springframework.web.context.request.WebRequest
-  import org.springframework.web.servlet.NoHandlerFoundException
-
-
   import com.jsimone.error.ErrorResponseBody
-  import org.springframework.http.HttpHeaders
-  import org.springframework.http.HttpStatus
-  import org.springframework.http.MediaType
-  import org.springframework.http.ResponseEntity
+  import org.springframework.http.{HttpHeaders, HttpStatus, MediaType, ResponseEntity}
   import org.springframework.web.bind.annotation.ExceptionHandler
   import org.springframework.web.context.request.WebRequest
+  import org.springframework.web.servlet.NoHandlerFoundException
 
   @ExceptionHandler(Array(classOf[Exception]))
   protected def handleDefaultException(exception: RuntimeException, request: WebRequest): ResponseEntity[AnyRef] = {
@@ -28,7 +21,7 @@ class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     val message = exception.getMessage
     val status = HttpStatus.INTERNAL_SERVER_ERROR
     val errorResponseBody = new ErrorResponseBody(status.value, URIPath, message)
-    handleExceptionInternal(exception, errorResponseBody, headers, status, request)
+    handleExceptionInternal(exception, JsonUtil.toJson(errorResponseBody), headers, status, request)
   }
 
   /**
