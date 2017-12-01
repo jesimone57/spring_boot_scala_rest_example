@@ -1,14 +1,13 @@
 package com.jsimone.controller
 
-import org.apache.log4j.Logger
+import com.jsimone.entity.Person
+import com.jsimone.util.Logging
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation._
 
 @RestController
 @RequestMapping(value = Array("/"), produces = Array(MediaType.TEXT_PLAIN_VALUE))
-class HelloWorldController {
-
-  val log: Logger = Logger.getLogger(classOf[HelloWorldController])
+class HelloWorldController extends Logging {
 
   @GetMapping(value = Array("/"))
   def hello() = {
@@ -26,6 +25,12 @@ class HelloWorldController {
   def helloByPathVariable(@PathVariable name: String) = {
     log.info("/hello2 endpoint hit.")
     "hello %s".format(name)
+  }
+
+  @GetMapping(value = Array("/hello3"))
+  def helloByRequestBody(person: Person) = {
+    log.info("/hello3 endpoint hit with person params: %s".format(person.toString))
+    "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
   }
 
 }

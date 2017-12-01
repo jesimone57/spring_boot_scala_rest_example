@@ -1,16 +1,13 @@
 package com.jsimone.controller
 
 import com.jsimone.error.{ErrorResponseBody, FieldError}
-import com.jsimone.util.JsonUtil
-import org.apache.log4j.Logger
+import com.jsimone.util.{JsonUtil, Logging}
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation._
 
 @RestController
 @RequestMapping(value = Array("/"), produces = Array(MediaType.APPLICATION_JSON_VALUE))
-class ErrorResponseController {
-
-  val log: Logger = Logger.getLogger(classOf[ErrorResponseController])
+class ErrorResponseController extends Logging {
 
   @GetMapping(value = Array("/example_response"))
   def sampleErrorResponse(): String = {
@@ -43,7 +40,6 @@ class ErrorResponseController {
   def throwingAnException(): String = {
     log.info("/thrown_exception enpoint hit.")
     throw new IllegalArgumentException("Illegal Argument Exception")
-    "never get here"
   }
 
 }
