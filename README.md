@@ -3,8 +3,10 @@
 This repository contains examples of how to use the Spring REST framework to implement 
 an API which does some simple things:
 1. Say hello
-2. Handle exceptions via a global exception handler
-3. Convert responses to JSON
+2. Specific exception handler for exceptions of a given class
+3. A global exception handler as a catch-all for all other exceptions
+4. Convert Scala object responses to JSON
+5. A template for standardizing error responses via ErrorResponseBody and FieldError classes.
 
 
 NOTE:
@@ -12,6 +14,7 @@ If you try to hit an invalid endpoint, the Spring controller advice will produce
 nice error message indicating the endpoint is not in service.
 
 ## Prerequisites needed to compile, test and execute the code
+* scala 2.11.*
 * java 1.8
 * gradle 4 or higher
 * git 
@@ -20,11 +23,11 @@ nice error message indicating the endpoint is not in service.
 1. git clone https://github.com/jesimone57/spring_boot_scala_rest_example.git
 2. gradle build
 3. gradle bootRun
-4. For best results, use Google Chrome and install the JSONView chrome plugin to nicely format JSON results. 
-Firefox browser also does an excellent job of formatting the JSON results.
-5. Then try any of the following URLs (Note: Spring Boot runs Tomcat server on localhost port 8080):
+4. For best results, use Google Chrome and install the JSONView chrome extension to nicely format JSON results.
+Firefox browser also does an excellent job of formatting the JSON results without the need for an extension.
+5. Try any of the following URLs (Note: Spring Boot runs Tomcat server on localhost port 8080):
 
-### Check to make sure the webservice is running
+### Check to make sure the REST API is running
 [http://localhost:8080/health](http://localhost:8080/health)
 
 ## Hello Example URL end-points
