@@ -41,14 +41,17 @@ Firefox browser also does an excellent job of formatting the JSON results withou
 ### Hello World using a given name as a request parameter
 [http://localhost:8080/hello1?name=Frank](http://localhost:8080/hello1?name=Frank)
 
+### Hello using a name as a path variable
+[http://localhost:8080/hello2/tom](http://localhost:8080/hello2/tom)
+
 ### Hello from request parameter mapping onto Person entity - using all defaults
 [http://localhost:8080/hello3](http://localhost:8080/hello3)
 
 ### Hello from request parameter mapping onto Person entity - using named parameters
 [http://localhost:8080/hello3?name=Elvis&age=45&job=Singer](http://localhost:8080/hello3?name=Elvis&age=45&job=Singer)
 
-### Hello using a name as a path variable
-[http://localhost:8080/hello2/tom](http://localhost:8080/hello2/tom)
+## Hello from request parameter mapping onto Person entity - using named parameters with validation -> 400 bad request
+[http://localhost:8080/hello4?name=Elvis&age=45&job=Singer](http://localhost:8080/hello4?name=Elvis&age=12&job=Singer)
 
 ### Example error response
 [http://localhost:8080/example_response](http://localhost:8080/example_response)

@@ -1,8 +1,11 @@
 package com.jsimone.controller
 
+import javax.validation.Valid
+
 import com.jsimone.entity.Person
 import com.jsimone.util.Logging
 import org.springframework.http.MediaType
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation._
 
 @RestController
@@ -28,9 +31,15 @@ class HelloWorldController extends Logging {
   }
 
   @GetMapping(value = Array("/hello3"))
-  def helloByRequestBody(person: Person) = {
+  def helloByRequestClass(person: Person) = {
     log.info("/hello3 endpoint hit with person params: %s".format(person.toString))
     "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
   }
+
+//    @GetMapping(value = Array("/hello4"))
+//    def helloByRequestClassValidate(@Valid person: Person) = {
+//      log.info("/hello4 endpoint hit with person params: %s".format(person.toString))
+//      "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
+//    }
 
 }
