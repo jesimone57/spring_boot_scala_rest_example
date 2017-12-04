@@ -7,6 +7,7 @@ import scala.collection.mutable.ListBuffer
 class ErrorResponseBody() {
   @JsonProperty("status_code") var code: Int = _
   @JsonProperty("uri_path") var path: String = _
+  @JsonProperty("method") var method: String = _
   @JsonProperty("error_message") var message: String = _
   @JsonProperty("errors") var errors: ListBuffer[FieldError] = ListBuffer()
 

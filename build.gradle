@@ -17,8 +17,6 @@ plugins {
     id 'com.palantir.git-version' version '0.8.0'
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'scala'
 apply plugin: 'org.springframework.boot'

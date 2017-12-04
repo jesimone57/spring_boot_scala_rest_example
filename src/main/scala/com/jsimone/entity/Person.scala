@@ -1,10 +1,12 @@
 package com.jsimone.entity
 
-import javax.validation.constraints.{Max, Min}
+import javax.validation.constraints.{Max, Min, Size}
 
 import scala.beans.BeanProperty
 
 class Person() {
+
+  @Size(min=2, max=30)
   @BeanProperty var name: String = "none"
 
   @Min(value = 18, message = "Age should be a minium of 18")

@@ -1,22 +1,37 @@
 package com.jsimone
 
-import javax.validation.ConstraintViolation
+import javax.servlet.http.HttpServletRequest
 
-import com.jsimone.util.JsonUtil
-import org.springframework.web.bind.annotation.ControllerAdvice
+import com.jsimone.error.ErrorResponseBody
+import com.jsimone.util.{JsonUtil, Logging}
+import org.springframework.http._
+import org.springframework.web.bind.annotation.{ControllerAdvice, ExceptionHandler}
+import org.springframework.web.context.request.WebRequest
+import org.springframework.web.servlet.NoHandlerFoundException
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
-@ControllerAdvice
-class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-  import com.jsimone.error.ErrorResponseBody
-  import org.springframework.http.{HttpHeaders, HttpStatus, MediaType, ResponseEntity}
-  import org.springframework.web.bind.annotation.ExceptionHandler
-  import org.springframework.web.context.request.WebRequest
-  import org.springframework.web.servlet.NoHandlerFoundException
+/*
+Spring MVC Exceptions see https://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/mvc.html#mvc-ann-rest-spring-mvc-exceptions
+
+BindException	                        400 (Bad Request)
+ConversionNotSupportedException	      500 (Internal Server Error)
+HttpMediaTypeNotAcceptableException	  406 (Not Acceptable)
+HttpMediaTypeNotSupportedException	  415 (Unsupported Media Type)
+HttpMessageNotReadableException	      400 (Bad Request)
+HttpMessageNotWritableException	      500 (Internal Server Error)
+HttpRequestMethodNotSupportedException	405 (Method Not Allowed)
+MethodArgumentNotValidException	      400 (Bad Request)
+MissingServletRequestParameterException	400 (Bad Request)
+MissingServletRequestPartException	  400 (Bad Request)
+NoSuchRequestHandlingMethodException	404 (Not Found)
+TypeMismatchException	                400 (Bad Request)
+ */
+@ControllerAdvice
+class GlobalExceptionHandler extends ResponseEntityExceptionHandler with Logging {
 
   @ExceptionHandler(Array(classOf[Exception]))
-  protected def handleDefaultException(exception: RuntimeException, request: WebRequest): ResponseEntity[AnyRef] = {
+  protected def handleDefaultException(exception: Exception, request: WebRequest): ResponseEntity[AnyRef] = {
     val URIPath = request.getDescription(false).substring(4)
     val headers = new HttpHeaders
     headers.setContentType(MediaType.APPLICATION_JSON)
@@ -25,27 +40,6 @@ class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     val errorResponseBody = new ErrorResponseBody(status.value, URIPath, message)
     handleExceptionInternal(exception, JsonUtil.toJson(errorResponseBody), headers, status, request)
   }
-
-//  import org.springframework.http.HttpStatus
-//  import org.springframework.validation.BindingResult
-//  import org.springframework.web.bind.MethodArgumentNotValidException
-//  import org.springframework.web.bind.annotation.ExceptionHandler
-//  import org.springframework.web.bind.annotation.ResponseBody
-//  import org.springframework.web.bind.annotation.ResponseStatus
-//
-//  @ExceptionHandler(Array(classOf[MethodArgumentNotValidException]))
-//  @ResponseStatus(HttpStatus.BAD_REQUEST)
-//  def handleMethodArgumentNotValidException(exception: MethodArgumentNotValidException, request: WebRequest): ResponseEntity[AnyRef] = {
-//    val URIPath = request.getDescription(false).substring(4)
-//    val headers = new HttpHeaders
-//    headers.setContentType(MediaType.APPLICATION_JSON)
-//    val message = exception.getMessage
-//    val status = HttpStatus.BAD_REQUEST
-//    val result = exception.getBindingResult
-//    val fieldErrors = result.getFieldErrors
-//    val errorResponseBody = new ErrorResponseBody(status.value, URIPath, message)  // todo: set field errors into response body
-//    handleExceptionInternal(exception, JsonUtil.toJson(errorResponseBody), headers, status, request)
-//  }
 
   /**
     * Note:  we must add the 2 properties to resources/application.properties in order for this to work:

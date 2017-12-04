@@ -1,11 +1,13 @@
 package com.jsimone.controller
 
+import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 
 import com.jsimone.entity.Person
-import com.jsimone.util.Logging
-import org.springframework.http.MediaType
-import org.springframework.validation.BindingResult
+import com.jsimone.error.{ErrorResponseBody, FieldError}
+import com.jsimone.util.{JsonUtil, Logging}
+import org.springframework.http.{HttpHeaders, HttpStatus, MediaType, ResponseEntity}
+import org.springframework.validation.BindException
 import org.springframework.web.bind.annotation._
 
 @RestController
@@ -36,10 +38,26 @@ class HelloWorldController extends Logging {
     "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
   }
 
-    @GetMapping(value = Array("/hello4"))
-    def helloByRequestClassValidate(@Valid person: Person) = {
-      log.info("/hello4 endpoint hit with person params: %s".format(person.toString))
-      "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
-    }
+  @GetMapping(value = Array("/hello4"))
+  def helloByRequestClassValidate(@Valid person: Person) = {
+    log.info("/hello4 endpoint hit with person params: %s".format(person.toString))
+    "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
+  }
 
+
+  @ExceptionHandler(Array(classOf[BindException]))
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  def handleBindException(ex: BindException, request: HttpServletRequest ): ResponseEntity[AnyRef] = {
+    log.error( ex.getBindingResult.getGlobalError)
+    val URIPath = request.getRequestURI
+    val headers = new HttpHeaders
+    headers.setContentType(MediaType.APPLICATION_JSON)
+    val message = ex.getMessage
+    val status = HttpStatus.BAD_REQUEST
+    val bindingResult = ex.getBindingResult
+    val errorResponseBody = new ErrorResponseBody(status.value, URIPath, message)  // todo: set field errors into response body
+    errorResponseBody.method = request.getMethod
+    //bindingResult.getFieldErrors.forEach(fe => errorResponseBody.errors +=  new FieldError(fe.getField, fe.getRejectedValue.toString,fe.getDefaultMessage))
+    new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, status)
+  }
 }
