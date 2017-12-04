@@ -51,6 +51,7 @@ class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     * Note:  we must add the 2 properties to resources/application.properties in order for this to work:
     *   spring.mvc.throw-exception-if-no-handler-found=true
     *   spring.resources.add-mappings=false
+    * Note:  The application properties file must reside in /src/main/resources or it will not be found by Spring Boot
     */
   override protected def handleNoHandlerFoundException(exception: NoHandlerFoundException, headers: HttpHeaders, status: HttpStatus, request: WebRequest): ResponseEntity[AnyRef] = {
     val URIPath = request.getDescription(false).substring(4)

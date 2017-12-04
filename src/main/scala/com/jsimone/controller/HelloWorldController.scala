@@ -36,10 +36,10 @@ class HelloWorldController extends Logging {
     "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
   }
 
-//    @GetMapping(value = Array("/hello4"))
-//    def helloByRequestClassValidate(@Valid person: Person) = {
-//      log.info("/hello4 endpoint hit with person params: %s".format(person.toString))
-//      "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
-//    }
+    @GetMapping(value = Array("/hello4"))
+    def helloByRequestClassValidate(@Valid person: Person) = {
+      log.info("/hello4 endpoint hit with person params: %s".format(person.toString))
+      "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
+    }
 
 }
