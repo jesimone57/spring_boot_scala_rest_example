@@ -38,12 +38,13 @@ bootRun {
 }
 
 dependencies {
-    compile group: 'org.scala-lang', name: 'scala-library', version: '2.11.8'
+    compile group: 'org.scala-lang', name: 'scala-library', version: '2.12.4'
 
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
 
-    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.11', version: '2.8.1'
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.12', version: '2.8.10'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.10'
 
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
 

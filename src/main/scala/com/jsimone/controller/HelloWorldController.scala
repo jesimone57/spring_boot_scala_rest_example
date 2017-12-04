@@ -57,7 +57,7 @@ class HelloWorldController extends Logging {
     val bindingResult = ex.getBindingResult
     val errorResponseBody = new ErrorResponseBody(status.value, URIPath, message)  // todo: set field errors into response body
     errorResponseBody.method = request.getMethod
-    //bindingResult.getFieldErrors.forEach(fe => errorResponseBody.errors +=  new FieldError(fe.getField, fe.getRejectedValue.toString,fe.getDefaultMessage))
+    bindingResult.getFieldErrors.forEach(fe => errorResponseBody.errors +=  new FieldError(fe.getField, fe.getRejectedValue.toString,fe.getDefaultMessage))
     new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, status)
   }
 }
