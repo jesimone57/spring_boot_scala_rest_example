@@ -47,17 +47,17 @@ class HelloWorldController extends Logging {
 
   @ExceptionHandler(Array(classOf[BindException]))
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  def handleBindException(ex: BindException, request: HttpServletRequest ): ResponseEntity[AnyRef] = {
-    log.error( ex.getBindingResult.getGlobalError)
+  def handleBindException(exception: BindException, request: HttpServletRequest ): ResponseEntity[AnyRef] = {
+    log.error(exception.toString)
     val URIPath = request.getRequestURI
     val headers = new HttpHeaders
     headers.setContentType(MediaType.APPLICATION_JSON)
-    val message = ex.getMessage
+    val message = exception.getMessage
     val status = HttpStatus.BAD_REQUEST
-    val bindingResult = ex.getBindingResult
-    val errorResponseBody = new ErrorResponseBody(status.value, URIPath, message)  // todo: set field errors into response body
+    val bindingResult = exception.getBindingResult
+    val errorResponseBody = new ErrorResponseBody(status.value, URIPath, message)
     errorResponseBody.method = request.getMethod
-    bindingResult.getFieldErrors.forEach(fe => errorResponseBody.errors +=  new FieldError(fe.getField, fe.getRejectedValue.toString,fe.getDefaultMessage))
+    bindingResult.getFieldErrors.forEach(fe => errorResponseBody.errors +=  new FieldError(fe.getField, if (fe.getRejectedValue != null) fe.getRejectedValue.toString else null, fe.getDefaultMessage))
     new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, status)
   }
 }

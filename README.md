@@ -47,11 +47,20 @@ Firefox browser also does an excellent job of formatting the JSON results withou
 ### Hello from request parameter mapping onto Person entity - using all defaults
 [http://localhost:8080/hello3](http://localhost:8080/hello3)
 
-### Hello from request parameter mapping onto Person entity - using named parameters
+### Hello from request parameters mapping onto Person entity - using named parameters
 [http://localhost:8080/hello3?name=Elvis&age=45&job=Singer](http://localhost:8080/hello3?name=Elvis&age=45&job=Singer)
 
-## Hello from request parameter mapping onto Person entity - using named parameters with validation -> 400 bad request
-[http://localhost:8080/hello4?name=Elvis&age=45&job=Singer](http://localhost:8080/hello4?name=Elvis&age=12&job=Singer)
+### Hello from request parameter mapping onto Person entity - using named parameters with validation -> 400 bad request: age field constraint violation
+[http://localhost:8080/hello4?name=Elvis&age=12&job=Singer](http://localhost:8080/hello4?name=Elvis&age=12&job=Singer)
+
+### Hello from request parameters mapping onto Person entity - using named parameters with validation -> 400 bad request: age and name field constraint violations
+[http://localhost:8080/hello4?name=f&age=17&job=Painter](http://localhost:8080/hello4?name=f&age=17&job=Painter)
+
+### Hello from request parameters mapping onto Person entity - using named parameters with validation -> 400 bad request: age, name and job field constraint violations. Null job field.
+[http://localhost:8080/hello4?name=f&age=17](http://localhost:8080/hello4?name=f&age=17)
+
+### Hello from request parameters mapping onto Person entity - using named parameters with validation -> 400 bad request: age, name and job field constraint violations. Empty job field.
+[http://localhost:8080/hello4?name=f&age=17&job=](http://localhost:8080/hello4?name=f&age=17&job=)
 
 ### Example error response
 [http://localhost:8080/example_response](http://localhost:8080/example_response)
