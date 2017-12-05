@@ -25,12 +25,11 @@ nice error message indicating the endpoint is not in service.
 3. gradle bootRun
 4. For best results, use Google Chrome and install the JSONView chrome extension to nicely format JSON results.
 Firefox browser also does an excellent job of formatting the JSON results without the need for an extension.
-5. Try any of the following URLs (Note: Spring Boot runs Tomcat server on localhost port 8080):
+5. Try any of the following URLs (Note: Spring Boot runs Tomcat server on localhost port 8080 by default.
+You can change the port in application.properties file):
 
 ### Check to make sure the REST API is running
 [http://localhost:8080/health](http://localhost:8080/health)
-
-## Hello Example URL end-points
 
 ### Hello World
 [http://localhost:8080](http://localhost:8080)
@@ -62,6 +61,9 @@ Firefox browser also does an excellent job of formatting the JSON results withou
 ### Hello from request parameters mapping onto Person entity - using named parameters with validation -> 400 bad request: age, name and job field constraint violations. Empty job field.
 [http://localhost:8080/hello4?name=f&age=17&job=](http://localhost:8080/hello4?name=f&age=17&job=)
 
+### Hello from request parameters mapping onto Person entity - using named parameters with validation -> 400 bad request: job field violates regexp pattern constraint
+[http://localhost:8080/hello4?name=Oscar&age=21&job=*actor](http://localhost:8080/hello4?name=Oscar&age=21&job=*actor)
+
 ### Example error response
 [http://localhost:8080/example_response](http://localhost:8080/example_response)
 
@@ -69,5 +71,8 @@ Firefox browser also does an excellent job of formatting the JSON results withou
 [http://localhost:8080/json](http://localhost:8080/json)
 
 ### Example of an arbitrarily thrown exception caught by an exception handler
-[http://localhost:8080//thrown_exception](http://localhost:8080//thrown_exception)
+[http://localhost:8080/thrown_exception](http://localhost:8080/thrown_exception)
+
+### Example of 404 - page not found - due to invalid endpoint
+[http://localhost:8080/asdf](http://localhost:8080/asdf)
 

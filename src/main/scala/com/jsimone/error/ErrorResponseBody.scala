@@ -1,6 +1,10 @@
 package com.jsimone.error
 
+import javax.servlet.http.HttpServletRequest
+
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.springframework.http.HttpStatus
+import org.springframework.validation.{BindException, BindingResult}
 
 import scala.collection.mutable.ListBuffer
 
@@ -24,6 +28,14 @@ class ErrorResponseBody() {
     this.path = path
     this.message = message
     this.errors = errors
+  }
+
+  def addBindingResultErrors(bindingResult: BindingResult) = {
+    bindingResult
+      .getFieldErrors
+      .forEach(fe => this.errors +=  new FieldError(fe.getField,
+        if (fe.getRejectedValue != null) fe.getRejectedValue.toString else null,
+        fe.getDefaultMessage))
   }
 
   override def toString: String = {

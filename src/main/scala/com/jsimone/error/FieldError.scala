@@ -3,8 +3,8 @@ package com.jsimone.error
 import com.fasterxml.jackson.annotation.JsonProperty
 
 class FieldError() {
-  @JsonProperty("error_field") var field: String = _
-  @JsonProperty("error_value")var value: String = _
+  @JsonProperty("field_name") var field: String = _
+  @JsonProperty("rejected_value")var value: String = _
   @JsonProperty("error_message") var message: String = _
 
   def this(field: String, value: String, message: String) = {

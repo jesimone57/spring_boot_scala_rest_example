@@ -1,15 +1,19 @@
 package com.jsimone.controller
 
+import javax.validation.Valid
+
+import com.jsimone.constants.UrlPath
+import com.jsimone.entity.Person
 import com.jsimone.error.{ErrorResponseBody, FieldError}
-import com.jsimone.util.{JsonUtil, Logging}
+import com.jsimone.util.JsonUtil
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation._
 
 @RestController
-@RequestMapping(value = Array("/"), produces = Array(MediaType.APPLICATION_JSON_VALUE))
-class ErrorResponseController extends Logging {
+@RequestMapping(value = Array(UrlPath.ROOT), produces = Array(MediaType.APPLICATION_JSON_VALUE))
+class ErrorResponseController extends BaseController {
 
-  @GetMapping(value = Array("/example_response"))
+  @GetMapping(value = Array(UrlPath.EXAMPLE_RESPONSE))
   def sampleErrorResponse(): String = {
     log.info("/example_response endpoint hit.")
     val errorResponseBody = new ErrorResponseBody(400, "http://asdf", "some weird error")
@@ -22,7 +26,7 @@ class ErrorResponseController extends Logging {
   /**
     * See ref https://stackoverflow.com/questions/12113010/scala-responsebody-and-map
     */
-  @GetMapping(value = Array("/json"))
+  @GetMapping(value = Array(UrlPath.JSON))
   def mapToJson(): String = {
     log.info("/json endpoint hit.")
     val m = Map(
@@ -36,10 +40,17 @@ class ErrorResponseController extends Logging {
     JsonUtil.toJson(m)
   }
 
-  @GetMapping(value = Array("/thrown_exception"))
+  @GetMapping(value = Array(UrlPath.THROWN_EXCEPTION))
   def throwingAnException(): String = {
     log.info("/thrown_exception enpoint hit.")
     throw new IllegalArgumentException("Illegal Argument Exception")
+  }
+
+  // Note:  this endpoint works with validation because the exception handler is in the base class
+  @GetMapping(value = Array("/validate_person"))
+  def helloByRequestClassValidate(@Valid person: Person) = {
+    log.info("/validate_person endpoint hit with person params: %s".format(person.toString))
+    "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
   }
 
 }
