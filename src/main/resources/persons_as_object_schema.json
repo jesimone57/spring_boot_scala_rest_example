@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "persons": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "person": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "age": {
+                "description": "Age in years",
+                "type": "integer",
+                "minimum": 18,
+                "maximum": 150
+              },
+              "job": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "job"]
+          }
+        }
+      }
+    }
+  }
+}

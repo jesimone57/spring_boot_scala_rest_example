@@ -1,0 +1,21 @@
+{
+  "persons": [{
+    "person": {
+      "name": "fred",
+      "age": 25,
+      "job": "pilot"
+    }
+  }, {
+    "person": {
+      "name": "tom",
+      "age": 12,
+      "job": "student"
+    }
+  }, {
+    "person": {
+      "name": "Alice",
+      "age": 45,
+      "job": "Nurse"
+    }
+  }]
+}

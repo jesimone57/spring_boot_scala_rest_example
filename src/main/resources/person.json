@@ -1,0 +1,7 @@
+{
+  "person": {
+      "name": "fred",
+      "age": 18,
+      "job": "pilot"
+  }
+}

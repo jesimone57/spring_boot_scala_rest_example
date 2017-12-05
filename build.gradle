@@ -15,7 +15,10 @@ buildscript {
 plugins {
     // a Gradle plugin that uses `git describe` to produce a version string.
     id 'com.palantir.git-version' version '0.8.0'
+    id 'org.springframework.boot' version '1.5.9.RELEASE'
 }
+
+version '1.0-SNAPSHOT'
 
 apply plugin: 'idea'
 apply plugin: 'scala'
@@ -47,6 +50,8 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.10'
 
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
+
+    compile group: 'com.github.java-json-tools', name: 'json-schema-validator', version: '2.2.8'
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.scalatest:scalatest_2.11:3.0.1')
