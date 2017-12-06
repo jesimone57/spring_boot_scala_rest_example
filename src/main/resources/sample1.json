@@ -1,0 +1,31 @@
+[
+  {
+    "idStr": "a7fc-7b",
+    "label": "AmusementDiscount07",
+    "fee": 12.50,
+    "earlyFee": 12.50,
+    "lateFee": 12.50,
+    "feeScope": "REGISTRANTS",
+    "selected": true,
+    "restrictedAccess": false
+  },
+  {
+    "idStr": "a7fc-7c",
+    "label": "AmusementDiscount08",
+    "fee": 12.50,
+    "earlyFee": 12.50,
+    "lateFee": 12.50,
+    "feeScope": "GUESTS",
+    "selected": false,
+    "restrictedAccess": false
+  },
+  {
+    "idStr": "b8da-14",
+    "label": "FoodCourtDiscount17",
+    "fee": 12.50,
+    "earlyFee": 12.50,
+    "lateFee": 12.50,
+    "feeScope": "BOTH",
+    "restrictedAccess": false
+  }
+]

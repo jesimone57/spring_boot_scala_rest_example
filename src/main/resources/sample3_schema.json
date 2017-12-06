@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Product list",
+
+  "definitions": {
+    "product": {
+      "type": "object",
+      "properties": {
+        "id":         { "type": "integer",   "description": "The unique identifier for a product" },
+        "name":       { "type": "string" ,   "description": "Name of the product"},
+        "price":      { "type": "number" ,   "minimum": 0,    "exclusiveMinimum": true }
+      },
+      "required": ["id", "name", "price"]
+    }
+  },
+
+  "description": "A product from Acme's catalog",
+  "type": "array",
+  "uniqueItems": true,
+  "minItems": 1,
+
+  "items": {
+    "title": "Product",
+    "type": "object",
+    "oneOf": [
+      { "$ref": "#/definitions/product" }
+    ]
+  }
+}

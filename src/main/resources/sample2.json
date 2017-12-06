@@ -1,0 +1,184 @@
+
+[
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZVRs_b1TWJ3CVBAUmP0a3Qs",
+    "name": "DISAMTUNLFL",
+    "quantityTotal": null,
+    "paused": false,
+    "discountAmount": 2,
+    "discountType": "AMOUNT",
+    "discountScope": "FEE_LIST",
+    "feeIds": [
+      "rR_7KOL-YSHMmj-N_YywZYPJUvBGM9P1V53KQcYO8Aw",
+      "rR_7KOL-YSHMmj-N_YywZZkA8FSK0kaE_UWA8fxLGos"
+    ]
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZSD6R5toUgNN9_IAbnfBjMM",
+    "name": "DISAMTUNLOT",
+    "quantityTotal": null,
+    "paused": false,
+    "discountAmount": 2,
+    "discountType": "AMOUNT",
+    "discountScope": "ORDER_TOTAL",
+    "feeIds": []
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZVRs_b1TWJ3CVBAUmP0a3Qs",
+    "name": "DISAMT10FL",
+    "quantityTotal": 10,
+    "paused": false,
+    "discountAmount": 2,
+    "discountType": "AMOUNT",
+    "discountScope": "FEE_LIST",
+    "feeIds": [
+      "rR_7KOL-YSHMmj-N_YywZYPJUvBGM9P1V53KQcYO8Aw",
+      "rR_7KOL-YSHMmj-N_YywZZkA8FSK0kaE_UWA8fxLGos"
+    ]
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZSD6R5toUgNN9_IAbnfBjMM",
+    "name": "DISAMT10OT1",
+    "quantityTotal": 10,
+    "paused": false,
+    "discountAmount": 2,
+    "discountType": "AMOUNT",
+    "discountScope": "ORDER_TOTAL",
+    "feeIds": []
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZSD6R5toUgNN9_IAbnfBjMM",
+    "name": "DISAMT10OT2",
+    "quantityTotal": 10,
+    "paused": false,
+    "discountAmount": 2,
+    "discountScope": "ORDER_TOTAL"
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZVRs_b1TWJ3CVBAUmP0a3Qs",
+    "name": "DISPERUNLFL",
+    "quantityTotal": null,
+    "paused": false,
+    "discountPercent": 5,
+    "discountType": "PERCENT",
+    "discountScope": "FEE_LIST",
+    "feeIds": [
+      "rR_7KOL-YSHMmj-N_YywZYPJUvBGM9P1V53KQcYO8Aw",
+      "rR_7KOL-YSHMmj-N_YywZZkA8FSK0kaE_UWA8fxLGos"
+    ]
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZSD6R5toUgNN9_IAbnfBjMM",
+    "name": "DISPERUNLOT1",
+    "quantityTotal": null,
+    "paused": false,
+    "discountPercent": 5,
+    "discountType": "PERCENT",
+    "discountScope": "ORDER_TOTAL",
+    "feeIds": []
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZSD6R5toUgNN9_IAbnfBjMM",
+    "name": "DISPERUNLOT2",
+    "quantityTotal": null,
+    "paused": false,
+    "discountPercent": 5,
+    "discountType": "PERCENT",
+    "discountScope": "ORDER_TOTAL"
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZSD6R5toUgNN9_IAbnfBjMM",
+    "name": "DISPERUNLOT3",
+    "quantityTotal": null,
+    "paused": false,
+    "discountPercent": 5,
+    "discountScope": "ORDER_TOTAL"
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZVRs_b1TWJ3CVBAUmP0a3Qs",
+    "name": "DISPER10FL",
+    "quantityTotal": 10,
+    "paused": false,
+    "discountPercent": 5,
+    "discountType": "PERCENT",
+    "discountScope": "FEE_LIST",
+    "feeIds": [
+      "rR_7KOL-YSHMmj-N_YywZYPJUvBGM9P1V53KQcYO8Aw",
+      "rR_7KOL-YSHMmj-N_YywZZkA8FSK0kaE_UWA8fxLGos"
+    ]
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZSD6R5toUgNN9_IAbnfBjMM",
+    "name": "DISPER10OT1",
+    "quantityTotal": 10,
+    "paused": false,
+    "discountPercent": 5,
+    "discountType": "PERCENT",
+    "discountScope": "ORDER_TOTAL",
+    "feeIds": []
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZSD6R5toUgNN9_IAbnfBjMM",
+    "name": "DISPER10OT2",
+    "quantityTotal": 10,
+    "paused": false,
+    "discountPercent": 5,
+    "discountType": "PERCENT",
+    "discountScope": "ORDER_TOTAL"
+  },
+  {
+    "type": "DISCOUNT",
+    "id": "rR_7KOL-YSHMmj-N_YywZSD6R5toUgNN9_IAbnfBjMM",
+    "name": "DISPER10OT3",
+    "quantityTotal": 10,
+    "paused": false,
+    "discountPercent": 5,
+    "discountScope": "ORDER_TOTAL"
+  },
+  {
+    "type": "ACCESS",
+    "id": "rR_7KOL-YSHMmj-N_YywZYPJUvBGM9P1V53KQcYO8Aw",
+    "name": "ACC5",
+    "quantityTotal": 5,
+    "paused": false,
+    "feeIds": [
+      "rR_7KOL-YSHMmj-N_YywZePPZtIUTEXxcjpb74MZb3w"
+    ]
+  },
+  {
+    "type": "ACCESS",
+    "id": "rR_7KOL-YSHMmj-N_YywZYPJUvBGM9P1V53KQcYO8Aw",
+    "name": "ACCUNL",
+    "quantityTotal": null,
+    "paused": false,
+    "feeIds": [
+      "rR_7KOL-YSHMmj-N_YywZePPZtIUTEXxcjpb74MZb3w"
+    ]
+  },
+  {
+    "type": "ACCESS",
+    "id": "rR_7KOL-YSHMmj-N_YywZYPJUvBGM9P1V53KQcYO8Aw",
+    "name": "ACCUNL2",
+    "quantityTotal": null,
+    "paused": false,
+    "discountPercent": null,
+    "discountAmount": null,
+    "discountType": null,
+    "discountScope": null,
+    "feeIds": [
+      "rR_7KOL-YSHMmj-N_YywZePPZtIUTEXxcjpb74MZb3w"
+    ]
+  }
+]

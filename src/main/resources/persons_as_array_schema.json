@@ -1,5 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "An array of person objects JSON schema.  Validate against persons_as_array.json",
+
   "type": "array",
   "minItems": 3,
   "maxItems": 10,
@@ -14,8 +16,11 @@
           "age":  { "description": "Age in years", "type": "integer", "minimum": 18, "maximum": 150 },
           "job":  { "type": "string" }
         },
-        "required": ["name", "job"]
+        "required": ["name", "job"],
+        "additionalProperties": false
       }
-    }
+    },
+    "required": ["person"],
+    "additionalProperties": false
   }
 }

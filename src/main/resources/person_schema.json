@@ -1,5 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Person as an object JSON schema.  Validate against person.json",
+
   "type": "object",
   "properties": {
     "person": {
@@ -16,7 +18,10 @@
           "type": "string"
         }
       },
-      "required": ["name", "job"]
+      "required": ["name", "job"],
+      "additionalProperties": false
     }
-  }
+  },
+  "required": ["person"],
+  "additionalProperties": false
 }
