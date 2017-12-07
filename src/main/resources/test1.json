@@ -1,0 +1,21 @@
+{
+  "string-min": "f",
+  "string-max": "fffffff",
+  "int-min": 17,
+  "int-max": 1000,
+  "int-wrongtype": 23.1,
+  "string-pattern": "pi*lot",
+  "bool": true,
+  "date": "2017",
+  "enum": "AZURE",
+  "email": "asdf",
+  "number-min":  1.0,
+  "number-max":  10000.0,
+  "number-multof": 100.001,
+  "pat-props": {
+    "one": true,
+    "two": false,
+    "three": "true"
+  },
+  "extra-prop":  "asdf-asdf"
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "tests all the different schema constraints",
+
+  "type": "object",
+  "properties": {
+    "string-min": {
+      "type": "string",
+      "minLength": 5
+    },
+    "string-max": {
+      "type": "string",
+      "maxLength": 2
+    },
+    "int-min": {
+      "type": "integer",
+      "minimum": 50
+    },
+    "int-max": {
+      "type": "integer",
+      "maximum": 100
+    },
+    "int-wrongtype": {
+      "type": "integer"
+    },
+    "string-pattern": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]+$"
+    },
+    "bool": {
+      "type": "boolean"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "enum": {
+      "enum": [ "RED", "BLACK", "BLUE" ]
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "number-min": {
+      "type": "number",
+      "minimum": 10.0
+    },
+    "number-max": {
+      "type": "number",
+      "maximum": 100.0
+    },
+    "number-multof": {
+      "type": "number",
+      "multipleOf": 0.01
+    },
+    "pat-props": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Za-z]+$": {
+          "type": "boolean",
+          "maxProperties": 2
+        }
+      }
+    }
+  },
+  "required": ["required"],
+  "additionalProperties": false
+}

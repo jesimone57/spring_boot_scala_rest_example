@@ -11,7 +11,7 @@ import org.springframework.web.servlet.NoHandlerFoundException
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 
-/*
+/**
 Spring MVC Exceptions see https://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/mvc.html#mvc-ann-rest-spring-mvc-exceptions
 
 BindException	                        400 (Bad Request)
@@ -35,7 +35,7 @@ class GlobalExceptionHandler extends ResponseEntityExceptionHandler with Logging
     val URIPath = request.getDescription(false).substring(4)
     val headers = new HttpHeaders
     headers.setContentType(MediaType.APPLICATION_JSON)
-    val message = exception.getMessage
+    val message = Option(exception.getMessage).getOrElse(exception.getStackTrace.mkString("\n"))
     val status = HttpStatus.INTERNAL_SERVER_ERROR
     val errorResponseBody = new ErrorResponseBody(status.value, URIPath, message)
     handleExceptionInternal(exception, JsonUtil.toJson(errorResponseBody), headers, status, request)

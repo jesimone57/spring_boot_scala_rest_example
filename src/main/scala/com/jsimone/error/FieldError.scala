@@ -7,10 +7,10 @@ class FieldError() {
   @JsonProperty("rejected_value")var value: String = _
   @JsonProperty("error_message") var message: String = _
 
-  def this(field: String, value: String, message: String) = {
+  def this(field: String, rejectedValue: String, message: String) = {
     this()
     this.field = field
-    this.value = value
+    this.value = rejectedValue
     this.message = message
   }
 

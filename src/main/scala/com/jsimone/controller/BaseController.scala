@@ -18,9 +18,7 @@ class BaseController extends Logging {
     headers.setContentType(MediaType.APPLICATION_JSON)
     val status = HttpStatus.BAD_REQUEST
 
-    val errorResponseBody = new ErrorResponseBody(status.value, request.getRequestURI, exception.getMessage)
-    errorResponseBody.method = request.getMethod
-    errorResponseBody.addBindingResultErrors(exception.getBindingResult)
+    val errorResponseBody = new ErrorResponseBody(status.value, request, exception)
 
     new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, status)
   }

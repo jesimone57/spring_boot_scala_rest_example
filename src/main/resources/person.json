@@ -1,6 +1,7 @@
-{ "person": {
-    "name": "fred",
-    "age": 18,
-    "job": "pilot"
+{
+  "person": {
+    "name": "f",
+    "age": 17,
+    "job": "pi*lot"
   }
 }
