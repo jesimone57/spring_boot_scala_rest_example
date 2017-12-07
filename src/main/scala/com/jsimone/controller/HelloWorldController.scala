@@ -18,9 +18,15 @@ class HelloWorldController extends BaseController {
   }
 
   @GetMapping(value = Array(UrlPath.HELLO1))
-  def helloByRequestParam(@RequestParam(value = "name", required = false, defaultValue = "World") name: String) = {
+  def helloByOptionalRequestParam(@RequestParam(value = "name", required = false, defaultValue = "World") name: String) = {
     log.info("/hello1 endpoint hit.")
     "Hello, %s!".format(name)
+  }
+
+  @GetMapping(value = Array("/hello1.1"))
+  def helloByRequiredRequestParam(@RequestParam(value = "name", required = true) name: String) = {
+    log.info("/hello1.1 endpoint hit.")
+    s"Hello, $name !"
   }
 
   @GetMapping(value = Array(UrlPath.HELLO2))

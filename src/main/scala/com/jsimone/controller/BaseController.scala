@@ -10,7 +10,9 @@ import com.jsimone.error.ErrorResponseBody
 import com.jsimone.util.{JsonUtil, Logging}
 import org.springframework.http.{HttpHeaders, HttpStatus, MediaType, ResponseEntity}
 import org.springframework.validation.BindException
+import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.annotation.{ExceptionHandler, ResponseStatus}
+import org.springframework.web.context.request.WebRequest
 
 class BaseController extends Logging {
 
@@ -21,14 +23,30 @@ class BaseController extends Logging {
     val headers = new HttpHeaders
     headers.setContentType(MediaType.APPLICATION_JSON)
     val status = HttpStatus.BAD_REQUEST
-
     val errorResponseBody = new ErrorResponseBody(status.value, request, exception)
+    new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, status)
+  }
 
+  @ExceptionHandler(Array(classOf[MissingServletRequestParameterException]))
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  def handleMissingParams(exception: MissingServletRequestParameterException, request: WebRequest): ResponseEntity[AnyRef] = {
+    val name = exception.getParameterName
+    val path = request.getDescription(false).substring(4)
+    val headers = new HttpHeaders
+    headers.setContentType(MediaType.APPLICATION_JSON)
+    val status = HttpStatus.BAD_REQUEST
+    val errorResponseBody = new ErrorResponseBody(status.value, path, exception.getMessage)
     new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, status)
   }
 
   protected def jsonSchemaValidateResource(inputFilename: String, schemaFilename: String, request: HttpServletRequest) = {
-    val jsonString = scala.io.Source.fromResource(inputFilename).getLines().mkString
+    var jsonString: String = ""
+    try {
+      jsonString = scala.io.Source.fromResource(inputFilename).getLines().mkString
+    } catch {
+      case ioe: Exception => new ErrorResponseBody(HttpStatus.BAD_REQUEST.value(), request, ioe)
+    }
+
     val schemaJsonNode: JsonNode = JsonLoader.fromResource(schemaFilename)
 
     val objectMapper: ObjectMapper = new ObjectMapper()

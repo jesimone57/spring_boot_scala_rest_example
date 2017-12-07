@@ -16,10 +16,10 @@ class ErrorResponseBody() {
   @JsonProperty("error_message") var message: String = _
   @JsonProperty("errors") var errors: ListBuffer[FieldError] = ListBuffer()
 
-  def this(code: Int, uri: String, message: String) = {
+  def this(code: Int, path: String, message: String) = {
     this()
     this.code = code
-    this.path = uri
+    this.path = path
     this.message = message
   }
 
@@ -32,7 +32,6 @@ class ErrorResponseBody() {
     exception match {
       case e: BindException => this.addBindingResultErrors(e.getBindingResult)
       case _ =>
-
     }
   }
 
@@ -53,7 +52,7 @@ class ErrorResponseBody() {
     this.errors = errors
   }
 
-  private def addBindingResultErrors(bindingResult: BindingResult) = {
+  private def addBindingResultErrors(bindingResult: BindingResult): Unit = {
     bindingResult
       .getFieldErrors
       .forEach(fe => this.errors += new FieldError(fe.getField,
@@ -61,11 +60,14 @@ class ErrorResponseBody() {
         fe.getDefaultMessage))
   }
 
-  private def setSchemaValidationProcessingMessageErrors(report: ProcessingReport) = {
-    // see https://stackoverflow.com/questions/20702855/how-can-we-extract-all-messages-from-processing-report-in-json-schema-validator
+  /**
+    * @see <a href="https://stackoverflow.com/questions/20702855/how-can-we-extract-all-messages-from-processing-report-in-json-schema-validator">
+    *        how-can-we-extract-all-messages-from-processing-report-in-json-schema-validator</a>
+    * @param report Json schema validation report
+    */
+  private def setSchemaValidationProcessingMessageErrors(report: ProcessingReport): Unit = {
     errors = ListBuffer() ++ report.iterator().asScala.map { pm =>
       val rejectedValue = pm.asJson().get("keyword").asText() match {
-
         case "minimum" | "maximum" | "type" =>
           pm.asJson().get("found").asText()
         case "pattern" =>
@@ -89,7 +91,6 @@ class ErrorResponseBody() {
 
   override def toString: String = {
     super.toString
-    "ErrorResponseBody { code: \"%d\", path: \"%s\", message: \"%s\", errors: [%s] }".format(code, path, message,
-      errors.toString())
+    s"ErrorResponseBody { code: $code, path: $path, message: $message, errors: [${errors.toString()}] }"
   }
 }

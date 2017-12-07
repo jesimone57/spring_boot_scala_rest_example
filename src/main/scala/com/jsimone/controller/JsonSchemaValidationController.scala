@@ -12,12 +12,20 @@ class JsonSchemaValidationController extends BaseController {
 
   @GetMapping(value = Array("/schema_test1"))
   def validateAgainstSchema(request: HttpServletRequest) = {
-
     log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
     jsonSchemaValidateResource("test1.json", "/test1_schema.json", request)
-    //val restTemplate: RestTemplate = new RestTemplate()
-    //val url = "http://gturnquist-quoters.cfapps.io/api/random"
-    //restTemplate.getForObject(url, classOf[String])
+  }
+
+  /**
+    * Example http://localhost:8080/schema?input=test1.json&schema=/test1_schema.json
+    */
+  @GetMapping(value = Array("/schema"))
+  def validateNamedFileWithNamedSchema(
+                                        @RequestParam(value = "input", required = true) inputFilename: String,
+                                        @RequestParam(value = "schema", required = true) schemaFilename: String,
+                                        request: HttpServletRequest) = {
+    log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
+    jsonSchemaValidateResource(inputFilename, schemaFilename, request)
   }
 
 }
