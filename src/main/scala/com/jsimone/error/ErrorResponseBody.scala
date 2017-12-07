@@ -4,9 +4,9 @@ import javax.servlet.http.HttpServletRequest
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.github.fge.jsonschema.core.report.ProcessingReport
-import org.springframework.http.HttpStatus
 import org.springframework.validation.{BindException, BindingResult}
 
+import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
 
 class ErrorResponseBody() {
@@ -40,38 +40,9 @@ class ErrorResponseBody() {
     this()
     this.code = code
     this.path = request.getRequestURI
-    this.message = ""
+    this.message = if (report.isSuccess) "" else s"JSON Schema validation errors encountered."
     this.method = request.getMethod
-
-    import collection.JavaConverters._
-
-    // see https://stackoverflow.com/questions/20702855/how-can-we-extract-all-messages-from-processing-report-in-json-schema-validator
-    errors = ListBuffer() ++ report.iterator().asScala.map{ pm =>
-      val rejectedValue = pm.asJson().get("keyword").asText() match {
-        case "minimum" => pm.asJson().get("found").asText()
-        case "maximum" => pm.asJson().get("found").asText()
-        case "pattern" => pm.asJson().get("string").asText()
-        case "minLength" => pm.asJson().get("value").asText()
-        case "maxLength" => pm.asJson().get("value").asText()
-        case "additionalProperties" => pm.asJson().get("unwanted").asText()
-        case "required" => pm.asJson().get("missing").asText()
-        case unknown => s"Unknown schema keyword $unknown encountered"
-      }
-      new FieldError(
-        pm.asJson().get("instance").elements().next().textValue(),
-        rejectedValue,
-        pm.asJson().get("message").asText()
-      )
-    }
-//    val itr = report.iterator()
-//    itr.hasNext
-//    val pm = itr.next()
-//    pm.asJson().get("instance").elements().next().textValue()
-//    pm.asJson().get("found").asText()
-//    pm.asJson().get("message").asText()
-//    pm.asJson()
-//    report.forEach(message => message.asJson().get("instance").asText())
-    //this.addBindingResultErrors(exception.getBindingResult)
+    setSchemaValidationProcessingMessageErrors(report)
   }
 
   def this(code: Int, path: String, message: String, errors: ListBuffer[FieldError]) = {
@@ -85,9 +56,35 @@ class ErrorResponseBody() {
   private def addBindingResultErrors(bindingResult: BindingResult) = {
     bindingResult
       .getFieldErrors
-      .forEach(fe => this.errors +=  new FieldError(fe.getField,
+      .forEach(fe => this.errors += new FieldError(fe.getField,
         if (fe.getRejectedValue != null) fe.getRejectedValue.toString else null,
         fe.getDefaultMessage))
+  }
+
+  private def setSchemaValidationProcessingMessageErrors(report: ProcessingReport) = {
+    // see https://stackoverflow.com/questions/20702855/how-can-we-extract-all-messages-from-processing-report-in-json-schema-validator
+    errors = ListBuffer() ++ report.iterator().asScala.map { pm =>
+      val rejectedValue = pm.asJson().get("keyword").asText() match {
+
+        case "minimum" | "maximum" | "type" =>
+          pm.asJson().get("found").asText()
+        case "pattern" =>
+          pm.asJson().get("string").asText()
+        case "enum" | "format" | "minLength" | "maxLength" | "multipleOf" =>
+          pm.asJson().get("value").asText()
+        case "additionalProperties" =>
+          pm.asJson().get("unwanted").asText()
+        case "required" =>
+          pm.asJson().get("missing").asText()
+        case unknown =>
+          s"Unknown schema keyword $unknown encountered"
+      }
+      new FieldError(
+        pm.asJson().get("instance").elements().next().textValue(),
+        rejectedValue,
+        pm.asJson().get("message").asText()
+      )
+    }
   }
 
   override def toString: String = {

@@ -2,6 +2,10 @@ package com.jsimone.controller
 
 import javax.servlet.http.HttpServletRequest
 
+import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
+import com.github.fge.jackson.JsonLoader
+import com.github.fge.jsonschema.core.report.ProcessingReport
+import com.github.fge.jsonschema.main.{JsonSchema, JsonSchemaFactory}
 import com.jsimone.error.ErrorResponseBody
 import com.jsimone.util.{JsonUtil, Logging}
 import org.springframework.http.{HttpHeaders, HttpStatus, MediaType, ResponseEntity}
@@ -12,7 +16,7 @@ class BaseController extends Logging {
 
   @ExceptionHandler(Array(classOf[BindException]))
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  def handleBindException(exception: BindException, request: HttpServletRequest): ResponseEntity[AnyRef] = {
+  protected def handleBindException(exception: BindException, request: HttpServletRequest): ResponseEntity[AnyRef] = {
     log.error(exception.toString)
     val headers = new HttpHeaders
     headers.setContentType(MediaType.APPLICATION_JSON)
@@ -21,5 +25,22 @@ class BaseController extends Logging {
     val errorResponseBody = new ErrorResponseBody(status.value, request, exception)
 
     new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, status)
+  }
+
+  protected def jsonSchemaValidateResource(inputFilename: String, schemaFilename: String, request: HttpServletRequest) = {
+    val jsonString = scala.io.Source.fromResource(inputFilename).getLines().mkString
+    val schemaJsonNode: JsonNode = JsonLoader.fromResource(schemaFilename)
+
+    val objectMapper: ObjectMapper = new ObjectMapper()
+    val inputJsonNode: JsonNode = objectMapper.readTree(jsonString)
+    val jsonSchemaFactory: JsonSchemaFactory = JsonSchemaFactory.byDefault()
+    val jsonSchema: JsonSchema = jsonSchemaFactory.getJsonSchema(schemaJsonNode)
+
+    val report: ProcessingReport = jsonSchema.validate(inputJsonNode)
+    if (report.isSuccess) {
+      "valid"
+    } else {
+      JsonUtil.toJson(new ErrorResponseBody(HttpStatus.BAD_REQUEST.value(), request, report))
+    }
   }
 }
