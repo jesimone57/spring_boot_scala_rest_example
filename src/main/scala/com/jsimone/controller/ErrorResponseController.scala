@@ -1,12 +1,13 @@
 package com.jsimone.controller
 
+import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 
 import com.jsimone.constants.UrlPath
 import com.jsimone.entity.Person
 import com.jsimone.error.{ErrorResponseBody, FieldError}
 import com.jsimone.util.JsonUtil
-import org.springframework.http.MediaType
+import org.springframework.http.{HttpHeaders, HttpStatus, MediaType, ResponseEntity}
 import org.springframework.web.bind.annotation._
 
 @RestController
@@ -14,13 +15,17 @@ import org.springframework.web.bind.annotation._
 class ErrorResponseController extends BaseController {
 
   @GetMapping(value = Array(UrlPath.EXAMPLE_RESPONSE))
-  def sampleErrorResponse(): String = {
-    log.info("/example_response endpoint hit.")
-    val errorResponseBody = new ErrorResponseBody(400, "http://asdf", "some weird error")
+  def sampleErrorResponse(request: HttpServletRequest): ResponseEntity[AnyRef] = {
+    log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
+
+    val headers = new HttpHeaders
+    headers.setContentType(MediaType.APPLICATION_JSON)
+    val status = HttpStatus.BAD_REQUEST
+    val errorResponseBody = new ErrorResponseBody(status.value(), request.getRequestURI, "some weird error")
     errorResponseBody.errors += new FieldError("name", "", "required name is empty or null")
     errorResponseBody.errors += new FieldError("age", "0", "invalid age given")
     errorResponseBody.errors += new FieldError("phone", "123", "invald phone number provided")
-    JsonUtil.toJson(errorResponseBody)
+    new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, HttpStatus.BAD_REQUEST)
   }
 
   /**
