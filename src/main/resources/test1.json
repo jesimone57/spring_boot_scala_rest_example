@@ -5,7 +5,7 @@
   "int-max": 1000,
   "int-wrongtype": 23.1,
   "string-pattern": "pi*lot",
-  "bool": true,
+  "bool": "asdf",
   "date": "2017",
   "enum": "AZURE",
   "email": "asdf",

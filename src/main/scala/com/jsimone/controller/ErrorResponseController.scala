@@ -55,7 +55,7 @@ class ErrorResponseController extends BaseController {
   @GetMapping(value = Array("/validate_person"))
   def helloByRequestClassValidate(@Valid person: Person) = {
     log.info("/validate_person endpoint hit with person params: %s".format(person.toString))
-    "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
+    s"Hello ${person.name}, whose age is ${person.age} and job is ${person.job}"
   }
 
 }

@@ -20,32 +20,31 @@ class HelloWorldController extends BaseController {
   @GetMapping(value = Array(UrlPath.HELLO1))
   def helloByOptionalRequestParam(@RequestParam(value = "name", required = false, defaultValue = "World") name: String) = {
     log.info("/hello1 endpoint hit.")
-    "Hello, %s!".format(name)
+    s"Hello, $name"
   }
 
   @GetMapping(value = Array("/hello1.1"))
   def helloByRequiredRequestParam(@RequestParam(value = "name", required = true) name: String) = {
     log.info("/hello1.1 endpoint hit.")
-    s"Hello, $name !"
+    s"Hello, $name"
   }
 
   @GetMapping(value = Array(UrlPath.HELLO2))
   def helloByPathVariable(@PathVariable name: String) = {
     log.info("/hello2 endpoint hit.")
-    "hello %s".format(name)
+    s"Hello, $name"
   }
 
   @GetMapping(value = Array(UrlPath.HELLO3))
   def helloByRequestClass(person: Person) = {
     log.info("/hello3 endpoint hit with person params: %s".format(person.toString))
-    "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
+    s"Hello ${person.name}, whose age is ${person.age} and job is ${person.job}"
   }
 
   @GetMapping(value = Array(UrlPath.HELLO4))
   def helloByRequestClassValidate(@Valid person: Person) = {
     log.info("/hello4 endpoint hit with person params: %s".format(person.toString))
-    "hello %s, whose age is %d and job is %s".format(person.name, person.age, person.job)
+    s"Hello ${person.name}, whose age is ${person.age} and job is ${person.job}"
   }
-
 
 }

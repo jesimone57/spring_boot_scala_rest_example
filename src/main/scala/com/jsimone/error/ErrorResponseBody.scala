@@ -67,24 +67,24 @@ class ErrorResponseBody() {
     */
   private def setSchemaValidationProcessingMessageErrors(report: ProcessingReport): Unit = {
     errors = ListBuffer() ++ report.iterator().asScala.map { pm =>
-      val rejectedValue = pm.asJson().get("keyword").asText() match {
+      val rejectedValue = pm.asJson.get("keyword").asText() match {
         case "minimum" | "maximum" | "type" =>
-          pm.asJson().get("found").asText()
+          pm.asJson.get("found").asText()
         case "pattern" =>
-          pm.asJson().get("string").asText()
+          pm.asJson.get("string").asText()
         case "enum" | "format" | "minLength" | "maxLength" | "multipleOf" =>
-          pm.asJson().get("value").asText()
+          pm.asJson.get("value").asText()
         case "additionalProperties" =>
-          pm.asJson().get("unwanted").asText()
+          pm.asJson.get("unwanted").asText()
         case "required" =>
-          pm.asJson().get("missing").asText()
+          pm.asJson.get("missing").asText()
         case unknown =>
           s"Unknown schema keyword $unknown encountered"
       }
       new FieldError(
-        pm.asJson().get("instance").elements().next().textValue(),
+        pm.asJson.get("instance").elements().next().asText(),
         rejectedValue,
-        pm.asJson().get("message").asText()
+        pm.asJson.get("message").asText()
       )
     }
   }
