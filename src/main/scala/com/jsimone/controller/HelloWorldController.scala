@@ -29,10 +29,22 @@ class HelloWorldController extends BaseController {
     s"Hello, $name"
   }
 
+  @GetMapping(value = Array("/hello1.2"))
+  def helloByRequiredRequestParamAsInt(@RequestParam(value = "num", required = true) num: Int) = {
+    log.info("/hello1.2 endpoint hit.")
+    s"Hello, $num"
+  }
+
   @GetMapping(value = Array(UrlPath.HELLO2))
   def helloByPathVariable(@PathVariable name: String) = {
     log.info("/hello2 endpoint hit.")
     s"Hello, $name"
+  }
+
+  @GetMapping(value = Array("/hello2.1"))
+  def helloByPathVariableAsInt(@PathVariable num: Int) = {
+    log.info("/hello2.1 endpoint hit.")
+    s"Hello, $num"
   }
 
   @GetMapping(value = Array(UrlPath.HELLO3))

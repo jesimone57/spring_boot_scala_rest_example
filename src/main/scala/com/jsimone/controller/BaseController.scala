@@ -8,11 +8,11 @@ import com.github.fge.jsonschema.core.report.ProcessingReport
 import com.github.fge.jsonschema.main.{JsonSchema, JsonSchemaFactory}
 import com.jsimone.error.ErrorResponseBody
 import com.jsimone.util.{JsonUtil, Logging}
+import org.springframework.beans.TypeMismatchException
 import org.springframework.http.{HttpHeaders, HttpStatus, MediaType, ResponseEntity}
 import org.springframework.validation.BindException
-import org.springframework.web.bind.MissingServletRequestParameterException
+import org.springframework.web.bind.{MethodArgumentNotValidException, MissingPathVariableException, MissingServletRequestParameterException}
 import org.springframework.web.bind.annotation.{ExceptionHandler, ResponseStatus}
-import org.springframework.web.context.request.WebRequest
 
 class BaseController extends Logging {
 
@@ -20,22 +20,42 @@ class BaseController extends Logging {
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   protected def handleBindException(exception: BindException, request: HttpServletRequest): ResponseEntity[AnyRef] = {
     log.error(exception.toString)
-    val headers = new HttpHeaders
-    headers.setContentType(MediaType.APPLICATION_JSON)
-    val status = HttpStatus.BAD_REQUEST
-    val errorResponseBody = new ErrorResponseBody(status.value, request, exception)
-    new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, status)
+    buildBadRequestResponse(exception, request)
   }
 
   @ExceptionHandler(Array(classOf[MissingServletRequestParameterException]))
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  def handleMissingParams(exception: MissingServletRequestParameterException, request: WebRequest): ResponseEntity[AnyRef] = {
-    val name = exception.getParameterName
-    val path = request.getDescription(false).substring(4)
+  def handleMissingServletRequestParameterException(exception: MissingServletRequestParameterException, request: HttpServletRequest): ResponseEntity[AnyRef] = {
+    log.error(exception.toString)
+    buildBadRequestResponse(exception, request)
+  }
+
+  @ExceptionHandler(Array(classOf[TypeMismatchException]))
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  def handleTypeMismatchException(exception: TypeMismatchException, request: HttpServletRequest): ResponseEntity[AnyRef] = {
+    log.error(exception.toString)
+    buildBadRequestResponse(exception, request)
+  }
+
+  @ExceptionHandler(Array(classOf[MethodArgumentNotValidException]))
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  def handleMethodArgumentNotValidException(exception: MethodArgumentNotValidException, request: HttpServletRequest): ResponseEntity[AnyRef] = {
+    log.error(exception.toString)
+    buildBadRequestResponse(exception, request)
+  }
+
+  @ExceptionHandler(Array(classOf[MissingPathVariableException]))
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  def handleMissingPathVariableException(exception: MissingPathVariableException, request: HttpServletRequest): ResponseEntity[AnyRef] = {
+    log.error(exception.toString)
+    buildBadRequestResponse(exception, request)
+  }
+
+  private def buildBadRequestResponse( exception: Exception, request: HttpServletRequest): ResponseEntity[AnyRef] = {
     val headers = new HttpHeaders
     headers.setContentType(MediaType.APPLICATION_JSON)
     val status = HttpStatus.BAD_REQUEST
-    val errorResponseBody = new ErrorResponseBody(status.value, path, exception.getMessage)
+    val errorResponseBody = new ErrorResponseBody(status.value, request, exception)
     new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, status)
   }
 
