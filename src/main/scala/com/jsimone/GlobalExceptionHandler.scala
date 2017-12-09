@@ -1,5 +1,7 @@
 package com.jsimone
 
+import javax.servlet.http.HttpServletRequest
+
 import com.jsimone.error.ErrorResponseBody
 import com.jsimone.util.{JsonUtil, Logging}
 import org.springframework.http._
@@ -49,6 +51,7 @@ class GlobalExceptionHandler extends ResponseEntityExceptionHandler with Logging
     val URIPath = request.getDescription(false).substring(4)
     val message = "The URL you have reached is not in service at this time"
     val errorResponseBody = new ErrorResponseBody(status.value, URIPath, message)
+    headers.add("Content-Type", MediaType.APPLICATION_JSON_VALUE)
     handleExceptionInternal(exception, JsonUtil.toJson(errorResponseBody), headers, status, request)
     //new ResponseEntity[AnyRef](errorResponseBody, status)
   }
