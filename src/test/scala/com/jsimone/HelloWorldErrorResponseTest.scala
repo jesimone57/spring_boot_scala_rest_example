@@ -1,5 +1,7 @@
 package com.jsimone
 
+import com.jsimone.error.ErrorResponseBody
+import com.jsimone.util.JsonUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.runner.RunWith
 import org.junit.{Assert, Test}
@@ -8,12 +10,12 @@ import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.http.{HttpHeaders, HttpStatus}
+import org.springframework.http.{HttpHeaders, HttpStatus, ResponseEntity}
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-class HelloWorldErrorResponseTest {
+class HelloWorldErrorResponseTest extends TestBase {
 
   @LocalServerPort
   private val port: Int = 0
@@ -21,24 +23,9 @@ class HelloWorldErrorResponseTest {
   @Autowired
   private val restTemplate: TestRestTemplate  = null
 
-  private def verifyErrorResponseJson(url: String, expectedResponse: String,
-                                      expectedStatus:  HttpStatus, expectedContentType: String): Unit = {
-    val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    val json = responseEntity.getBody
-    //println(json)
-    Assert.assertEquals(expectedResponse, json)
-    val actualStatus = responseEntity.getStatusCode
-    //println(actualStatus)
-    Assert.assertEquals(expectedStatus, actualStatus)
-    val headers: HttpHeaders = responseEntity.getHeaders
-    //println(headers)
-    val actualContentType = headers.get("Content-Type").toString
-    Assert.assertEquals(expectedContentType, actualContentType)
-  }
-
   @Test
   @throws[Exception]
-  def greetingShouldReturnDefaultMessage(): Unit = {
+  def helloWorld(): Unit = {
     assertThat(restTemplate.getForObject("http://localhost:" + port + "/", classOf[String])).contains("Hello World")
   }
 
@@ -54,10 +41,8 @@ class HelloWorldErrorResponseTest {
   @Test
   def hello1_1(): Unit = {
     val url = "http://localhost:" + port +"/hello1.1"
-    val expectedResponse = "{\"status_code\":400,\"uri_path\":\"/hello1.1\",\"method\":\"GET\",\"error_message\":\"Required String parameter 'name' is not present\",\"errors\":[]}"
-    val expectedStatus = HttpStatus.BAD_REQUEST
-    val expectedContentType = "[application/json]"
-    verifyErrorResponseJson(url, expectedResponse, expectedStatus, expectedContentType)
+    val responseEntity = restTemplate.getForEntity(url, classOf[String])
+    verifyBadRequestErrorResponse(responseEntity, 400, "GET", "Required String parameter 'name' is not present")
   }
 
   /**
@@ -71,10 +56,8 @@ class HelloWorldErrorResponseTest {
     */
   @Test
   def hello1_2(): Unit = {
-    val url = "http://localhost:" + port +"/hello1.2"
-    val expectedResponse = "{\"status_code\":400,\"uri_path\":\"/hello1.2\",\"method\":\"GET\",\"error_message\":\"Required int parameter 'num' is not present\",\"errors\":[]}"
-    val expectedStatus = HttpStatus.BAD_REQUEST
-    val expectedContentType = "[application/json]"
-    verifyErrorResponseJson(url, expectedResponse, expectedStatus, expectedContentType)
+    val url = "http://localhost:" + port + "/hello1.2"
+    val responseEntity = restTemplate.getForEntity(url, classOf[String])
+    verifyBadRequestErrorResponse(responseEntity, 400, "GET", "Required int parameter 'num' is not present")
   }
 }

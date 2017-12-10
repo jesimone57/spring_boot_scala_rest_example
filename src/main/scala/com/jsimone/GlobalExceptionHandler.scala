@@ -48,10 +48,10 @@ class GlobalExceptionHandler extends ResponseEntityExceptionHandler with Logging
     * Note:  The application properties file must reside in /src/main/resources or it will not be found by Spring Boot
     */
   override protected def handleNoHandlerFoundException(exception: NoHandlerFoundException, headers: HttpHeaders, status: HttpStatus, request: WebRequest): ResponseEntity[AnyRef] = {
-    val URIPath = request.getDescription(false).substring(4)
-    val message = "The URL you have reached is not in service at this time"
-    val errorResponseBody = new ErrorResponseBody(status.value, URIPath, message)
+    val path = request.getDescription(false).substring(4)
     headers.add("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+    val message = "The URL you have reached is not in service at this time"
+    val errorResponseBody = new ErrorResponseBody(status.value, path, message)
     handleExceptionInternal(exception, JsonUtil.toJson(errorResponseBody), headers, status, request)
     //new ResponseEntity[AnyRef](errorResponseBody, status)
   }
