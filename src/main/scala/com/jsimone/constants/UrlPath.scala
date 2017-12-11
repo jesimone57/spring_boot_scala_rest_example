@@ -8,7 +8,7 @@ object UrlPath {
   final val HELLO3 = "/hello3"
   final val HELLO4 = "/hello4"
 
-  final val EXAMPLE_RESPONSE = "/example_response"
+  final val ERROR_RESPONSE = "/error_response"
   final val JSON = "/json"
   final val THROWN_EXCEPTION = "/thrown_exception"
 }

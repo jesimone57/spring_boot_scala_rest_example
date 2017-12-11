@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream
 import com.fasterxml.jackson.databind.{DeserializationFeature, ObjectMapper}
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import com.jsimone.error.ErrorResponseBody
 
 object JsonUtil {
   val objectMapper = new ObjectMapper() with ScalaObjectMapper
@@ -28,5 +29,8 @@ object JsonUtil {
     objectMapper.readValue[T](json)
   }
 
+//  def fromJson(json: String): ErrorResponseBody = {
+//    objectMapper.readValue(json, classOf[ErrorResponseBody])
+//  }
 }
 

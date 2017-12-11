@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation._
 
 @RestController
 @RequestMapping(value = Array(UrlPath.ROOT), produces = Array(MediaType.TEXT_PLAIN_VALUE))
-class HelloWorldController extends BaseController {
+class HelloWorldController extends ControllerBase {
 
   @GetMapping(value = Array(UrlPath.ROOT))
   def hello() = {

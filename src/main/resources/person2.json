@@ -1,17 +1,17 @@
 [
   {
-   "name": "fred",
-   "age": 25,
-   "job": "pilot"
+    "name": "fred",
+    "age": 25,
+    "job": "pilot"
   },
   {
-   "name": "tom",
-   "age": 18,
-   "job": "student"
+    "name": "tom",
+    "age": 18,
+    "job": "student"
   },
   {
-   "name": "Alice",
-   "age": 45,
-   "job": "Nurse"
+    "name": "Alice",
+    "age": 45,
+    "job": "Nurse"
   }
 ]

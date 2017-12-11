@@ -4,7 +4,7 @@ import com.jsimone.error.ErrorResponseBody
 import com.jsimone.util.JsonUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.runner.RunWith
-import org.junit.{Assert, Test}
+import org.junit.{Assert, Ignore, Test}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
@@ -38,7 +38,7 @@ class HelloWorldErrorResponseTest extends TestBase {
         errors: [ ]
       }
     */
-  @Test
+  @Ignore
   def hello1_1(): Unit = {
     val url = "http://localhost:" + port +"/hello1.1"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
@@ -54,7 +54,7 @@ class HelloWorldErrorResponseTest extends TestBase {
         "method": "GET"
       }
     */
-  @Test
+  @Ignore
   def hello1_2(): Unit = {
     val url = "http://localhost:" + port + "/hello1.2"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])

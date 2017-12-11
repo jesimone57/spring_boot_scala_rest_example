@@ -1,5 +1,14 @@
 package com.jsimone.exception
 
-class ErrorResponseException {
+import com.jsimone.error.ErrorResponseBody
 
+class ErrorResponseException extends Exception {
+
+  var errorResponse:  ErrorResponseBody = _
+
+  def this(errorResponse:  ErrorResponseBody) = {
+    this()
+    this.errorResponse = errorResponse
+  }
 }
+

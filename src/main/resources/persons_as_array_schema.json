@@ -12,9 +12,9 @@
       "person":  {
         "type": "object",
         "properties": {
-          "name": { "type": "string" },
+          "name": { "type": "string", "minLength": 2, "maxLength": 30 },
           "age":  { "description": "Age in years", "type": "integer", "minimum": 18, "maximum": 150 },
-          "job":  { "type": "string" }
+          "job":  { "type": "string", "pattern": "^[A-Za-z0-9]+$" }
         },
         "required": ["name", "job"],
         "additionalProperties": false
