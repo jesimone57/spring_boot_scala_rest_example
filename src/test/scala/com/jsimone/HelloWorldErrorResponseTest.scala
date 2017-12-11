@@ -54,7 +54,7 @@ class HelloWorldErrorResponseTest extends TestBase {
         "method": "GET"
       }
     */
-  @Ignore
+  @Test
   def hello1_2(): Unit = {
     val url = "http://localhost:" + port + "/hello1.2"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])

@@ -30,7 +30,7 @@ import scala.beans.BeanProperty
     @Future and @FutureOrPresent – validates that a date value is in the future, or in the future including the present
 
     The validation annotations can also be applied to elements of a collection:
- */
+*/
 class Person() {
 
   @Size(min=2, max=30)    // Note: we'll use the default message since we did not provide a custom message
@@ -48,5 +48,22 @@ class Person() {
   override def toString: String = {
     super.toString
     "Person { name: \"%s\", age: \"%d\", job: \"%s\" }".format(name, age, job)
+  }
+
+  def canEqual(a: Any) = a.isInstanceOf[Person]
+
+  override def equals(that: Any): Boolean =
+    that match {
+      case that: Person => that.canEqual(this) && this.hashCode == that.hashCode
+      case _ => false
+    }
+
+  override def hashCode: Int = {
+    val prime = 31
+    var result = 1
+    result = prime * result + age
+    result = prime * result + (if (name == null) 0 else name.hashCode)
+    result = prime * result + (if (job == null) 0 else job.hashCode)
+    result
   }
 }

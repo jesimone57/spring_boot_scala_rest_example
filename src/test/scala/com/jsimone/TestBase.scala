@@ -14,6 +14,8 @@ class TestBase {
                                             expectedMethod: String,
                                             expectedMessage: String): Unit = {
 
+    val json = responseEntity.getBody
+    println(json)
     val errorResponseBody: ErrorResponseBody = JsonUtil.fromJson[ErrorResponseBody](responseEntity.getBody)
 
     Assert.assertEquals(expectedStatusCode, errorResponseBody.code)
