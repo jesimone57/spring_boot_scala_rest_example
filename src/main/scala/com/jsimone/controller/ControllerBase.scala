@@ -72,32 +72,35 @@ class ControllerBase extends Logging {
     new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, status)
   }
 
-  protected def jsonSchemaValidateFromResource(inputFilename: String, schemaFilename: String, request: HttpServletRequest) = {
-    var inputJsonString: String = null
-    try {
-       val bufferedSource = scala.io.Source.fromResource(inputFilename)
-       inputJsonString = bufferedSource.getLines().mkString
-    } catch {
-      case ioex: Exception => throw new ErrorResponseException(new ErrorResponseBody(HttpStatus.BAD_REQUEST.value, request, ioex))
-    }
-    jsonSchemaValidateFromString(inputJsonString, schemaFilename, request)
+  def jsonSchemaValidateFromResource(inputFilename: String, schemaFilename: String, request: HttpServletRequest) = {
+    val inputNode: JsonNode = readResourceAsJsonNode(inputFilename, request)
+    val schemaNode: JsonNode = readResourceAsJsonNode(schemaFilename, request)
+    jsonSchemaValidate(inputNode, schemaNode, request)
   }
 
-  protected def jsonSchemaValidateFromString(inputString: String, schemaFilename: String, request: HttpServletRequest) = {
-    var schemaJsonNode: JsonNode = null
+  def jsonSchemaValidateFromString(jsonString: String, schemaFilename: String, request: HttpServletRequest) = {
+    val objectMapper: ObjectMapper = new ObjectMapper()
+    val inputJsonNode: JsonNode = objectMapper.readTree(jsonString)
+    val schemaNode: JsonNode = readResourceAsJsonNode(schemaFilename, request)
+    jsonSchemaValidate(inputJsonNode, schemaNode, request)
+  }
+
+  protected def jsonSchemaValidate(inputNode: JsonNode, schemaNode: JsonNode, request: HttpServletRequest) = {
+    val objectMapper: ObjectMapper = new ObjectMapper()
+    val jsonSchemaFactory: JsonSchemaFactory = JsonSchemaFactory.byDefault()
+    val jsonSchema: JsonSchema = jsonSchemaFactory.getJsonSchema(schemaNode)
+
+    val report: ProcessingReport = jsonSchema.validate(inputNode)
+    if (!report.isSuccess) throw new ErrorResponseException(
+      new ErrorResponseBody(HttpStatus.BAD_REQUEST.value(), request, report))
+  }
+
+  protected def readResourceAsJsonNode(resourceFilename: String, request: HttpServletRequest): JsonNode = {
     try {
-      schemaJsonNode = JsonLoader.fromResource(schemaFilename)
+      JsonLoader.fromResource(resourceFilename)
     } catch {
       case ioex: Exception => throw new ErrorResponseException(new ErrorResponseBody(HttpStatus.BAD_REQUEST.value, request, ioex))
     }
-    val objectMapper: ObjectMapper = new ObjectMapper()
-    val inputJsonNode: JsonNode = objectMapper.readTree(inputString)
-    val jsonSchemaFactory: JsonSchemaFactory = JsonSchemaFactory.byDefault()
-    val jsonSchema: JsonSchema = jsonSchemaFactory.getJsonSchema(schemaJsonNode)
-
-    val report: ProcessingReport = jsonSchema.validate(inputJsonNode)
-    if (!report.isSuccess) throw new ErrorResponseException(
-      new ErrorResponseBody(HttpStatus.BAD_REQUEST.value(), request, report))
   }
 
 }

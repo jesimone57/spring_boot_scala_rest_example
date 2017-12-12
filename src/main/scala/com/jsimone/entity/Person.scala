@@ -45,6 +45,13 @@ class Person() {
   @Pattern(regexp = "^[A-Za-z0-9]+$")   // Alpha numeric string
   @BeanProperty var job: String = _
 
+  def this(name: String, age: Int, job: String) {
+    this()
+    this.name = name
+    this.age = age
+    this.job = job
+  }
+
   override def toString: String = {
     super.toString
     "Person { name: \"%s\", age: \"%d\", job: \"%s\" }".format(name, age, job)

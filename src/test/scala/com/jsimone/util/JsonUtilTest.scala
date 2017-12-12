@@ -7,26 +7,20 @@ import org.junit.{Assert, Test}
 class JsonUtilTest {
 
   @Test
-  def toJsonTest()  {
-    val json: String = "{\"name\":\"frank\",\"age\":20,\"job\":\"artist\"}"
+  def toJsonPerson()  {
+    val json = """{"name":"frank","age":20,"job":"artist"}"""
 
-    val person: Person = new Person
-    person.name = "frank"
-    person.age = 20
-    person.job = "artist"
+    val person: Person = new Person("frank", 20, "artist")
 
     val actual = JsonUtil.toJson(person)
     Assert.assertEquals(json, actual)
   }
 
   @Test
-  def fromJsonTest()  {
-    val json: String = "{\"name\":\"frank\",\"age\":20,\"job\":\"artist\"}"
+  def fromJsonPerson()  {
+    val json = """{"name":"frank","age":20,"job":"artist"}"""
 
-    val person: Person = new Person
-    person.name = "frank"
-    person.age = 20
-    person.job = "artist"
+    val person: Person = new Person("frank", 20, "artist")
 
     val personActual: Person = JsonUtil.fromJson[Person](json)
     Assert.assertEquals(person, personActual)
@@ -34,7 +28,7 @@ class JsonUtilTest {
 
   @Test
   def fromJsonErrorResponse(): Unit = {
-    val json = "{\"status_code\":400,\"uri_path\":\"/hello1.2\",\"method\":\"GET\",\"error_message\":\"Required int parameter 'num' is not present\",\"errors\":[]}"
+    val json = """{"status_code":400,"uri_path":"/hello1.2","method":"GET","error_message":"Required int parameter 'num' is not present","errors":[]}"""
 
     val expectedErrorResponse: ErrorResponseBody = new ErrorResponseBody(400, "/hello1.2", "Required int parameter 'num' is not present")
     expectedErrorResponse.method = "GET"
@@ -45,12 +39,9 @@ class JsonUtilTest {
 
   @Test
   def fromJsonFieldError(): Unit = {
-    val json = "{\"field_name\":\"name\",\"rejected_value\":\"ff\",\"error_message\":\"name is too short\"}"
+    val json = """{"field_name":"name","rejected_value":"ff","error_message":"name is too short"}"""
 
-    val fieldError: FieldError = new FieldError
-    fieldError.field = "name"
-    fieldError.value = "ff"
-    fieldError.message = "name is too short"
+    val fieldError: FieldError = new FieldError("name", "ff", "name is too short")
 
     val actualFieldError: FieldError = JsonUtil.fromJson[FieldError](json)
     Assert.assertEquals(fieldError, actualFieldError)

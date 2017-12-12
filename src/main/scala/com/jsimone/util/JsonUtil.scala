@@ -7,6 +7,10 @@ import java.util.TimeZone
 import com.fasterxml.jackson.databind.{DeserializationFeature, ObjectMapper}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
+//import org.json4s._
+//import org.json4s.jackson.JsonMethods._
+//import org.json4s.jackson.Serialization.{read,write}
+
 
 /**
   * Other serialization/deserialization featuress include:
@@ -24,6 +28,8 @@ import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
   *
   */
 object JsonUtil {
+  //implicit val formats = DefaultFormats
+
   val W3C_UTC_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
   val W3C_UTC_DATE_FORMAT = new SimpleDateFormat(W3C_UTC_FORMAT)
   W3C_UTC_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"))
@@ -50,8 +56,18 @@ object JsonUtil {
     objectMapper.readValue[T](json)
   }
 
-  //  def fromJson(json: String): ErrorResponseBody = {
-  //    objectMapper.readValue(json, classOf[ErrorResponseBody])
-  //  }
+  /*
+    Json4s implementation.   I could not get this to work.
+
+  def toJson2(value: AnyRef): String = {
+    write(value)
+  }
+
+  def fromJson2[T](json: String)(implicit m: Manifest[T]): T = {
+    read[T](json)
+   // or
+    parse(json).extract[T]
+  }
+  */
 }
 
