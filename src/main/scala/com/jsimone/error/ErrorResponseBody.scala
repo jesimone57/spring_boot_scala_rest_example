@@ -6,15 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.github.fge.jsonschema.core.report.ProcessingReport
 import org.springframework.validation.{BindException, BindingResult}
 
+import scala.beans.BeanProperty
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
 
 class ErrorResponseBody() {
-  @JsonProperty("status_code") var code: Int = _
-  @JsonProperty("uri_path") var path: String = _
-  @JsonProperty("method") var method: String = _
-  @JsonProperty("error_message") var message: String = _
-  @JsonProperty("errors") var errors: ListBuffer[FieldError] = ListBuffer()
+  @BeanProperty @JsonProperty("status_code") var code: Int = _
+  @BeanProperty @JsonProperty("uri_path") var path: String = _
+  @BeanProperty @JsonProperty("method") var method: String = _
+  @BeanProperty @JsonProperty("error_message") var message: String = _
+  @BeanProperty @JsonProperty("errors") var errors: ListBuffer[FieldError] = ListBuffer()
 
   def this(code: Int, path: String, message: String) = {
     this()
@@ -93,4 +94,23 @@ class ErrorResponseBody() {
     super.toString
     s"ErrorResponseBody { code: $code, path: $path, message: $message, errors: [${errors.toString()}] }"
   }
+//
+//  private def canEqual(a: Any) = a.isInstanceOf[ErrorResponseBody]
+//
+//  override def equals(that: Any): Boolean =
+//    that match {
+//      case that: ErrorResponseBody => that.canEqual(this) && this.hashCode == that.hashCode
+//      case _ => false
+//    }
+//
+//  override def hashCode: Int = {
+//    val prime = 31
+//    var result = 1
+//    result = prime * result + code
+//    result = prime * result + (if (path == null) 0 else path.hashCode)
+//    result = prime * result + (if (method == null) 0 else method.hashCode)
+//    result = prime * result + (if (message == null) 0 else message.hashCode)
+//    result = prime * result + (if (errors == null) 0 else errors.hashCode)
+//    result
+//  }
 }

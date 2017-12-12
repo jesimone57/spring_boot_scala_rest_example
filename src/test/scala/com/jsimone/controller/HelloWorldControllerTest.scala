@@ -1,6 +1,5 @@
-package com.jsimone
+package com.jsimone.controller
 
-import com.jsimone.controller.HelloWorldController
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

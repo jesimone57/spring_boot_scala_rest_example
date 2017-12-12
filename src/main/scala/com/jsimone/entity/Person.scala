@@ -50,7 +50,7 @@ class Person() {
     "Person { name: \"%s\", age: \"%d\", job: \"%s\" }".format(name, age, job)
   }
 
-  def canEqual(a: Any) = a.isInstanceOf[Person]
+  private def canEqual(a: Any) = a.isInstanceOf[Person]
 
   override def equals(that: Any): Boolean =
     that match {

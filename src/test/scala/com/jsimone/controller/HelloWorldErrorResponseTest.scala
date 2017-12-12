@@ -1,16 +1,14 @@
-package com.jsimone
+package com.jsimone.controller
 
-import com.jsimone.error.ErrorResponseBody
-import com.jsimone.util.JsonUtil
+import com.jsimone.TestBase
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.{Assert, Ignore, Test}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.http.{HttpHeaders, HttpStatus, ResponseEntity}
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
@@ -38,7 +36,7 @@ class HelloWorldErrorResponseTest extends TestBase {
         errors: [ ]
       }
     */
-  @Ignore
+  @Test
   def hello1_1(): Unit = {
     val url = "http://localhost:" + port +"/hello1.1"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
