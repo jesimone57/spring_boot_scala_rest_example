@@ -35,10 +35,12 @@ class JsonUtilTest {
   @Test
   def fromJsonErrorResponse(): Unit = {
     val json = "{\"status_code\":400,\"uri_path\":\"/hello1.2\",\"method\":\"GET\",\"error_message\":\"Required int parameter 'num' is not present\",\"errors\":[]}"
-    println(json)
+
+    val expectedErrorResponse: ErrorResponseBody = new ErrorResponseBody(400, "/hello1.2", "Required int parameter 'num' is not present")
+    expectedErrorResponse.method = "GET"
+
     val actualErrorResponse: ErrorResponseBody = JsonUtil.fromJson[ErrorResponseBody](json)
-    println(actualErrorResponse)
-    //Assert.assertEquals(expectedJson, actualErrorResponse)
+    Assert.assertEquals(expectedErrorResponse, actualErrorResponse)
   }
 
   @Test

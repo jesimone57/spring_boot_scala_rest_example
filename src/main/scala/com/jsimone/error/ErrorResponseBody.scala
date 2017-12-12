@@ -27,9 +27,9 @@ class ErrorResponseBody() {
   def this(code: Int, request: HttpServletRequest, exception: Exception) = {
     this()
     this.code = code
-    this.path = request.getRequestURI
-    this.message = exception.getMessage
-    this.method = request.getMethod
+    this.path = if (request != null) request.getRequestURI else ""
+    this.message = if (exception != null) exception.getMessage else ""
+    this.method = if (request != null) request.getMethod else ""
     exception match {
       case e: BindException => this.addBindingResultErrors(e.getBindingResult)
       case _ =>
@@ -39,10 +39,14 @@ class ErrorResponseBody() {
   def this(code: Int, request: HttpServletRequest, report: ProcessingReport) = {
     this()
     this.code = code
-    this.path = request.getRequestURI
-    this.message = if (report.isSuccess) "" else s"JSON Schema validation errors encountered."
-    this.method = request.getMethod
-    setSchemaValidationProcessingMessageErrors(report)
+    Option(request).foreach { r =>
+      this.path = r.getRequestURI
+      this.method = r.getMethod
+    }
+    Option(report).foreach { r =>
+      this.message = if (report.isSuccess) "" else s"JSON Schema validation errors encountered."
+      setSchemaValidationProcessingMessageErrors(report)
+    }
   }
 
   def this(code: Int, path: String, message: String, errors: ListBuffer[FieldError]) = {
@@ -63,7 +67,7 @@ class ErrorResponseBody() {
 
   /**
     * @see <a href="https://stackoverflow.com/questions/20702855/how-can-we-extract-all-messages-from-processing-report-in-json-schema-validator">
-    *        how-can-we-extract-all-messages-from-processing-report-in-json-schema-validator</a>
+    *      how-can-we-extract-all-messages-from-processing-report-in-json-schema-validator</a>
     * @param report Json schema validation report
     */
   private def setSchemaValidationProcessingMessageErrors(report: ProcessingReport): Unit = {
@@ -94,23 +98,25 @@ class ErrorResponseBody() {
     super.toString
     s"ErrorResponseBody { code: $code, path: $path, message: $message, errors: [${errors.toString()}] }"
   }
-//
-//  private def canEqual(a: Any) = a.isInstanceOf[ErrorResponseBody]
-//
-//  override def equals(that: Any): Boolean =
-//    that match {
-//      case that: ErrorResponseBody => that.canEqual(this) && this.hashCode == that.hashCode
-//      case _ => false
-//    }
-//
-//  override def hashCode: Int = {
-//    val prime = 31
-//    var result = 1
-//    result = prime * result + code
-//    result = prime * result + (if (path == null) 0 else path.hashCode)
-//    result = prime * result + (if (method == null) 0 else method.hashCode)
-//    result = prime * result + (if (message == null) 0 else message.hashCode)
-//    result = prime * result + (if (errors == null) 0 else errors.hashCode)
-//    result
-//  }
+
+  private def canEqual(a: Any) = a.isInstanceOf[ErrorResponseBody]
+
+  override def equals(that: Any): Boolean =
+    that match {
+      case that: ErrorResponseBody => that.canEqual(this) && this.hashCode == that.hashCode
+      case _ => false
+    }
+
+  override def hashCode: Int = {
+    val prime = 31
+    var result = 1
+    result = prime * result + code
+    result = prime * result + (if (path == null) 0 else path.hashCode)
+    result = prime * result + (if (method == null) 0 else method.hashCode)
+    result = prime * result + (if (message == null) 0 else message.hashCode)
+    result = prime * result + (if (errors == null) 0 else errors.hashCode)
+    result
+  }
+
+
 }
