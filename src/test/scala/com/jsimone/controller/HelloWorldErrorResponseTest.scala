@@ -59,4 +59,47 @@ class HelloWorldErrorResponseTest extends TestBase {
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "Required int parameter 'num' is not present")
   }
+
+  /**
+    {
+      "status_code": 404,
+      "uri_path": "/hello2",
+      "error_message": "The URL you have reached is not in service at this time",
+      "method": null,
+      "errors": [],
+    }
+    */
+  @Test
+  def hello2(): Unit = {
+    val url = "http://localhost:" + port + "/hello2"
+    val responseEntity = restTemplate.getForEntity(url, classOf[String])
+    verifyErrorResponse(responseEntity, HttpStatus.NOT_FOUND, null, "The URL you have reached is not in service at this time")
+  }
+
+  /**
+  {
+    "status_code": 400,
+    "uri_path": "/hello4",
+    "error_message": "org.springframework.validation.BeanPropertyBindingResult: 2 errors Field error in object 'person' on field 'job': rejected value [null]; codes [NotBlank.person.job,NotBlank.job,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.job,job]; arguments []; default message [job]]; default message [may not be empty] Field error in object 'person' on field 'age': rejected value [0]; codes [Min.person.age,Min.age,Min.int,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.age,age]; arguments []; default message [age],18]; default message [Age should be a minium of 18]",
+    "method": "GET",
+    "errors": [
+      {
+      "field_name": "job",
+      "error_message": "may not be empty",
+      "rejected_value": null
+      },
+     {
+      "field_name": "age",
+      "error_message": "Age should be a minium of 18",
+      "rejected_value": "0"
+      }
+    ],
+  }
+    */
+  @Test
+  def hello4(): Unit = {
+    val url = "http://localhost:" + port + "/hello4"
+    val responseEntity = restTemplate.getForEntity(url, classOf[String])
+    verifyErrorResponsePrefix(responseEntity, HttpStatus.BAD_REQUEST, "GET", "org.springframework.validation.BeanPropertyBindingResult: 2 errors\nField error in object 'person'")
+  }
 }

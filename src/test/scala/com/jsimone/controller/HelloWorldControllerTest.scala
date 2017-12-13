@@ -1,5 +1,6 @@
 package com.jsimone.controller
 
+import com.jsimone.constants.UrlPath
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -92,4 +93,36 @@ class HelloWorldControllerTest {
       .andExpect(content.string("Hello, Fred"))
   }
 
+  @Test
+  def test5(): Unit = {
+    mockMvc.perform(get("/hello2/Fred")
+      .accept(MediaType.parseMediaType("text/plain;charset=UTF-8")))
+      .andExpect(status.isOk)
+      .andExpect(content.contentType("text/plain;charset=UTF-8"))
+      .andExpect(content.string("Hello, Fred"))
+  }
+
+  /**
+    * No validation, therefore missing request parameters do not cause an error response
+    */
+  @Test
+  def test6(): Unit = {
+    mockMvc.perform(get("/hello3")
+      .accept(MediaType.parseMediaType("text/plain;charset=UTF-8")))
+      .andExpect(status.isOk)
+      .andExpect(content.contentType("text/plain;charset=UTF-8"))
+      .andExpect(content.string("Hello none, whose age is 0 and job is null"))
+  }
+
+  /**
+    * No validation, therefore request parameters are not bound by constraints and do not cause an error response
+    */
+  @Test
+  def test7(): Unit = {
+    mockMvc.perform(get("/hello3?name=f&age=1&job=****")
+      .accept(MediaType.parseMediaType("text/plain;charset=UTF-8")))
+      .andExpect(status.isOk)
+      .andExpect(content.contentType("text/plain;charset=UTF-8"))
+      .andExpect(content.string("Hello f, whose age is 1 and job is ****"))
+  }
 }
