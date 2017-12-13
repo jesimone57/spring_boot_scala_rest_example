@@ -9,8 +9,8 @@ class TestBase {
   protected val APPLICATION_JSON = "[application/json]"
   protected val CONTENT_TYPE = "Content-Type"
 
-  protected def verifyBadRequestErrorResponse(responseEntity: ResponseEntity[String],
-                                            expectedStatusCode: Int,
+  protected def verifyErrorResponse(responseEntity: ResponseEntity[String],
+                                            expectedHttpStatus: HttpStatus,
                                             expectedMethod: String,
                                             expectedMessage: String): Unit = {
 
@@ -18,11 +18,30 @@ class TestBase {
     println(json)
     val errorResponse: ErrorResponse = JsonUtil.fromJson[ErrorResponse](responseEntity.getBody)
 
-    Assert.assertEquals(expectedStatusCode, errorResponse.code)
+    Assert.assertEquals(expectedHttpStatus.value(), errorResponse.code)
     Assert.assertEquals(expectedMethod, errorResponse.method)
     Assert.assertEquals(expectedMessage, errorResponse.message)
 
-    Assert.assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode)
+    Assert.assertEquals(expectedHttpStatus, responseEntity.getStatusCode)
+
+    val headers: HttpHeaders = responseEntity.getHeaders
+    Assert.assertEquals(APPLICATION_JSON, headers.get(CONTENT_TYPE).toString)
+  }
+
+  protected def verifyErrorResponsePrefix(responseEntity: ResponseEntity[String],
+                                    expectedHttpStatus: HttpStatus,
+                                    expectedMethod: String,
+                                              messagePrefix: String): Unit = {
+
+    val json = responseEntity.getBody
+    println(json)
+    val errorResponse: ErrorResponse = JsonUtil.fromJson[ErrorResponse](responseEntity.getBody)
+
+    Assert.assertEquals(expectedHttpStatus.value(), errorResponse.code)
+    Assert.assertEquals(expectedMethod, errorResponse.method)
+    Assert.assertTrue(errorResponse.message.startsWith(messagePrefix))
+
+    Assert.assertEquals(expectedHttpStatus, responseEntity.getStatusCode)
 
     val headers: HttpHeaders = responseEntity.getHeaders
     Assert.assertEquals(APPLICATION_JSON, headers.get(CONTENT_TYPE).toString)

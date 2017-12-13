@@ -10,5 +10,6 @@ object UrlPath {
 
   final val ERROR_RESPONSE = "/error_response"
   final val JSON = "/json"
-  final val THROWN_EXCEPTION = "/thrown_exception"
+  final val THROWN_EXCEPTION1 = "/thrown_exception1"
+  final val THROWN_EXCEPTION2 = "/thrown_exception2"
 }

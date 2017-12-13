@@ -1,6 +1,4 @@
-package com.jsimone
-
-import javax.servlet.http.HttpServletRequest
+package com.jsimone.exception
 
 import com.jsimone.error.ErrorResponse
 import com.jsimone.util.{JsonUtil, Logging}
@@ -29,17 +27,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
   */
 @ControllerAdvice
 class GlobalExceptionHandler extends ResponseEntityExceptionHandler with Logging {
-
-  @ExceptionHandler(Array(classOf[Exception]))
-  protected def handleDefaultException(exception: Exception, request: WebRequest): ResponseEntity[AnyRef] = {
-    val path = request.getDescription(false).substring(4)
-    val headers = new HttpHeaders
-    headers.setContentType(MediaType.APPLICATION_JSON)
-    val message = Option(exception.getMessage).getOrElse(exception.getStackTrace.mkString("\n"))
-    val status = HttpStatus.INTERNAL_SERVER_ERROR
-    val errorResponse = new ErrorResponse(status.value, path, message)
-    handleExceptionInternal(exception, JsonUtil.toJson(errorResponse), headers, status, request)
-  }
 
   /**
     * Note:  we must add the 2 properties to resources/application.properties in order for this to work:

@@ -9,6 +9,7 @@ import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
@@ -40,7 +41,7 @@ class HelloWorldErrorResponseTest extends TestBase {
   def hello1_1(): Unit = {
     val url = "http://localhost:" + port +"/hello1.1"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyBadRequestErrorResponse(responseEntity, 400, "GET", "Required String parameter 'name' is not present")
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "Required String parameter 'name' is not present")
   }
 
   /**
@@ -56,6 +57,6 @@ class HelloWorldErrorResponseTest extends TestBase {
   def hello1_2(): Unit = {
     val url = "http://localhost:" + port + "/hello1.2"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyBadRequestErrorResponse(responseEntity, 400, "GET", "Required int parameter 'num' is not present")
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "Required int parameter 'num' is not present")
   }
 }

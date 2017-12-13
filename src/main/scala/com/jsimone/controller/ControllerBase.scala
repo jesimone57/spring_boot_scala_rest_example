@@ -15,8 +15,6 @@ import org.springframework.validation.BindException
 import org.springframework.web.bind.annotation.{ExceptionHandler, ResponseStatus}
 import org.springframework.web.bind.{MethodArgumentNotValidException, MissingPathVariableException, MissingServletRequestParameterException}
 
-import scala.io.BufferedSource
-
 class ControllerBase extends Logging {
 
   @ExceptionHandler(Array(classOf[BindException]))
@@ -59,6 +57,19 @@ class ControllerBase extends Logging {
   def handleErrorResponseException(exception: ErrorResponseException, request: HttpServletRequest): ResponseEntity[AnyRef] = {
     log.error(exception.toString)
     buildBadRequestResponse(exception, request)
+  }
+
+  @ExceptionHandler(Array(classOf[Exception]))
+  protected def handleDefaultException(exception: Exception, request: HttpServletRequest): ResponseEntity[AnyRef] = {
+    val path = request.getRequestURI
+    val headers = new HttpHeaders
+    headers.setContentType(MediaType.APPLICATION_JSON)
+    //val message = Option(exception.getMessage).getOrElse(exception.getStackTrace.mkString("\n"))
+    val message = exception.getStackTrace.mkString("\n")
+    val status = HttpStatus.INTERNAL_SERVER_ERROR
+    val errorResponse = new ErrorResponse(status.value, path, message)
+    errorResponse.method = request.getMethod
+    new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponse), headers, status)
   }
 
   private def buildBadRequestResponse(exception: Exception, request: HttpServletRequest): ResponseEntity[AnyRef] = {

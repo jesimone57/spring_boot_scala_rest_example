@@ -44,10 +44,16 @@ class ErrorResponseController extends ControllerBase {
     JsonUtil.toJson(m)
   }
 
-  @GetMapping(value = Array(UrlPath.THROWN_EXCEPTION))
-  def throwingAnException(): String = {
-    log.info("/thrown_exception enpoint hit.")
+  @GetMapping(value = Array(UrlPath.THROWN_EXCEPTION1))
+  def throwingAnException1(): String = {
+    log.info("/thrown_exception1 endpoint hit.")
     throw new IllegalArgumentException("Illegal Argument Exception")
+  }
+
+  @GetMapping(value = Array(UrlPath.THROWN_EXCEPTION2))
+  def throwingAnException2(): String = {
+    log.info("/thrown_exception2 endpoint hit.")
+    throw new NullPointerException()
   }
 
   // Note:  this endpoint works with validation because the exception handler is in the base class
