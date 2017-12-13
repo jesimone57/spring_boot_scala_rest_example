@@ -13,7 +13,7 @@ class JsonSchemaValidationController extends ControllerBase {
   @GetMapping(value = Array("/schema_test1"))
   def validateAgainstSchema(request: HttpServletRequest) = {
     log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
-    jsonSchemaValidateFromResource("test1.json", "/test1_schema.json", request)
+    jsonSchemaValidateFromResource("/test1.json", "/test1_schema.json", request)
     "valid"
   }
 

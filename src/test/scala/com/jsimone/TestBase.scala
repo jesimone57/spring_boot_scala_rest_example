@@ -10,9 +10,9 @@ class TestBase {
   protected val CONTENT_TYPE = "Content-Type"
 
   protected def verifyErrorResponse(responseEntity: ResponseEntity[String],
-                                            expectedHttpStatus: HttpStatus,
-                                            expectedMethod: String,
-                                            expectedMessage: String): Unit = {
+                                    expectedHttpStatus: HttpStatus,
+                                    expectedMethod: String,
+                                    expectedMessage: String): ErrorResponse = {
 
     val json = responseEntity.getBody
     println(json)
@@ -26,12 +26,13 @@ class TestBase {
 
     val headers: HttpHeaders = responseEntity.getHeaders
     Assert.assertEquals(APPLICATION_JSON, headers.get(CONTENT_TYPE).toString)
+    errorResponse
   }
 
   protected def verifyErrorResponsePrefix(responseEntity: ResponseEntity[String],
-                                    expectedHttpStatus: HttpStatus,
-                                    expectedMethod: String,
-                                              messagePrefix: String): Unit = {
+                                          expectedHttpStatus: HttpStatus,
+                                          expectedMethod: String,
+                                          messagePrefix: String): Unit = {
 
     val json = responseEntity.getBody
     println(json)
@@ -48,7 +49,7 @@ class TestBase {
   }
 
   protected def verifyFieldErrors(responseEntity: ResponseEntity[String],
-                                  expectedErrors:  List[FieldError]): Unit = {
+                                  expectedErrors: List[FieldError]): Unit = {
 
     val json = responseEntity.getBody
     val errorResponse: ErrorResponse = JsonUtil.fromJson[ErrorResponse](responseEntity.getBody)
