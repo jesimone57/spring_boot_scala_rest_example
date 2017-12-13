@@ -10,7 +10,7 @@ import scala.beans.BeanProperty
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
 
-class ErrorResponseBody() {
+class ErrorResponse() {
   @BeanProperty @JsonProperty("status_code") var code: Int = _
   @BeanProperty @JsonProperty("uri_path") var path: String = _
   @BeanProperty @JsonProperty("method") var method: String = _
@@ -98,11 +98,11 @@ class ErrorResponseBody() {
     s"${this.getClass.getSimpleName} { code: $code, path: $path, message: $message, method: $method, errors: [${errors.toString()}] }"
   }
 
-  private def canEqual(a: Any) = a.isInstanceOf[ErrorResponseBody]
+  private def canEqual(a: Any) = a.isInstanceOf[ErrorResponse]
 
   override def equals(that: Any): Boolean =
     that match {
-      case that: ErrorResponseBody => that.canEqual(this) && this.hashCode == that.hashCode
+      case that: ErrorResponse => that.canEqual(this) && this.hashCode == that.hashCode
       case _ => false
     }
 

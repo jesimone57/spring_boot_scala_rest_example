@@ -2,7 +2,7 @@ package com.jsimone
 
 import javax.servlet.http.HttpServletRequest
 
-import com.jsimone.error.ErrorResponseBody
+import com.jsimone.error.ErrorResponse
 import com.jsimone.util.{JsonUtil, Logging}
 import org.springframework.http._
 import org.springframework.web.bind.annotation.{ControllerAdvice, ExceptionHandler}
@@ -37,8 +37,8 @@ class GlobalExceptionHandler extends ResponseEntityExceptionHandler with Logging
     headers.setContentType(MediaType.APPLICATION_JSON)
     val message = Option(exception.getMessage).getOrElse(exception.getStackTrace.mkString("\n"))
     val status = HttpStatus.INTERNAL_SERVER_ERROR
-    val errorResponseBody = new ErrorResponseBody(status.value, path, message)
-    handleExceptionInternal(exception, JsonUtil.toJson(errorResponseBody), headers, status, request)
+    val errorResponse = new ErrorResponse(status.value, path, message)
+    handleExceptionInternal(exception, JsonUtil.toJson(errorResponse), headers, status, request)
   }
 
   /**
@@ -51,8 +51,8 @@ class GlobalExceptionHandler extends ResponseEntityExceptionHandler with Logging
     val path = request.getDescription(false).substring(4)
     headers.add("Content-Type", MediaType.APPLICATION_JSON_VALUE)
     val message = "The URL you have reached is not in service at this time"
-    val errorResponseBody = new ErrorResponseBody(status.value, path, message)
-    handleExceptionInternal(exception, JsonUtil.toJson(errorResponseBody), headers, status, request)
-    //new ResponseEntity[AnyRef](errorResponseBody, status)
+    val errorResponse = new ErrorResponse(status.value, path, message)
+    handleExceptionInternal(exception, JsonUtil.toJson(errorResponse), headers, status, request)
+    //new ResponseEntity[AnyRef](errorResponse, status)
   }
 }

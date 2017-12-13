@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import com.github.fge.jackson.JsonLoader
 import com.github.fge.jsonschema.core.report.ProcessingReport
 import com.github.fge.jsonschema.main.{JsonSchema, JsonSchemaFactory}
-import com.jsimone.error.ErrorResponseBody
+import com.jsimone.error.ErrorResponse
 import com.jsimone.exception.ErrorResponseException
 import com.jsimone.util.{JsonUtil, Logging}
 import org.springframework.beans.TypeMismatchException
@@ -65,11 +65,11 @@ class ControllerBase extends Logging {
     val headers = new HttpHeaders
     headers.setContentType(MediaType.APPLICATION_JSON)
     val status = HttpStatus.BAD_REQUEST
-    val errorResponseBody = exception match {
+    val errorResponse = exception match {
       case e: ErrorResponseException => e.errorResponse
-      case _ => new ErrorResponseBody(status.value, request, exception)
+      case _ => new ErrorResponse(status.value, request, exception)
     }
-    new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponseBody), headers, status)
+    new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponse), headers, status)
   }
 
   def jsonSchemaValidateFromResource(inputFilename: String, schemaFilename: String, request: HttpServletRequest) = {
@@ -92,14 +92,14 @@ class ControllerBase extends Logging {
 
     val report: ProcessingReport = jsonSchema.validate(inputNode)
     if (!report.isSuccess) throw new ErrorResponseException(
-      new ErrorResponseBody(HttpStatus.BAD_REQUEST.value(), request, report))
+      new ErrorResponse(HttpStatus.BAD_REQUEST.value(), request, report))
   }
 
   protected def readResourceAsJsonNode(resourceFilename: String, request: HttpServletRequest): JsonNode = {
     try {
       JsonLoader.fromResource(resourceFilename)
     } catch {
-      case ioex: Exception => throw new ErrorResponseException(new ErrorResponseBody(HttpStatus.BAD_REQUEST.value, request, ioex))
+      case ioex: Exception => throw new ErrorResponseException(new ErrorResponse(HttpStatus.BAD_REQUEST.value, request, ioex))
     }
   }
 

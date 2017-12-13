@@ -1,6 +1,6 @@
 package com.jsimone
 
-import com.jsimone.error.ErrorResponseBody
+import com.jsimone.error.ErrorResponse
 import com.jsimone.util.JsonUtil
 import org.junit.Assert
 import org.springframework.http.{HttpHeaders, HttpStatus, ResponseEntity}
@@ -16,11 +16,11 @@ class TestBase {
 
     val json = responseEntity.getBody
     println(json)
-    val errorResponseBody: ErrorResponseBody = JsonUtil.fromJson[ErrorResponseBody](responseEntity.getBody)
+    val errorResponse: ErrorResponse = JsonUtil.fromJson[ErrorResponse](responseEntity.getBody)
 
-    Assert.assertEquals(expectedStatusCode, errorResponseBody.code)
-    Assert.assertEquals(expectedMethod, errorResponseBody.method)
-    Assert.assertEquals(expectedMessage, errorResponseBody.message)
+    Assert.assertEquals(expectedStatusCode, errorResponse.code)
+    Assert.assertEquals(expectedMethod, errorResponse.method)
+    Assert.assertEquals(expectedMessage, errorResponse.message)
 
     Assert.assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode)
 
