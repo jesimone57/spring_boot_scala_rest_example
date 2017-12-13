@@ -10,7 +10,7 @@ import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.http.HttpStatus
+import org.springframework.http.{HttpHeaders, HttpStatus, MediaType}
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
@@ -148,14 +148,14 @@ class JsonSchemaValidationControllerTest extends TestBase {
   def schemaValidationFailure(): Unit = {
     val url = "http://localhost:" + port + "/schema?input=/person1.json&schema=/person1_schema.json "
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "JSON Schema validation errors encountered.")
+    val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "JSON Schema validation errors encountered.")
 
     val expectedFieldErrors = List(
       new FieldError("/age", "17", "numeric instance is lower than the required minimum (minimum: 18, found: 17)"),
       new FieldError("/job", "pi*lot", """ECMA 262 regex "^[A-Za-z0-9]+$" does not match input string "pi*lot""""),
       new FieldError("/name",  "f", "string \"f\" is too short (length: 1, required minimum: 2)")
     )
-    verifyFieldErrors(responseEntity, expectedFieldErrors)
+    verifyFieldErrors(expectedFieldErrors.length, errorResponse, expectedFieldErrors)
   }
 
   /**
@@ -230,10 +230,46 @@ class JsonSchemaValidationControllerTest extends TestBase {
       new FieldError("/string-pattern", "pi*lot", """ECMA 262 regex "^[A-Za-z0-9]+$" does not match input string "pi*lot""""),
       new FieldError("/string-min",  "f", "string \"f\" is too short (length: 1, required minimum: 5)")
     )
-    someExpectedFieldErrors.foreach{efe =>
-      println("--> found = "+ errorResponse.errors.contains(efe) + "   "+ efe)
-      Assert.assertTrue(errorResponse.errors.contains(efe))}
-    Assert.assertEquals(13, errorResponse.errors.length)
+    verifyFieldErrors(13, errorResponse, someExpectedFieldErrors)
+  }
+
+  @Test
+  def schemaValidationFailureOnPost(): Unit = {
+    val json =
+      """{
+        |  "name": "f",
+        |  "age": 17,
+        |  "job": "pi*lot"
+        |}
+      """.stripMargin
+
+    val url = "http://localhost:" + port + "/create_person1"
+    val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
+    val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "POST", "JSON Schema validation errors encountered.")
+
+    val expectedFieldErrors = List(
+      new FieldError("/age", "17", "numeric instance is lower than the required minimum (minimum: 18, found: 17)"),
+      new FieldError("/job", "pi*lot", """ECMA 262 regex "^[A-Za-z0-9]+$" does not match input string "pi*lot""""),
+      new FieldError("/name",  "f", "string \"f\" is too short (length: 1, required minimum: 2)")
+    )
+    verifyFieldErrors(3, errorResponse, expectedFieldErrors)
+  }
+
+  @Test
+  def schemaValidationSuccessOnPost(): Unit = {
+    val json =
+      """{
+        |  "name": "Fred",
+        |  "age": 22,
+        |  "job": "Artist"
+        |}
+      """.stripMargin
+
+    val url = "http://localhost:" + port + "/create_person1"
+    val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
+    Assert.assertEquals("valid", responseEntity.getBody)
+    val headers: HttpHeaders = responseEntity.getHeaders
+    Assert.assertEquals(TEXT_PLAIN, headers.get(CONTENT_TYPE).toString)
   }
 }
 

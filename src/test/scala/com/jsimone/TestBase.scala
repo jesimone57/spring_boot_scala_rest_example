@@ -7,6 +7,7 @@ import org.springframework.http.{HttpHeaders, HttpStatus, ResponseEntity}
 
 class TestBase {
   protected val APPLICATION_JSON = "[application/json]"
+  protected val TEXT_PLAIN = "[text/plain;charset=UTF-8]"
   protected val CONTENT_TYPE = "Content-Type"
 
   protected def verifyErrorResponse(responseEntity: ResponseEntity[String],
@@ -48,17 +49,11 @@ class TestBase {
     Assert.assertEquals(APPLICATION_JSON, headers.get(CONTENT_TYPE).toString)
   }
 
-  protected def verifyFieldErrors(responseEntity: ResponseEntity[String],
-                                  expectedErrors: List[FieldError]): Unit = {
-
-    val json = responseEntity.getBody
-    val errorResponse: ErrorResponse = JsonUtil.fromJson[ErrorResponse](responseEntity.getBody)
-    Assert.assertEquals(errorResponse.errors.length, expectedErrors.length)
-
-    errorResponse.errors.foreach(fe => Assert.assertTrue(s"$fe not found in $expectedErrors", expectedErrors.contains(fe)))
-    //errorResponse.errors.foreach(fe => println(fe +" "+expectedErrors.contains(fe)))
-    val headers: HttpHeaders = responseEntity.getHeaders
-    Assert.assertEquals(APPLICATION_JSON, headers.get(CONTENT_TYPE).toString)
+  protected def verifyFieldErrors(totalFieldErrorsExpected: Int, errorResponse: ErrorResponse, expectedFieldErrors: List[FieldError]): Unit = {
+    Assert.assertEquals(totalFieldErrorsExpected, errorResponse.errors.length)
+    expectedFieldErrors.foreach{efe =>
+      println("--> found = "+ errorResponse.errors.contains(efe) + "   "+ efe)
+      Assert.assertTrue(s"$efe not found", errorResponse.errors.contains(efe))}
   }
 }
 
