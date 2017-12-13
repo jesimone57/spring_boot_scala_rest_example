@@ -95,8 +95,7 @@ class ErrorResponseBody() {
   }
 
   override def toString: String = {
-    super.toString
-    s"ErrorResponseBody { code: $code, path: $path, message: $message, errors: [${errors.toString()}] }"
+    s"${this.getClass.getSimpleName} { code: $code, path: $path, message: $message, method: $method, errors: [${errors.toString()}] }"
   }
 
   private def canEqual(a: Any) = a.isInstanceOf[ErrorResponseBody]

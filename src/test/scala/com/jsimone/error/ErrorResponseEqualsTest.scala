@@ -5,6 +5,14 @@ import org.junit.{Assert, Test}
 class ErrorResponseEqualsTest {
 
   @Test
+  def isEqual0(): Unit = {
+    val errorResponse1 = new ErrorResponseBody(400, "/root", "error")
+    errorResponse1.method = "GET"
+
+    Assert.assertEquals(errorResponse1, errorResponse1)
+  }
+
+  @Test
   def isEqual1(): Unit = {
     val errorResponse1 = new ErrorResponseBody(400, "/root", "error")
     errorResponse1.method = "GET"

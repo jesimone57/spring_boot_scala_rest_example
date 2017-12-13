@@ -40,8 +40,7 @@ class Person() {
   @Max(value = 150, message = "Age should be a maximum of 150")
   @BeanProperty var age: Int = 0
 
-  @NotBlank
-  @NotNull                // Note: we'll use the default message since we did not provide a custom message
+  @NotBlank   // Note: we'll use the default message since we did not provide a custom message
   @Pattern(regexp = "^[A-Za-z0-9]+$")   // Alpha numeric string
   @BeanProperty var job: String = _
 
@@ -53,8 +52,7 @@ class Person() {
   }
 
   override def toString: String = {
-    super.toString
-    "Person { name: \"%s\", age: \"%d\", job: \"%s\" }".format(name, age, job)
+    s"${this.getClass.getSimpleName} { name: $name, age: $age, job: $job }"
   }
 
   private def canEqual(a: Any) = a.isInstanceOf[Person]

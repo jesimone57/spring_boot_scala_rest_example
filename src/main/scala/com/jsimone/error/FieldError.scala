@@ -18,8 +18,7 @@ class FieldError() {
   }
 
   override def toString: String = {
-    super.toString
-    "FieldError { field: \"%s\", value: \"%s\", message: \"%s\" }".format(field, value, message)
+    s"${this.getClass.getSimpleName} { field: $field, value: $value, message: $message }"
   }
 
   private def canEqual(a: Any) = a.isInstanceOf[FieldError]
