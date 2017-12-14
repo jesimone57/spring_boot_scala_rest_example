@@ -1,14 +1,8 @@
 package com.jsimone.controller
 
-import javax.servlet.http.HttpServletRequest
-import javax.validation.Valid
-
 import com.jsimone.constants.UrlPath
-import com.jsimone.entity.Person
-import com.jsimone.error.{ErrorResponse, FieldError}
-import com.jsimone.exception.ErrorResponseException
 import com.jsimone.util.JsonUtil
-import org.springframework.http.{HttpStatus, MediaType, ResponseEntity}
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation._
 
 @RestController

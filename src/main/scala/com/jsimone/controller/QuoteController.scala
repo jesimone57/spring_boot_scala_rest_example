@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate
 class QuoteController {
 
   @GetMapping(value = Array("/quote"))
-  def validateAgainstSchema(request: HttpServletRequest) = {
+  def validateAgainstSchema(request: HttpServletRequest): String = {
     val restTemplate: RestTemplate = new RestTemplate()
     val url = "http://gturnquist-quoters.cfapps.io/api/random"
     restTemplate.getForObject(url, classOf[String])

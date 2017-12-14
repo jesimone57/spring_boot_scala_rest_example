@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation._
 class HelloWorldController extends ControllerBase {
 
   @GetMapping(value = Array(UrlPath.ROOT))
-  def hello() = {
+  def hello(): String = {
     log.info("/ endpoint hit.")
     "Hello World"
   }
@@ -94,7 +94,7 @@ class HelloWorldController extends ControllerBase {
   @GetMapping(value = Array("/hello5"))
   def helloByRequestClassValidate(@NotEmpty @Size(min=2, max=30) @RequestParam(value = "name") @Valid name: String): String = {
     log.info(s"hello5 endpoint hit with name param: $name")
-    s"Hello ${name}"
+    s"Hello $name"
   }
 
 }

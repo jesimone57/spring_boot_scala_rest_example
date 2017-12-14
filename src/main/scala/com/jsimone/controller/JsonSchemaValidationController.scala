@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation._
 class JsonSchemaValidationController extends ControllerBase {
 
   @GetMapping(value = Array("/schema_test1"))
-  def validateAgainstSchema(request: HttpServletRequest) = {
+  def validateAgainstSchema(request: HttpServletRequest): String = {
     log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
     jsonSchemaValidateFromResource("/test1.json", "/test1_schema.json", request)
     "valid"
@@ -19,7 +19,7 @@ class JsonSchemaValidationController extends ControllerBase {
 
 
   @PostMapping(value = Array("/create_person1"))
-  def createPerson1(@RequestBody requestBody: String, request: HttpServletRequest) = {
+  def createPerson1(@RequestBody requestBody: String, request: HttpServletRequest): String = {
     log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
     jsonSchemaValidateFromString(requestBody, "/person1_schema.json", request)
     "valid"
@@ -32,7 +32,7 @@ class JsonSchemaValidationController extends ControllerBase {
   def validateNamedFileWithNamedSchema(
                                         @RequestParam(value = "input", required = true) inputFilename: String,
                                         @RequestParam(value = "schema", required = true) schemaFilename: String,
-                                        request: HttpServletRequest) = {
+                                        request: HttpServletRequest): String = {
     log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
     jsonSchemaValidateFromResource(inputFilename, schemaFilename, request)
     "valid"

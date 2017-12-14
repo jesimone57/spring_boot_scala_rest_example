@@ -13,21 +13,20 @@ import org.springframework.http.HttpStatus
 
 class ControllerBase extends MyExceptionHandler with Logging {
 
-  def jsonSchemaValidateFromResource(inputFilename: String, schemaFilename: String, request: HttpServletRequest) = {
+  def jsonSchemaValidateFromResource(inputFilename: String, schemaFilename: String, request: HttpServletRequest): Unit = {
     val inputNode: JsonNode = readResourceAsJsonNode(inputFilename, request)
     val schemaNode: JsonNode = readResourceAsJsonNode(schemaFilename, request)
     jsonSchemaValidate(inputNode, schemaNode, request)
   }
 
-  def jsonSchemaValidateFromString(jsonString: String, schemaFilename: String, request: HttpServletRequest) = {
+  def jsonSchemaValidateFromString(jsonString: String, schemaFilename: String, request: HttpServletRequest): Unit = {
     val objectMapper: ObjectMapper = new ObjectMapper()
     val inputJsonNode: JsonNode = objectMapper.readTree(jsonString)
     val schemaNode: JsonNode = readResourceAsJsonNode(schemaFilename, request)
     jsonSchemaValidate(inputJsonNode, schemaNode, request)
   }
 
-  protected def jsonSchemaValidate(inputNode: JsonNode, schemaNode: JsonNode, request: HttpServletRequest) = {
-    val objectMapper: ObjectMapper = new ObjectMapper()
+  protected def jsonSchemaValidate(inputNode: JsonNode, schemaNode: JsonNode, request: HttpServletRequest): Unit = {
     val jsonSchemaFactory: JsonSchemaFactory = JsonSchemaFactory.byDefault()
     val jsonSchema: JsonSchema = jsonSchemaFactory.getJsonSchema(schemaNode)
 
