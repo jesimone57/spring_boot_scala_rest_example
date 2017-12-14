@@ -26,7 +26,7 @@
         "DOB": { "type": "string", "format": "date" },
         "age": { "type": "integer", "minimum": 13 },
         "gender": { "enum": ["female", "male"] }
-      }
+      },
       "required": ["DOB", "age"],
       "additionalProperties": false
     },

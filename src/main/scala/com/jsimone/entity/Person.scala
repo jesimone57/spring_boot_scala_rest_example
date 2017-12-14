@@ -36,7 +36,7 @@ class Person() {
   @Size(min=2, max=30)    // Note: we'll use the default message since we did not provide a custom message
   @BeanProperty var name: String = "none"
 
-  @Min(value = 18, message = "Age should be a minium of 18")
+  @Min(value = 18, message = "Age should be a minimum of 18")
   @Max(value = 150, message = "Age should be a maximum of 150")
   @BeanProperty var age: Int = 0
 

@@ -32,7 +32,7 @@ class ErrorResponseControllerTest extends TestBase {
             },
             {
             "field_name": "phone",
-            "error_message": "invald phone number provided",
+            "error_message": "invalid phone number provided",
             "rejected_value": "123"
             }
           ],
@@ -47,7 +47,7 @@ class ErrorResponseControllerTest extends TestBase {
     val expectedFieldErrors = List(
       new FieldError("name", "", "required name is empty or null"),
       new FieldError("age", "0", "invalid age given"),
-      new FieldError("phone",  "123", "invald phone number provided")
+      new FieldError("phone",  "123", "invalid phone number provided")
     )
     verifyFieldErrors(3, errorResponse, expectedFieldErrors)
   }

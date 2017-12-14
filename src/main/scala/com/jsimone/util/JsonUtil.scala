@@ -13,7 +13,7 @@ import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 
 
 /**
-  * Other serialization/deserialization featuress include:
+  * Other serialization/deserialization features include:
   *
   * // Serialization features of Jackson (converting object to json)
   * objectMapper.enable(SerializationFeature.INDENT_OUTPUT)    // enable this for indented output

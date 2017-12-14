@@ -105,7 +105,7 @@ class HelloWorldErrorResponseTest extends TestBase {
   {
     "status_code": 400,
     "uri_path": "/hello4",
-    "error_message": "org.springframework.validation.BeanPropertyBindingResult: 2 errors Field error in object 'person' on field 'job': rejected value [null]; codes [NotBlank.person.job,NotBlank.job,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.job,job]; arguments []; default message [job]]; default message [may not be empty] Field error in object 'person' on field 'age': rejected value [0]; codes [Min.person.age,Min.age,Min.int,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.age,age]; arguments []; default message [age],18]; default message [Age should be a minium of 18]",
+    "error_message": "org.springframework.validation.BeanPropertyBindingResult: 2 errors Field error in object 'person' on field 'job': rejected value [null]; codes [NotBlank.person.job,NotBlank.job,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.job,job]; arguments []; default message [job]]; default message [may not be empty] Field error in object 'person' on field 'age': rejected value [0]; codes [Min.person.age,Min.age,Min.int,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.age,age]; arguments []; default message [age],18]; default message [Age should be a minmium of 18]",
     "method": "GET",
     "errors": [
       {

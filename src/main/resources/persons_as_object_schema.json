@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "A persons object containing an array of person objects JSON schema."
+  "title": "A persons object containing an array of person objects JSON schema.",
   "title": "Validate against persons_as_object.json",
 
   "type": "object",

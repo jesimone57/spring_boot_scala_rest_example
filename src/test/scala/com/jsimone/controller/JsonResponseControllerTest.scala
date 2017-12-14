@@ -22,6 +22,11 @@ class JsonResponseControllerTest extends TestBase {
     assertThat(responseEntity.getBody).isEqualTo(expectedResponse)
     assertThat(responseEntity.getStatusCode.value()).isEqualTo(HttpStatus.OK.value())
     Assert.assertEquals(MediaType.APPLICATION_JSON_UTF8, responseEntity.getHeaders.getContentType)
+
+    //Assertions.assertThat(responseEntity.getBody).isEqualTo(expectedResponse)
+    //Assertions.assertThat(responseEntity.getStatusCode).isEqualTo(HttpStatus.OK)
+    //Assertions.assertThat(responseEntity.getHeaders.getContentType).isEqualTo(MediaType.APPLICATION_JSON_UTF8)
+
   }
 }
 

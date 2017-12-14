@@ -43,8 +43,8 @@ class ErrorResponse() {
       this.path = r.getRequestURI
       this.method = r.getMethod
     }
-    Option(report).foreach { r =>
-      this.message = if (report.isSuccess) "" else s"JSON Schema validation errors encountered."
+    Option(report).foreach { _ =>
+      this.message = if (report.isSuccess) "" else "JSON Schema validation errors encountered."
       setSchemaValidationProcessingMessageErrors(report)
     }
   }

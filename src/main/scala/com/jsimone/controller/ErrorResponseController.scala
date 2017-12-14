@@ -22,7 +22,7 @@ class ErrorResponseController extends ControllerBase {
     errorResponse.method = request.getMethod
     errorResponse.errors += new FieldError("name", "", "required name is empty or null")
     errorResponse.errors += new FieldError("age", "0", "invalid age given")
-    errorResponse.errors += new FieldError("phone", "123", "invald phone number provided")
+    errorResponse.errors += new FieldError("phone", "123", "invalid phone number provided")
     throw new ErrorResponseException(errorResponse)
   }
 
