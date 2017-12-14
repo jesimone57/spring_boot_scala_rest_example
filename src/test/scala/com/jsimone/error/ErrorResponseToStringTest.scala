@@ -5,7 +5,7 @@ import org.junit.{Assert, Test}
 class ErrorResponseToStringTest {
 
   @Test
-  def toStringTest1(): Unit = {
+  def testToString1(): Unit = {
     val errorResponse1 = new ErrorResponse(400, "/root", "error")
     errorResponse1.method = "GET"
 
@@ -14,7 +14,7 @@ class ErrorResponseToStringTest {
   }
 
   @Test
-  def toStringTest2(): Unit = {
+  def testToString2(): Unit = {
     val errorResponse1 = new ErrorResponse(400, "/root", "error")
     errorResponse1.method = "GET"
     errorResponse1.errors += new FieldError("a", "b", "c")

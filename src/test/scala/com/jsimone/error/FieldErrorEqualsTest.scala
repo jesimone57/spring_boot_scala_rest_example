@@ -5,14 +5,14 @@ import org.junit.{Assert, Test}
 class FieldErrorEqualsTest {
 
   @Test
-  def isEqual0(): Unit = {
+  def equalsTest1(): Unit = {
     val fieldError1 = new FieldError("field", "value", "message")
 
     Assert.assertEquals(fieldError1, fieldError1)
   }
 
   @Test
-  def isEqual1(): Unit = {
+  def equalsTest2(): Unit = {
     val fieldError1 = new FieldError("field", "value", "message")
     val fieldError2 = new FieldError("field", "value", "message")
 
@@ -20,7 +20,7 @@ class FieldErrorEqualsTest {
   }
 
   @Test
-  def isEqual2(): Unit = {
+  def equalsTest3(): Unit = {
     val fieldError1 = new FieldError()
     val fieldError2 = new FieldError()
 
@@ -28,7 +28,7 @@ class FieldErrorEqualsTest {
   }
 
   @Test
-  def isNotEqual1(): Unit = {
+  def notEqualsTest1(): Unit = {
     val fieldError1 = new FieldError("field", "value", "message")
     val fieldError2 = new FieldError("field1", "value", "message")
 
@@ -36,7 +36,7 @@ class FieldErrorEqualsTest {
   }
 
   @Test
-  def isNotEqual2(): Unit = {
+  def notEqualsTest2(): Unit = {
     val fieldError1 = new FieldError("field", "value", "message")
     val fieldError2 = new FieldError("field", "value1", "message")
 
@@ -44,7 +44,7 @@ class FieldErrorEqualsTest {
   }
 
   @Test
-  def isNotEqual3(): Unit = {
+  def notEqualsTest3(): Unit = {
     val fieldError1 = new FieldError("field", "value", "message")
     val fieldError2 = new FieldError("field", "value", "message1")
 

@@ -7,7 +7,7 @@ import org.junit.{Assert, Test}
 class JsonUtilTest {
 
   @Test
-  def toJsonPerson()  {
+  def personToJson()  {
     val json = """{"name":"frank","age":20,"job":"artist"}"""
 
     val person: Person = new Person("frank", 20, "artist")
@@ -17,7 +17,7 @@ class JsonUtilTest {
   }
 
   @Test
-  def fromJsonPerson()  {
+  def personFromJson()  {
     val json = """{"name":"frank","age":20,"job":"artist"}"""
 
     val person: Person = new Person("frank", 20, "artist")
@@ -27,7 +27,7 @@ class JsonUtilTest {
   }
 
   @Test
-  def fromJsonErrorResponse(): Unit = {
+  def errorResponseFromJson(): Unit = {
     val json = """{"status_code":400,"uri_path":"/hello1.2","method":"GET","error_message":"Required int parameter 'num' is not present","errors":[]}"""
 
     val expectedErrorResponse: ErrorResponse = new ErrorResponse(400, "/hello1.2", "Required int parameter 'num' is not present")
@@ -38,7 +38,7 @@ class JsonUtilTest {
   }
 
   @Test
-  def fromJsonFieldError(): Unit = {
+  def fieldErrorFromJson(): Unit = {
     val json = """{"field_name":"name","rejected_value":"ff","error_message":"name is too short"}"""
 
     val fieldError: FieldError = new FieldError("name", "ff", "name is too short")

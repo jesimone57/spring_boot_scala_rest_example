@@ -5,7 +5,7 @@ import org.junit.{Assert, Test}
 class ErrorResponseEqualsTest {
 
   @Test
-  def isEqual0(): Unit = {
+  def equalsTest1(): Unit = {
     val errorResponse1 = new ErrorResponse(400, "/root", "error")
     errorResponse1.method = "GET"
 
@@ -13,7 +13,7 @@ class ErrorResponseEqualsTest {
   }
 
   @Test
-  def isEqual1(): Unit = {
+  def equalsTest2(): Unit = {
     val errorResponse1 = new ErrorResponse(400, "/root", "error")
     errorResponse1.method = "GET"
     val errorResponse2 = new ErrorResponse(400, "/root", "error")
@@ -23,7 +23,7 @@ class ErrorResponseEqualsTest {
   }
 
   @Test
-  def isEqual2(): Unit = {
+  def equalsTest3(): Unit = {
     val errorResponse1 = new ErrorResponse(400, "/root", "error")
     errorResponse1.method = "GET"
     errorResponse1.errors += new FieldError("a", "b", "c")
@@ -35,7 +35,7 @@ class ErrorResponseEqualsTest {
   }
 
   @Test
-  def isNotEqual1(): Unit = {
+  def notEqualsTest1(): Unit = {
     val errorResponse1 = new ErrorResponse(400, "/root", "error")
     errorResponse1.method = "GET"
     val errorResponse2 = new ErrorResponse(401, "/root", "error")
@@ -45,7 +45,7 @@ class ErrorResponseEqualsTest {
   }
 
   @Test
-  def isNotEqual2(): Unit = {
+  def notEqualsTest2(): Unit = {
     val errorResponse1 = new ErrorResponse(400, "/root", "error")
     errorResponse1.method = "GET"
     val errorResponse2 = new ErrorResponse(400, "/roott", "error")
@@ -55,7 +55,7 @@ class ErrorResponseEqualsTest {
   }
 
   @Test
-  def isNotEqual3(): Unit = {
+  def notEqualsTest3(): Unit = {
     val errorResponse1 = new ErrorResponse(400, "/root", "error")
     errorResponse1.method = "GET"
     val errorResponse2 = new ErrorResponse(400, "/root", "errorr")
@@ -65,7 +65,7 @@ class ErrorResponseEqualsTest {
   }
 
   @Test
-  def isNotEqual4(): Unit = {
+  def notEqualsTest4(): Unit = {
     val errorResponse1 = new ErrorResponse(400, "/root", "error")
     errorResponse1.method = "GET"
     val errorResponse2 = new ErrorResponse(400, "/root", "error")
@@ -75,7 +75,7 @@ class ErrorResponseEqualsTest {
   }
 
   @Test
-  def isNotEqual5(): Unit = {
+  def notEqualsTest5(): Unit = {
     val errorResponse1 = new ErrorResponse(400, "/root", "error")
     errorResponse1.method = "GET"
     errorResponse1.errors += new FieldError("a", "b", "c")
@@ -87,7 +87,7 @@ class ErrorResponseEqualsTest {
   }
 
   @Test
-  def isNotEqual6(): Unit = {
+  def notEqualsTest6(): Unit = {
     val errorResponse1 = new ErrorResponse(400, "/root", "error")
     errorResponse1.method = "GET"
     errorResponse1.errors += new FieldError("a", "b", "c")

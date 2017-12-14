@@ -2,16 +2,11 @@ package com.jsimone.controller
 
 import com.jsimone.TestBase
 import com.jsimone.error.FieldError
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.entry
-import org.junit.{Assert, Test}
+import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
-import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.http.{HttpStatus, MediaType}
+import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])

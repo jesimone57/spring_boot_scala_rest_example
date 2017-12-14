@@ -3,11 +3,8 @@ package com.jsimone.exception
 import com.jsimone.TestBase
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
-import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit4.SpringRunner
 
@@ -26,8 +23,9 @@ class NoHandlerFoundExceptionTest extends TestBase {
     */
   @Test
   def invalidEndpointTest(): Unit = {
-    val url = "http://localhost:" + port +"/asdfasdf"
+    val url = "http://localhost:" + port + "/asdfasdf"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.NOT_FOUND, null, "The URL you have reached is not in service at this time")
   }
 }
+
