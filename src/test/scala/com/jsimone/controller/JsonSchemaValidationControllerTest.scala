@@ -17,12 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class JsonSchemaValidationControllerTest extends TestBase {
 
-  @LocalServerPort
-  private val port: Int = 0
-
-  @Autowired
-  private val restTemplate: TestRestTemplate = null
-
   /**
     {
       "status_code": 400,
@@ -40,7 +34,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
   }
 
   /**
-  {
+    {
       "status_code": 400,
       "uri_path": "/schema",
       "error_message": "Required String parameter 'input' is not present",
@@ -56,7 +50,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
   }
 
   /**
-  {
+    {
       "status_code": 400,
       "uri_path": "/schema",
       "error_message": "Required String parameter 'schema' is not present",
@@ -72,7 +66,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
   }
 
   /**
-  {
+    {
       "status_code": 400,
       "uri_path": "/schema",
       "error_message": "resource path does not start with a '/'",
@@ -88,7 +82,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
   }
 
   /**
-  {
+    {
       "status_code": 400,
       "uri_path": "/schema",
       "error_message": "resource path does not start with a '/'",
@@ -104,7 +98,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
   }
 
   /**
-  {
+    {
       "status_code": 400,
       "uri_path": "/schema",
       "error_message": "resource path does not start with a '/'",
@@ -120,7 +114,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
   }
 
   /**
-  {
+    {
     "status_code": 400,
     "uri_path": "/schema",
     "error_message": "JSON Schema validation errors encountered.",
@@ -159,7 +153,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
   }
 
   /**
-        {
+      {
         "status_code": 400,
         "uri_path": "/schema_test1",
         "error_message": "JSON Schema validation errors encountered.",

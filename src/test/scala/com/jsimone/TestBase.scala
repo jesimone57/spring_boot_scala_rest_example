@@ -3,12 +3,23 @@ package com.jsimone
 import com.jsimone.error.{ErrorResponse, FieldError}
 import com.jsimone.util.JsonUtil
 import org.junit.Assert
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.context.embedded.LocalServerPort
+import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.{HttpHeaders, HttpStatus, ResponseEntity}
 
 class TestBase {
   protected val APPLICATION_JSON = "[application/json]"
   protected val TEXT_PLAIN = "[text/plain;charset=UTF-8]"
   protected val CONTENT_TYPE = "Content-Type"
+
+
+  @LocalServerPort
+  protected val port: Int = 0
+
+  @Autowired
+  protected val restTemplate: TestRestTemplate  = null
+
 
   protected def verifyErrorResponse(responseEntity: ResponseEntity[String],
                                     expectedHttpStatus: HttpStatus,

@@ -18,13 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class ErrorResponseControllerTest extends TestBase {
 
-  @LocalServerPort
-  private val port: Int = 0
-
-  @Autowired
-  private val restTemplate: TestRestTemplate  = null
-
-
   /**
         {
         "status_code": 400,

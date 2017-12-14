@@ -17,12 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class JsonResponseControllerTest extends TestBase {
 
-  @LocalServerPort
-  private val port: Int = 0
-
-  @Autowired
-  private val restTemplate: TestRestTemplate  = null
-
   @Test
   def jsonResponseTest(): Unit = {
     val url = "http://localhost:" + port + "/json"
