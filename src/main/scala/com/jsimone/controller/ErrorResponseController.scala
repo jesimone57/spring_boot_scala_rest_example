@@ -27,23 +27,6 @@ class ErrorResponseController extends ControllerBase {
     throw new ErrorResponseException(errorResponse)
   }
 
-  /**
-    * See ref https://stackoverflow.com/questions/12113010/scala-Response-and-map
-    */
-  @GetMapping(value = Array(UrlPath.JSON))
-  def mapToJson(): String = {
-    log.info("/json endpoint hit.")
-    val m = Map(
-      "name" -> "john doe",
-      "age" -> 18,
-      "hasChild" -> true,
-      "childs" -> List(
-        Map("name" -> "dorothy", "age" -> 5, "hasChild" -> false),
-        Map("name" -> "bill", "age" -> 8, "hasChild" -> false)))
-
-    JsonUtil.toJson(m)
-  }
-
   @GetMapping(value = Array(UrlPath.THROWN_EXCEPTION1))
   def throwingAnException1(): String = {
     log.info("/thrown_exception1 endpoint hit.")

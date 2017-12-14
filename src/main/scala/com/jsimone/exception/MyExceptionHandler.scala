@@ -10,6 +10,23 @@ import org.springframework.validation.BindException
 import org.springframework.web.bind.{MethodArgumentNotValidException, MissingPathVariableException, MissingServletRequestParameterException}
 import org.springframework.web.bind.annotation.{ExceptionHandler, ResponseStatus}
 
+/**
+  * Spring MVC Exceptions see https://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/mvc.html#mvc-ann-rest-spring-mvc-exceptions
+  * *
+  * BindException	                           400 (Bad Request)
+  * ConversionNotSupportedException	         500 (Internal Server Error)
+  * HttpMediaTypeNotAcceptableException	     406 (Not Acceptable)
+  * HttpMediaTypeNotSupportedException	     415 (Unsupported Media Type)
+  * HttpMessageNotReadableException	         400 (Bad Request)
+  * HttpMessageNotWritableException	         500 (Internal Server Error)
+  * HttpRequestMethodNotSupportedException	 405 (Method Not Allowed)
+  * MethodArgumentNotValidException	         400 (Bad Request)
+  * MissingServletRequestParameterException	 400 (Bad Request)
+  * MissingServletRequestPartException	     400 (Bad Request)
+  * NoSuchRequestHandlingMethodException	   404 (Not Found)
+  * TypeMismatchException	                   400 (Bad Request)
+  *
+  */
 class MyExceptionHandler extends Logging {
 
   @ExceptionHandler(Array(classOf[BindException]))
