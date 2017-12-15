@@ -312,10 +312,12 @@ paths:
       parameters:
         - in: query
           name: input
+          type: string
           description: application resource JSON input.  Located under /src/main/resources
           required: true
         - in: query
           name: schema
+          type: string
           description: application resource JSON schema.  Located under /src/main/resources
           required: true
       responses:
