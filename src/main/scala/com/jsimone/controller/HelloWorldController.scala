@@ -59,13 +59,7 @@ class HelloWorldController extends ControllerBase {
     s"Hello, $name"
   }
 
-  /**
-    * This example is provided for illustration purposes only.
-    * It will never work if coded this way that a path variable is defined as an int.
-    * Note:  if you try, you will not be able to execute a valid endpoint as the
-    * path variable is always expected to be a string.
-    */
-  @GetMapping(value = Array("/hello2.1"))
+  @GetMapping(value = Array("/hello2.1/{num}"))
   def helloByPathVariableAsInt(@PathVariable num: Int): String = {
     log.info("/hello2.1 endpoint hit.")
     s"Hello, $num"

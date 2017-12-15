@@ -1,0 +1,361 @@
+swagger: "2.0"
+info:
+  description: "A sample Scala project using Spring Boot and providing examples of validation and end-point testing.
+  for more information on the OpenAPI Specification (aka Swagger) used herein see
+  <a href=http://openapi-specification-visual-documentation.apihandyman.io/>OpenAPI Visual Documentation</a>"
+  version: 1.0.0
+  title: Spring Boot Scala REST API Application Example
+  contact:
+    email: "Joseph.Simone@nexteraenergy.com"
+
+basePath: /
+
+tags:
+  - name: Hello World
+    description: Hello world example endpoints demonstrating request param and path variable validation
+  - name: Error Response
+    description: Standardized error responses from various exception scenariors
+  - name: JSON Response
+    description: Example Object to JSON conversion response
+  - name: JSON Schema Validation
+    description: "Various examples using the JSON Schema spec to validate JSON input data.
+    see <a href=http://json-schema.org/>json-schema.org</a> for more information about JSON schemas."
+
+schemes:
+  - http
+
+paths:
+  /:
+    get:
+      tags:
+        - Hello World
+      produces:
+        - text/plain
+      parameters: []
+      responses:
+        "200":
+          description: successful operation
+
+  /hello0:
+    get:
+      tags:
+        - Hello World
+      produces:
+        - text/plain
+      parameters:
+        - name: name
+          in: query
+          description: Name to say hello to
+          required: false
+          type: string
+      responses:
+        "200":
+          description: successful operation
+
+  /hello1:
+    get:
+      tags:
+        - Hello World
+      produces:
+        - text/plain
+      parameters:
+        - name: name
+          in: query
+          description: Name to say hello to
+          required: false
+          type: string
+          default: World
+      responses:
+        "200":
+          description: successful operation
+
+  /hello1.1:
+    get:
+      tags:
+        - Hello World
+      produces:
+        - text/plain
+      parameters:
+        - name: name
+          in: query
+          description: Name to say hello to
+          required: true
+          type: string
+          default: World
+      responses:
+        "200":
+          description: successful operation
+
+  /hello1.2:
+    get:
+      tags:
+        - Hello World
+      produces:
+        - text/plain
+      parameters:
+        - name: num
+          in: query
+          description: Number to say hello to
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: successful operation
+
+  /hello2/{name}:
+    get:
+      tags:
+        - Hello World
+      produces:
+        - text/plain
+      parameters:
+        - name: name
+          in: path
+          description: Name to say hello to
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+
+  /hello2.1/{num}:
+    get:
+      tags:
+        - Hello World
+      produces:
+        - text/plain
+      parameters:
+        - name: num
+          in: path
+          description: Number to say hello to
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: successful operation
+
+  /hello3:
+    get:
+      tags:
+        - Hello World
+      description: Non-validating query parameters specified by Person object
+      produces:
+        - text/plain
+      parameters:
+        - in: query
+          name: name
+          description: Person name to say hello to
+          required: false
+          type: string
+        - in: query
+          name: age
+          description: Person age to say hello to
+          required: false
+          type: integer
+        - in: query
+          name: job
+          description: Person job to say hello to
+          required: false
+          type: string
+      responses:
+        "200":
+          description: successful operation
+
+  /hello4:
+    get:
+      tags:
+        - Hello World
+      description: Validating query parameters specified by Person object
+      produces:
+        - text/plain
+      parameters:
+        - in: query
+          name: name
+          description: Person name to say hello to
+          required: false
+          type: string
+        - in: query
+          name: age
+          description: Person age to say hello to
+          required: false
+          type: integer
+        - in: query
+          name: job
+          description: Person job to say hello to
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+
+  /hello5:
+    get:
+      tags:
+        - Hello World
+      description: An attempt at validating the query parameters via @NotEmpty @Size(min=2, max=30) @RequestParam and @Valid annotations
+      produces:
+        - text/plain
+      parameters:
+        - in: query
+          name: name
+          description: Person name to say hello to
+          required: false
+          type: string
+      responses:
+        "200":
+          description: successful operation
+
+
+
+  /error_response:
+    get:
+      tags:
+        - Error Response
+      description: A sample error response object
+      produces:
+        - application/json
+      responses:
+        "400":
+          description: bad request
+
+  /thrown_exception1:
+    get:
+      tags:
+        - Error Response
+      description: this path throws an IllegalArgumentException to demonstrate the error response handling
+      produces:
+        - application/json
+      responses:
+        "400":
+          description: bad request
+
+  /thrown_exception2:
+    get:
+      tags:
+        - Error Response
+      description: this path throws a NullPointerException to demonstrate the error response handling
+      produces:
+        - application/json
+      responses:
+        "400":
+          description: bad request
+
+
+
+  /json:
+    get:
+      tags:
+        - JSON Response
+      description: this path returns a sample JSON response object to test the object to JSON serialization code
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+
+
+
+  /schema_test1:
+      get:
+        tags:
+          - JSON Schema Validation
+        description: Applies person1 JSON schema to the request body and invokes validation to valid the request body
+
+  /create_person1:
+    post:
+      tags:
+        - JSON Schema Validation
+      description: Applies person1 JSON schema to the request body and invokes validation to valid the request body
+      consumes:
+        - application/json
+      produces:
+        - text/plain
+      parameters:
+        - in: body
+          name: body
+          description: Person name to say hello to
+          required: true
+          type: object
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: bad request body due to schema validation failure
+
+  /schema:
+    get:
+      tags:
+        - JSON Schema Validation
+      description: Applies person1 JSON schema to the request body and invokes validation to valid the request body
+
+
+definitions:
+  Person:
+    required:
+      - job
+    properties:
+      name:
+        type: string
+        minLength: 2
+        maxLength: 30
+      age:
+        type: integer
+        minimum: 18
+        maximum: 150
+        format: int64
+      job:
+        type: string
+        pattern: "^[A-Za-z0-9]+$"
+    xml:
+      name: Person
+
+  ErrorResponse:
+    properties:
+      status_code:
+        type: integer
+        description: HTTP Status code of the response for the request in error
+        format: int32
+      uri_path:
+        type: string
+        description: URI path used for the request in error
+        example: /hello
+      method:
+        type: string
+        description: HTTP method of the request in error
+        enum:
+          - GET
+          - PUT
+          - POST
+          - DELETE
+          - PATCH
+          - HEAD
+          - CONNECT
+          - OPTIONS
+          - TRACE
+      errors:
+        type: array
+        xml:
+          name: errors
+          wrapped: true
+        items:
+          $ref: "#/definitions/FieldError"
+    xml:
+      name: ErrorResponse
+
+  FieldError:
+    properties:
+      field_name:
+        type: string
+        description: The name of the field in error
+      rejected_value:
+        type: string
+        description: The rejected value of the field in error
+      error_message:
+        type: string
+        description: The error message associated with the field in error
+    xml:
+      name: FieldError
+
+externalDocs:
+  description: Find out more about Swagger
+  url: "http://swagger.io"

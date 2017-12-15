@@ -6,4 +6,7 @@ gradle/
 gradlew
 gradlew.*
 *.iml
+*.ipr
+*.iws
+
 

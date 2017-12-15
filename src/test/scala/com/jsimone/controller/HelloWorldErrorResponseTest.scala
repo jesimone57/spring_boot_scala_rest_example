@@ -102,6 +102,23 @@ class HelloWorldErrorResponseTest extends TestBase {
   }
 
   /**
+    {
+      "status_code": 400,
+      "uri_path": "/hello2.1/asdf",
+      "error_message": "Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "asdf"",
+      "method": "GET",
+      "errors": [],
+    }
+    */
+  @Test
+  def hello2_1(): Unit = {
+    val url = "http://localhost:" + port + "/hello2.1/asdf"
+    val responseEntity = restTemplate.getForEntity(url, classOf[String])
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET",
+      "Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: \"asdf\"")
+  }
+
+  /**
   {
     "status_code": 400,
     "uri_path": "/hello4",

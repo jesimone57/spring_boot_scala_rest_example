@@ -9,6 +9,7 @@ buildscript {
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('io.swagger:swagger-codegen:2.2.3')
     }
 }
 

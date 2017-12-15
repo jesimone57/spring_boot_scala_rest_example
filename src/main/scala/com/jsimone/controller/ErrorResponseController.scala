@@ -38,11 +38,4 @@ class ErrorResponseController extends ControllerBase {
     throw new NullPointerException()
   }
 
-  // Note:  this endpoint works with validation because the exception handler is in the base class
-  @GetMapping(value = Array("/validate_person"))
-  def helloByRequestClassValidate(@Valid person: Person): String = {
-    log.info("/validate_person endpoint hit with person params: %s".format(person.toString))
-    s"Hello ${person.name}, whose age is ${person.age} and job is ${person.job}"
-  }
-
 }
