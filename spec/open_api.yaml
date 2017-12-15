@@ -298,6 +298,8 @@ paths:
           description: successful operation
         400:
           description: bad request body due to schema validation failure
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
   /schema:
     get:
