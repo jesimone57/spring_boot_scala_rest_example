@@ -1,4 +1,6 @@
 swagger: "2.0"
+host: localhost:8080
+
 info:
   description: "A sample Scala project using Spring Boot and providing examples of validation and end-point testing.
   for more information on the OpenAPI Specification (aka Swagger) used herein see
@@ -217,6 +219,8 @@ paths:
       responses:
         "400":
           description: bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
   /thrown_exception1:
     get:
@@ -228,6 +232,8 @@ paths:
       responses:
         "400":
           description: bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
   /thrown_exception2:
     get:
@@ -239,6 +245,8 @@ paths:
       responses:
         "400":
           description: bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
 
 
@@ -275,7 +283,8 @@ paths:
           name: body
           description: Person name to say hello to
           required: true
-          type: object
+          schema:
+            $ref: "#/definitions/Person"
       responses:
         "200":
           description: successful operation
@@ -286,7 +295,27 @@ paths:
     get:
       tags:
         - JSON Schema Validation
-      description: Applies person1 JSON schema to the request body and invokes validation to valid the request body
+      description: Applies named schema parameter resource file to the named input parameter resource file and invokes schema validation.
+      produces:
+        - text/plain
+        - application/json
+      parameters:
+        - in: query
+          name: input
+          description: application resource JSON input.  Located under /src/main/resources
+          required: true
+        - in: query
+          name: schema
+          description: application resource JSON schema.  Located under /src/main/resources
+          required: true
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: schema validation failure will produce an error response
+          schema:
+             $ref: "#/definitions/ErrorResponse"
+
 
 
 definitions:
