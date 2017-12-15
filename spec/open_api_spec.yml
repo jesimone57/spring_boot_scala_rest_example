@@ -35,7 +35,7 @@ paths:
         - text/plain
       parameters: []
       responses:
-        "200":
+        200:
           description: successful operation
 
   /hello0:
@@ -51,7 +51,7 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        200:
           description: successful operation
 
   /hello1:
@@ -68,7 +68,7 @@ paths:
           type: string
           default: World
       responses:
-        "200":
+        200:
           description: successful operation
 
   /hello1.1:
@@ -85,7 +85,7 @@ paths:
           type: string
           default: World
       responses:
-        "200":
+        200:
           description: successful operation
 
   /hello1.2:
@@ -101,7 +101,7 @@ paths:
           required: true
           type: integer
       responses:
-        "200":
+        200:
           description: successful operation
 
   /hello2/{name}:
@@ -117,7 +117,7 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        200:
           description: successful operation
 
   /hello2.1/{num}:
@@ -133,7 +133,7 @@ paths:
           required: true
           type: integer
       responses:
-        "200":
+        200:
           description: successful operation
 
   /hello3:
@@ -160,7 +160,7 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        200:
           description: successful operation
 
   /hello4:
@@ -187,7 +187,7 @@ paths:
           required: true
           type: string
       responses:
-        "200":
+        200:
           description: successful operation
 
   /hello5:
@@ -204,7 +204,7 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        200:
           description: successful operation
 
 
@@ -217,7 +217,7 @@ paths:
       produces:
         - application/json
       responses:
-        "400":
+        400:
           description: bad request
           schema:
             $ref: "#/definitions/ErrorResponse"
@@ -230,7 +230,7 @@ paths:
       produces:
         - application/json
       responses:
-        "400":
+        400:
           description: bad request
           schema:
             $ref: "#/definitions/ErrorResponse"
@@ -243,7 +243,7 @@ paths:
       produces:
         - application/json
       responses:
-        "400":
+        400:
           description: bad request
           schema:
             $ref: "#/definitions/ErrorResponse"
@@ -258,7 +258,7 @@ paths:
       produces:
         - application/json
       responses:
-        "200":
+        200:
           description: successful operation
 
 
@@ -286,9 +286,9 @@ paths:
           schema:
             $ref: "#/definitions/Person"
       responses:
-        "200":
+        200:
           description: successful operation
-        "400":
+        400:
           description: bad request body due to schema validation failure
 
   /schema:
@@ -309,9 +309,9 @@ paths:
           description: application resource JSON schema.  Located under /src/main/resources
           required: true
       responses:
-        "200":
+        200:
           description: successful operation
-        "400":
+        400:
           description: schema validation failure will produce an error response
           schema:
              $ref: "#/definitions/ErrorResponse"
