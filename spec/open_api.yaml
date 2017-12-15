@@ -264,16 +264,24 @@ paths:
 
 
   /schema_test1:
-      get:
-        tags:
-          - JSON Schema Validation
-        description: Applies person1 JSON schema to the request body and invokes validation to valid the request body
+    get:
+      tags:
+        - JSON Schema Validation
+      description: Applies test1 JSON schema to the test1 JSON input and invokes validation to validate the request body. The file is invalid against the schema and will result in an error response.
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        400:
+          description: bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
   /create_person1:
     post:
       tags:
         - JSON Schema Validation
-      description: Applies person1 JSON schema to the request body and invokes validation to valid the request body
+      description: Applies person1 JSON schema to the request body and invokes validation to validate the request body
       consumes:
         - application/json
       produces:
