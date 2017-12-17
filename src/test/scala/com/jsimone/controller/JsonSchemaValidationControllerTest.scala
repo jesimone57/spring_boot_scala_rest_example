@@ -6,7 +6,7 @@ import org.junit.runner.RunWith
 import org.junit.{Assert, Test}
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
-import org.springframework.http.{HttpHeaders, HttpMethod, HttpStatus}
+import org.springframework.http.{HttpHeaders, HttpMethod, HttpStatus, MediaType}
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
@@ -257,6 +257,9 @@ class JsonSchemaValidationControllerTest extends TestBase {
 
     val url = "http://localhost:" + port + "/create_person1"
     val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
+
+    // verifySuccessResponse(responseEntity, HttpStatus.OK, MediaType.TEXT_PLAIN, "valid")  // TODO: fix this
+
     Assert.assertEquals("valid", responseEntity.getBody)
     val headers: HttpHeaders = responseEntity.getHeaders
     Assert.assertEquals(TEXT_PLAIN, headers.get(CONTENT_TYPE).toString)

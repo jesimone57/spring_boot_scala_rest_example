@@ -2,11 +2,12 @@ package com.jsimone
 
 import com.jsimone.error.{ErrorResponse, FieldError}
 import com.jsimone.util.JsonUtil
+import org.assertj.core.api.Assertions
 import org.junit.Assert
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.http.{HttpHeaders, HttpMethod, HttpStatus, ResponseEntity}
+import org.springframework.http._
 
 class TestBase {
   protected val APPLICATION_JSON = "[application/json]"
@@ -18,8 +19,14 @@ class TestBase {
   protected val port: Int = 0
 
   @Autowired
-  protected val restTemplate: TestRestTemplate  = null
+  protected val restTemplate: TestRestTemplate = null
 
+
+  protected def verifySuccessResponse(responseEntity: ResponseEntity[String], expectedStatus: HttpStatus, expectedMediaType: MediaType, expectedResponseBody: String): Unit = {
+    Assertions.assertThat(responseEntity.getBody).isEqualTo(expectedResponseBody)
+    Assertions.assertThat(responseEntity.getStatusCodeValue).isEqualTo(expectedStatus.value())
+    Assertions.assertThat(responseEntity.getHeaders.getContentType.toString).isEqualTo(expectedMediaType.toString)
+  }
 
   protected def verifyErrorResponse(responseEntity: ResponseEntity[String],
                                     expectedHttpStatus: HttpStatus,
@@ -62,9 +69,10 @@ class TestBase {
 
   protected def verifyFieldErrors(totalFieldErrorsExpected: Int, errorResponse: ErrorResponse, expectedFieldErrors: List[FieldError]): Unit = {
     Assert.assertEquals(totalFieldErrorsExpected, errorResponse.errors.length)
-    expectedFieldErrors.foreach{efe =>
-      println("--> found = "+ errorResponse.errors.contains(efe) + "   "+ efe)
-      Assert.assertTrue(s"$efe not found", errorResponse.errors.contains(efe))}
+    expectedFieldErrors.foreach { efe =>
+      println("--> found = " + errorResponse.errors.contains(efe) + "   " + efe)
+      Assert.assertTrue(s"$efe not found", errorResponse.errors.contains(efe))
+    }
   }
 }
 
