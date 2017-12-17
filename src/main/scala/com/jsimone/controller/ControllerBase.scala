@@ -10,7 +10,9 @@ import com.jsimone.error.ErrorResponse
 import com.jsimone.exception.{ErrorResponseException, MyExceptionHandler}
 import com.jsimone.util.Logging
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.CrossOrigin
 
+@CrossOrigin(origins = Array("*"))
 class ControllerBase extends MyExceptionHandler with Logging {
 
   def jsonSchemaValidateFromResource(inputFilename: String, schemaFilename: String, request: HttpServletRequest): Unit = {

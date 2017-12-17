@@ -22,7 +22,7 @@ class GlobalExceptionHandler extends ResponseEntityExceptionHandler with Logging
     val path = request.getDescription(false).substring(4)
     headers.add("Content-Type", MediaType.APPLICATION_JSON_VALUE)
     val message = "The URL you have reached is not in service at this time"
-    val errorResponse = new ErrorResponse(status.value, path, message)
+    val errorResponse = new ErrorResponse(status.value, path, null, message)
     handleExceptionInternal(exception, JsonUtil.toJson(errorResponse), headers, status, request)
     //new ResponseEntity[AnyRef](errorResponse, status)
   }

@@ -7,7 +7,7 @@ import com.jsimone.constants.UrlPath
 import com.jsimone.entity.Person
 import com.jsimone.error.{ErrorResponse, FieldError}
 import com.jsimone.exception.ErrorResponseException
-import org.springframework.http.{HttpStatus, MediaType, ResponseEntity}
+import org.springframework.http.{HttpMethod, HttpStatus, MediaType, ResponseEntity}
 import org.springframework.web.bind.annotation._
 
 @RestController
@@ -18,8 +18,7 @@ class ErrorResponseController extends ControllerBase {
   def sampleErrorResponse(request: HttpServletRequest): ResponseEntity[AnyRef] = {
     log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
 
-    val errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), request.getRequestURI, "example request validation errors")
-    errorResponse.method = request.getMethod
+    val errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), request.getRequestURI, HttpMethod.valueOf(request.getMethod), "example request validation errors")
     errorResponse.errors += new FieldError("name", "", "required name is empty or null")
     errorResponse.errors += new FieldError("age", "0", "invalid age given")
     errorResponse.errors += new FieldError("phone", "123", "invalid phone number provided")

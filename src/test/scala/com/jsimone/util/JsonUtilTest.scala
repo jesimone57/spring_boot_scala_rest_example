@@ -3,6 +3,7 @@ package com.jsimone.util
 import com.jsimone.entity.Person
 import com.jsimone.error.{ErrorResponse, FieldError}
 import org.junit.{Assert, Test}
+import org.springframework.http.HttpMethod
 
 class JsonUtilTest {
 
@@ -30,8 +31,7 @@ class JsonUtilTest {
   def errorResponseFromJson(): Unit = {
     val json = """{"status_code":400,"uri_path":"/hello1.2","method":"GET","error_message":"Required int parameter 'num' is not present","errors":[]}"""
 
-    val expectedErrorResponse: ErrorResponse = new ErrorResponse(400, "/hello1.2", "Required int parameter 'num' is not present")
-    expectedErrorResponse.method = "GET"
+    val expectedErrorResponse: ErrorResponse = new ErrorResponse(400, "/hello1.2", HttpMethod.GET, "Required int parameter 'num' is not present")
 
     val actualErrorResponse: ErrorResponse = JsonUtil.fromJson[ErrorResponse](json)
     Assert.assertEquals(expectedErrorResponse, actualErrorResponse)

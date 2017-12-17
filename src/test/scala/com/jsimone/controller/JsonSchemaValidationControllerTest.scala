@@ -6,7 +6,7 @@ import org.junit.runner.RunWith
 import org.junit.{Assert, Test}
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
-import org.springframework.http.{HttpHeaders, HttpStatus}
+import org.springframework.http.{HttpHeaders, HttpMethod, HttpStatus}
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
@@ -26,7 +26,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
   def schemaInputParamMissing1(): Unit = {
     val url = "http://localhost:" + port + "/schema"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "Required String parameter 'input' is not present")
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "Required String parameter 'input' is not present")
   }
 
   /**
@@ -40,9 +40,9 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaInputParamMissing2(): Unit = {
-    val url = "http://localhost:" + port + "/schema?schema=/person1.json "
+    val url = "http://localhost:" + port + "/schema?schema=/person1.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "Required String parameter 'input' is not present")
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "Required String parameter 'input' is not present")
   }
 
   /**
@@ -58,7 +58,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
   def schemaSchemaParamMissing(): Unit = {
     val url = "http://localhost:" + port + "/schema?input=/person1.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "Required String parameter 'schema' is not present")
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "Required String parameter 'schema' is not present")
   }
 
   /**
@@ -72,9 +72,9 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaInputResourceDoesNotBeginWithSlash1(): Unit = {
-    val url = "http://localhost:" + port + "/schema?input=person1.json&schema=person1_schema.json "
+    val url = "http://localhost:" + port + "/schema?input=person1.json&schema=person1_schema.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "resource path does not start with a '/'")
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "resource path does not start with a '/'")
   }
 
   /**
@@ -88,9 +88,9 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaInputResourceDoesNotBeginWithSlash2(): Unit = {
-    val url = "http://localhost:" + port + "/schema?input=/person1.json&schema=person1_schema.json "
+    val url = "http://localhost:" + port + "/schema?input=/person1.json&schema=person1_schema.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "resource path does not start with a '/'")
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "resource path does not start with a '/'")
   }
 
   /**
@@ -104,9 +104,9 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaInputResourceDoesNotBeginWithSlash3(): Unit = {
-    val url = "http://localhost:" + port + "/schema?input=person1.json&schema=/person1_schema.json "
+    val url = "http://localhost:" + port + "/schema?input=person1.json&schema=/person1_schema.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "resource path does not start with a '/'")
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "resource path does not start with a '/'")
   }
 
   /**
@@ -136,9 +136,9 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaValidationFailure(): Unit = {
-    val url = "http://localhost:" + port + "/schema?input=/person1.json&schema=/person1_schema.json "
+    val url = "http://localhost:" + port + "/schema?input=/person1.json&schema=/person1_schema.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "JSON Schema validation errors encountered.")
+    val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "JSON Schema validation errors encountered.")
 
     val expectedFieldErrors = List(
       new FieldError("/age", "17", "numeric instance is lower than the required minimum (minimum: 18, found: 17)"),
@@ -213,7 +213,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
   def schemaValidationFailure1(): Unit = {
     val url = "http://localhost:" + port + "/schema_test1"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "JSON Schema validation errors encountered.")
+    val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "JSON Schema validation errors encountered.")
 
     val someExpectedFieldErrors = List(
       new FieldError("/int-min", "17", "numeric instance is lower than the required minimum (minimum: 50, found: 17)"),
@@ -235,7 +235,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
 
     val url = "http://localhost:" + port + "/create_person1"
     val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
-    val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "POST", "JSON Schema validation errors encountered.")
+    val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.POST, "JSON Schema validation errors encountered.")
 
     val expectedFieldErrors = List(
       new FieldError("/age", "17", "numeric instance is lower than the required minimum (minimum: 18, found: 17)"),

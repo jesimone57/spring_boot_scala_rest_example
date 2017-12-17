@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.github.fge.jsonschema.core.report.ProcessingReport
+import org.springframework.http.{HttpMethod, HttpStatus}
 import org.springframework.validation.{BindException, BindingResult}
 
 import scala.beans.BeanProperty
@@ -13,14 +14,15 @@ import scala.collection.mutable.ListBuffer
 class ErrorResponse() {
   @BeanProperty @JsonProperty("status_code") var code: Int = _
   @BeanProperty @JsonProperty("uri_path") var path: String = _
-  @BeanProperty @JsonProperty("method") var method: String = _
+  @BeanProperty @JsonProperty("method") var method: HttpMethod = _
   @BeanProperty @JsonProperty("error_message") var message: String = _
   @BeanProperty @JsonProperty("errors") var errors: ListBuffer[FieldError] = ListBuffer()
 
-  def this(code: Int, path: String, message: String) = {
+  def this(code: Int, path: String, method: HttpMethod, message: String) = {
     this()
     this.code = code
     this.path = path
+    this.method = method
     this.message = message
   }
 
@@ -29,7 +31,7 @@ class ErrorResponse() {
     this.code = code
     this.path = if (request != null) request.getRequestURI else ""
     this.message = if (exception != null) exception.getMessage else ""
-    this.method = if (request != null) request.getMethod else ""
+    this.method = if (request != null) HttpMethod.valueOf(request.getMethod) else null
     exception match {
       case e: BindException => this.addBindingResultErrors(e.getBindingResult)
       case _ =>
@@ -41,7 +43,7 @@ class ErrorResponse() {
     this.code = code
     Option(request).foreach { r =>
       this.path = r.getRequestURI
-      this.method = r.getMethod
+      this.method = HttpMethod.valueOf(r.getMethod)
     }
     Option(report).foreach { _ =>
       this.message = if (report.isSuccess) "" else "JSON Schema validation errors encountered."
@@ -49,13 +51,13 @@ class ErrorResponse() {
     }
   }
 
-  def this(code: Int, path: String, message: String, errors: ListBuffer[FieldError]) = {
-    this()
-    this.code = code
-    this.path = path
-    this.message = message
-    this.errors = errors
-  }
+//  def this(code: Int, path: String, message: String, errors: ListBuffer[FieldError]) = {
+//    this()
+//    this.code = code
+//    this.path = path
+//    this.message = message
+//    this.errors = errors
+//  }
 
   private def addBindingResultErrors(bindingResult: BindingResult): Unit = {
     bindingResult

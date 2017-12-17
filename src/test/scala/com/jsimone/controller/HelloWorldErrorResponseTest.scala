@@ -6,7 +6,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
-import org.springframework.http.HttpStatus
+import org.springframework.http.{HttpMethod, HttpStatus}
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
@@ -32,7 +32,7 @@ class HelloWorldErrorResponseTest extends TestBase {
   def hello1_1(): Unit = {
     val url = "http://localhost:" + port +"/hello1.1"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "Required String parameter 'name' is not present")
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "Required String parameter 'name' is not present")
   }
 
   /**
@@ -48,7 +48,7 @@ class HelloWorldErrorResponseTest extends TestBase {
   def hello1_2(): Unit = {
     val url = "http://localhost:" + port + "/hello1.2"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "Required int parameter 'num' is not present")
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "Required int parameter 'num' is not present")
   }
 
   /**
@@ -64,7 +64,7 @@ class HelloWorldErrorResponseTest extends TestBase {
   def hello1_2_2(): Unit = {
     val url = "http://localhost:" + port + "hello1.2?num="
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET",
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET,
       "Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: \"\"")
   }
 
@@ -81,7 +81,7 @@ class HelloWorldErrorResponseTest extends TestBase {
   def hello1_2_3(): Unit = {
     val url = "http://localhost:" + port + "hello1.2?num=asdf"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET",
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET,
       "Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: \"asdf\"")
   }
 
@@ -114,7 +114,7 @@ class HelloWorldErrorResponseTest extends TestBase {
   def hello2_1(): Unit = {
     val url = "http://localhost:" + port + "/hello2.1/asdf"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET",
+    verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET,
       "Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: \"asdf\"")
   }
 
@@ -142,6 +142,6 @@ class HelloWorldErrorResponseTest extends TestBase {
   def hello4(): Unit = {
     val url = "http://localhost:" + port + "/hello4"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponsePrefix(responseEntity, HttpStatus.BAD_REQUEST, "GET", "org.springframework.validation.BeanPropertyBindingResult: 2 errors\nField error in object 'person'")
+    verifyErrorResponsePrefix(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "org.springframework.validation.BeanPropertyBindingResult: 2 errors\nField error in object 'person'")
   }
 }

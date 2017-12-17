@@ -6,7 +6,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
-import org.springframework.http.HttpStatus
+import org.springframework.http.{HttpMethod, HttpStatus}
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
@@ -42,7 +42,7 @@ class ErrorResponseControllerTest extends TestBase {
   def errorResponseTest(): Unit = {
     val url = "http://localhost:" + port + "/error_response"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, "GET", "example request validation errors")
+    val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "example request validation errors")
 
     val expectedFieldErrors = List(
       new FieldError("name", "", "required name is empty or null"),
@@ -65,7 +65,7 @@ class ErrorResponseControllerTest extends TestBase {
   def thrownException1Response(): Unit = {
     val url = "http://localhost:" + port +"/thrown_exception1"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponsePrefix(responseEntity, HttpStatus.INTERNAL_SERVER_ERROR, "GET",
+    verifyErrorResponsePrefix(responseEntity, HttpStatus.INTERNAL_SERVER_ERROR, HttpMethod.GET,
       "com.jsimone.controller.ErrorResponseController.throwingAnException1")
   }
 
@@ -82,7 +82,7 @@ class ErrorResponseControllerTest extends TestBase {
   def thrownException2Response(): Unit = {
     val url = "http://localhost:" + port +"/thrown_exception2"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
-    verifyErrorResponsePrefix(responseEntity, HttpStatus.INTERNAL_SERVER_ERROR, "GET",
+    verifyErrorResponsePrefix(responseEntity, HttpStatus.INTERNAL_SERVER_ERROR, HttpMethod.GET,
       "com.jsimone.controller.ErrorResponseController.throwingAnException2")
   }
 }

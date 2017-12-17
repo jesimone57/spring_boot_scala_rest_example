@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest
 import com.jsimone.error.ErrorResponse
 import com.jsimone.util.{JsonUtil, Logging}
 import org.springframework.beans.TypeMismatchException
-import org.springframework.http.{HttpHeaders, HttpStatus, MediaType, ResponseEntity}
+import org.springframework.http._
 import org.springframework.validation.BindException
 import org.springframework.web.bind.{MethodArgumentNotValidException, MissingPathVariableException, MissingServletRequestParameterException}
 import org.springframework.web.bind.annotation.{ExceptionHandler, ResponseStatus}
@@ -79,8 +79,7 @@ class MyExceptionHandler extends Logging {
     //val message = Option(exception.getMessage).getOrElse(exception.getStackTrace.mkString("\n"))
     val message = exception.getStackTrace.mkString("\n")
     val status = HttpStatus.INTERNAL_SERVER_ERROR
-    val errorResponse = new ErrorResponse(status.value, path, message)
-    errorResponse.method = request.getMethod
+    val errorResponse = new ErrorResponse(status.value, path, HttpMethod.valueOf(request.getMethod), message)
     new ResponseEntity[AnyRef](JsonUtil.toJson(errorResponse), headers, status)
   }
 

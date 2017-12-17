@@ -6,7 +6,7 @@ import org.junit.Assert
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.http.{HttpHeaders, HttpStatus, ResponseEntity}
+import org.springframework.http.{HttpHeaders, HttpMethod, HttpStatus, ResponseEntity}
 
 class TestBase {
   protected val APPLICATION_JSON = "[application/json]"
@@ -23,7 +23,7 @@ class TestBase {
 
   protected def verifyErrorResponse(responseEntity: ResponseEntity[String],
                                     expectedHttpStatus: HttpStatus,
-                                    expectedMethod: String,
+                                    expectedMethod: HttpMethod,
                                     expectedMessage: String): ErrorResponse = {
 
     val json = responseEntity.getBody
@@ -43,7 +43,7 @@ class TestBase {
 
   protected def verifyErrorResponsePrefix(responseEntity: ResponseEntity[String],
                                           expectedHttpStatus: HttpStatus,
-                                          expectedMethod: String,
+                                          expectedMethod: HttpMethod,
                                           messagePrefix: String): Unit = {
 
     val json = responseEntity.getBody
