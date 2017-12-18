@@ -61,8 +61,8 @@ dependencies {
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 
     // These 2 Scala test dependencies are not used ... yet.
-    //testCompile('org.scalatest:scalatest_2.11:3.0.1')
-    //testCompile('org.scalamock:scalamock-scalatest-support_2.11:3.6.0')
+    testCompile group: 'org.scalatest', name: 'scalatest_2.12', version: '3.0.4'
+    testCompile group: 'com.typesafe.akka', name: 'akka-http-testkit_2.12', version: '10.0.11'
 }
 
 
