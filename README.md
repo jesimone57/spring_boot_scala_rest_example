@@ -3,10 +3,11 @@
 This repository contains examples of how to use the Spring REST framework to implement 
 an API which does some simple things:
 1. Say hello
-2. Specific exception handler for exceptions of a given class
+2. Specific exception handlers for exceptions of a given class
 3. A global exception handler as a catch-all for all other exceptions
 4. Convert Scala object responses to JSON
 5. A template for standardizing error responses via ErrorResponseBody and FieldError classes.
+6. JSON schema validation
 
 
 NOTE:
@@ -65,14 +66,21 @@ You can change the port in application.properties file):
 [http://localhost:8080/hello4?name=Oscar&age=21&job=*actor](http://localhost:8080/hello4?name=Oscar&age=21&job=*actor)
 
 ### Example error response
-[http://localhost:8080/example_response](http://localhost:8080/example_response)
+[http://localhost:8080/error_response](http://localhost:8080/error_response)
 
 ### Sample JSON response of a nested Scala object
 [http://localhost:8080/json](http://localhost:8080/json)
 
 ### Example of an arbitrarily thrown exception caught by an exception handler
-[http://localhost:8080/thrown_exception](http://localhost:8080/thrown_exception)
+[http://localhost:8080/thrown_exception1](http://localhost:8080/thrown_exception1)
 
 ### Example of 404 - page not found - due to invalid endpoint
 [http://localhost:8080/asdf](http://localhost:8080/asdf)
+
+### Example of invalid JSON against a JSON schema
+[http://localhost:8080/schema_test1](http://localhost:8080/schema_test1)
+
+### Example of valid JSON against a JSON schema (Note: schemas and input JSON are in the resources directory)
+[http://localhost:8080/schema?input=/person2.json&schema=/person2_schema.json](http://localhost:8080/schema?input=/person2.json&schema=/person2_schema.json)
+
 
