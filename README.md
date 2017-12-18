@@ -6,8 +6,9 @@ an API which does some simple things:
 2. Specific exception handlers for exceptions of a given class
 3. A global exception handler as a catch-all for all other exceptions
 4. Convert Scala object responses to JSON
-5. A template for standardizing error responses via ErrorResponseBody and FieldError classes.
+5. A template for standardizing error responses via ErrorResponse and FieldError classes.
 6. JSON schema validation
+7. Request paramater validation via constraint annotations and @Valid
 
 
 NOTE:
@@ -15,9 +16,8 @@ If you try to hit an invalid endpoint, the Spring controller advice will produce
 nice error message indicating the endpoint is not in service.
 
 ## Prerequisites needed to compile, test and execute the code
-* scala 2.11.*
-* java 1.8
-* gradle 4 or higher
+* java 1.8+
+* gradle 4+
 * git 
 
 ## To execute the code
