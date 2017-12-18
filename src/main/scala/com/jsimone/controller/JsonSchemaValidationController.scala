@@ -2,12 +2,11 @@ package com.jsimone.controller
 
 import javax.servlet.http.HttpServletRequest
 
-import com.jsimone.constants.UrlPath
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation._
 
 @RestController
-@RequestMapping(value = Array(UrlPath.ROOT), produces = Array(MediaType.TEXT_PLAIN_VALUE))
+@RequestMapping(value = Array("/"), produces = Array(MediaType.TEXT_PLAIN_VALUE))
 class JsonSchemaValidationController extends ControllerBase {
 
   @GetMapping(value = Array("/schema_test1"))

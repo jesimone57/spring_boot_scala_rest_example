@@ -3,17 +3,16 @@ package com.jsimone.controller
 import javax.validation.Valid
 import javax.validation.constraints.Size
 
-import com.jsimone.constants.UrlPath
 import com.jsimone.entity.Person
 import org.hibernate.validator.constraints.NotEmpty
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation._
 
 @RestController
-@RequestMapping(value = Array(UrlPath.ROOT), produces = Array(MediaType.TEXT_PLAIN_VALUE))
+@RequestMapping(value = Array("/"), produces = Array(MediaType.TEXT_PLAIN_VALUE))
 class HelloWorldController extends ControllerBase {
 
-  @GetMapping(value = Array(UrlPath.ROOT))
+  @GetMapping(value = Array("/"))
   def hello(): String = {
     log.info("/ endpoint hit.")
     "Hello World"
@@ -35,7 +34,7 @@ class HelloWorldController extends ControllerBase {
     *  Note: the default required value = true if not specified.
     *  If you want an optional request param you must specify required = false
     */
-  @GetMapping(value = Array(UrlPath.HELLO1))
+  @GetMapping(value = Array("/hello1"))
   def helloByOptionalRequestParam(@RequestParam(value = "name", required = false, defaultValue = "World") name: String): String = {
     log.info("/hello1 endpoint hit.")
     s"Hello, $name"
@@ -53,7 +52,7 @@ class HelloWorldController extends ControllerBase {
     s"Hello, $num"
   }
 
-  @GetMapping(value = Array(UrlPath.HELLO2))
+  @GetMapping(value = Array("/hello2/{name}"))
   def helloByPathVariable(@PathVariable name: String): String = {
     log.info("/hello2 endpoint hit.")
     s"Hello, $name"
@@ -65,7 +64,7 @@ class HelloWorldController extends ControllerBase {
     s"Hello, $num"
   }
 
-  @GetMapping(value = Array(UrlPath.HELLO3))
+  @GetMapping(value = Array("/hello3"))
   def helloByRequestClass(person: Person): String = {
     log.info("/hello3 endpoint hit with person params: %s".format(person.toString))
     s"Hello ${person.name}, whose age is ${person.age} and job is ${person.job}"
@@ -74,7 +73,7 @@ class HelloWorldController extends ControllerBase {
   /**
     * Invokes validation using @Valid for all parameters bound into the Person object
     */
-  @GetMapping(value = Array(UrlPath.HELLO4))
+  @GetMapping(value = Array("/hello4"))
   def helloByRequestClassValidate(@Valid person: Person): String = {
     log.info("/hello4 endpoint hit with person params: %s".format(person.toString))
     s"Hello ${person.name}, whose age is ${person.age} and job is ${person.job}"

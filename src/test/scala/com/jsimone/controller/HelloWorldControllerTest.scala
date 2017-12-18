@@ -93,12 +93,30 @@ class HelloWorldControllerTest {
   }
 
   @Test
+  def test8(): Unit = {
+    mockMvc.perform(get("/hello1.2?num=11")
+      .accept(MediaType.parseMediaType("text/plain;charset=UTF-8")))
+      .andExpect(status.isOk)
+      .andExpect(content.contentType("text/plain;charset=UTF-8"))
+      .andExpect(content.string("Hello, 11"))
+  }
+
+  @Test
   def test5(): Unit = {
     mockMvc.perform(get("/hello2/Fred")
       .accept(MediaType.parseMediaType("text/plain;charset=UTF-8")))
       .andExpect(status.isOk)
       .andExpect(content.contentType("text/plain;charset=UTF-8"))
       .andExpect(content.string("Hello, Fred"))
+  }
+
+  @Test
+  def test9(): Unit = {
+    mockMvc.perform(get("/hello2.1/11")
+      .accept(MediaType.parseMediaType("text/plain;charset=UTF-8")))
+      .andExpect(status.isOk)
+      .andExpect(content.contentType("text/plain;charset=UTF-8"))
+      .andExpect(content.string("Hello, 11"))
   }
 
   /**
@@ -123,5 +141,23 @@ class HelloWorldControllerTest {
       .andExpect(status.isOk)
       .andExpect(content.contentType("text/plain;charset=UTF-8"))
       .andExpect(content.string("Hello f, whose age is 1 and job is ****"))
+  }
+
+  @Test
+  def test10(): Unit = {
+    mockMvc.perform(get("/hello4?name=Frank&age=35&job=Fisherman")
+      .accept(MediaType.parseMediaType("text/plain;charset=UTF-8")))
+      .andExpect(status.isOk)
+      .andExpect(content.contentType("text/plain;charset=UTF-8"))
+      .andExpect(content.string("Hello Frank, whose age is 35 and job is Fisherman"))
+  }
+
+  @Test
+  def test11(): Unit = {
+    mockMvc.perform(get("/hello5?name=")
+      .accept(MediaType.parseMediaType("text/plain;charset=UTF-8")))
+      .andExpect(status.isOk)
+      .andExpect(content.contentType("text/plain;charset=UTF-8"))
+      .andExpect(content.string("Hello "))
   }
 }

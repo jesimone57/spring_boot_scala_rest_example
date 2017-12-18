@@ -1,18 +1,17 @@
 package com.jsimone.controller
 
-import com.jsimone.constants.UrlPath
 import com.jsimone.util.JsonUtil
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation._
 
 @RestController
-@RequestMapping(value = Array(UrlPath.ROOT), produces = Array(MediaType.APPLICATION_JSON_VALUE))
+@RequestMapping(value = Array("/"), produces = Array(MediaType.APPLICATION_JSON_VALUE))
 class JsonResponseController extends ControllerBase {
 
   /**
     * See ref https://stackoverflow.com/questions/12113010/scala-Response-and-map
     */
-  @GetMapping(value = Array(UrlPath.JSON))
+  @GetMapping(value = Array("/json"))
   def mapToJson(): String = {
     log.info("/json endpoint hit.")
     val m = Map(

@@ -1,20 +1,17 @@
 package com.jsimone.controller
 
 import javax.servlet.http.HttpServletRequest
-import javax.validation.Valid
 
-import com.jsimone.constants.UrlPath
-import com.jsimone.entity.Person
 import com.jsimone.error.{ErrorResponse, FieldError}
 import com.jsimone.exception.ErrorResponseException
 import org.springframework.http.{HttpMethod, HttpStatus, MediaType, ResponseEntity}
 import org.springframework.web.bind.annotation._
 
 @RestController
-@RequestMapping(value = Array(UrlPath.ROOT), produces = Array(MediaType.APPLICATION_JSON_VALUE))
+@RequestMapping(value = Array("/"), produces = Array(MediaType.APPLICATION_JSON_VALUE))
 class ErrorResponseController extends ControllerBase {
 
-  @GetMapping(value = Array(UrlPath.ERROR_RESPONSE))
+  @GetMapping(value = Array("/error_response"))
   def sampleErrorResponse(request: HttpServletRequest): ResponseEntity[AnyRef] = {
     log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
 
@@ -25,13 +22,13 @@ class ErrorResponseController extends ControllerBase {
     throw new ErrorResponseException(errorResponse)
   }
 
-  @GetMapping(value = Array(UrlPath.THROWN_EXCEPTION1))
+  @GetMapping(value = Array("/thrown_exception1"))
   def throwingAnException1(): String = {
     log.info("/thrown_exception1 endpoint hit.")
     throw new IllegalArgumentException("Illegal Argument Exception")
   }
 
-  @GetMapping(value = Array(UrlPath.THROWN_EXCEPTION2))
+  @GetMapping(value = Array("/thrown_exception2"))
   def throwingAnException2(): String = {
     log.info("/thrown_exception2 endpoint hit.")
     throw new NullPointerException()
