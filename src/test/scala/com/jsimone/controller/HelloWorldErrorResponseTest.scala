@@ -16,7 +16,8 @@ class HelloWorldErrorResponseTest extends TestBase {
   @Test
   @throws[Exception]
   def helloWorld(): Unit = {
-    assertThat(restTemplate.getForObject("http://localhost:" + port + "/", classOf[String])).contains("Hello World")
+    val url = s"http://localhost:$port/"
+    assertThat(restTemplate.getForObject(url, classOf[String])).contains("Hello World")
   }
 
   /**
@@ -30,7 +31,7 @@ class HelloWorldErrorResponseTest extends TestBase {
     */
   @Test
   def hello1_1(): Unit = {
-    val url = "http://localhost:" + port +"/hello1.1"
+    val url = s"http://localhost:$port/hello1.1"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "Required String parameter 'name' is not present")
   }
@@ -46,7 +47,7 @@ class HelloWorldErrorResponseTest extends TestBase {
     */
   @Test
   def hello1_2(): Unit = {
-    val url = "http://localhost:" + port + "/hello1.2"
+    val url = s"http://localhost:$port/hello1.2"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "Required int parameter 'num' is not present")
   }
@@ -96,7 +97,7 @@ class HelloWorldErrorResponseTest extends TestBase {
     */
   @Test
   def hello2(): Unit = {
-    val url = "http://localhost:" + port + "/hello2"
+    val url = s"http://localhost:$port/hello2"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.NOT_FOUND, null, "The URL you have reached is not in service at this time")
   }
@@ -112,7 +113,7 @@ class HelloWorldErrorResponseTest extends TestBase {
     */
   @Test
   def hello2_1(): Unit = {
-    val url = "http://localhost:" + port + "/hello2.1/asdf"
+    val url = s"http://localhost:$port/hello2.1/asdf"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET,
       "Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: \"asdf\"")
@@ -140,7 +141,7 @@ class HelloWorldErrorResponseTest extends TestBase {
     */
   @Test
   def hello4(): Unit = {
-    val url = "http://localhost:" + port + "/hello4"
+    val url = s"http://localhost:$port/hello4"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponsePrefix(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "org.springframework.validation.BeanPropertyBindingResult: 2 errors\nField error in object 'person'")
   }

@@ -2,10 +2,12 @@ package com.jsimone.exception
 
 import javax.servlet.http.HttpServletRequest
 
+import com.fasterxml.jackson.core.JsonProcessingException
 import com.jsimone.error.ErrorResponse
 import com.jsimone.util.{JsonUtil, Logging}
 import org.springframework.beans.TypeMismatchException
 import org.springframework.http._
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.validation.BindException
 import org.springframework.web.bind.{MethodArgumentNotValidException, MissingPathVariableException, MissingServletRequestParameterException}
 import org.springframework.web.bind.annotation.{ExceptionHandler, ResponseStatus}
@@ -53,6 +55,20 @@ class MyExceptionHandler extends Logging {
   @ExceptionHandler(Array(classOf[MethodArgumentNotValidException]))
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   def handleMethodArgumentNotValidException(exception: MethodArgumentNotValidException, request: HttpServletRequest): ResponseEntity[AnyRef] = {
+    log.error(exception.toString)
+    buildBadRequestResponse(exception, request)
+  }
+
+  @ExceptionHandler(Array(classOf[HttpMessageNotReadableException]))
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  def handleHttpMessageNotReadableException(exception: HttpMessageNotReadableException, request: HttpServletRequest): ResponseEntity[AnyRef] = {
+    log.error(exception.toString)
+    buildBadRequestResponse(exception, request)
+  }
+
+  @ExceptionHandler(Array(classOf[JsonProcessingException]))
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  def handleJsonProcessingException(exception: JsonProcessingException, request: HttpServletRequest): ResponseEntity[AnyRef] = {
     log.error(exception.toString)
     buildBadRequestResponse(exception, request)
   }

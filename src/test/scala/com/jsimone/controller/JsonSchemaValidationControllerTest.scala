@@ -24,7 +24,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaInputParamMissing1(): Unit = {
-    val url = "http://localhost:" + port + "/schema"
+    val url = s"http://localhost:$port/schema"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "Required String parameter 'input' is not present")
   }
@@ -40,7 +40,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaInputParamMissing2(): Unit = {
-    val url = "http://localhost:" + port + "/schema?schema=/person1.json"
+    val url = s"http://localhost:$port/schema?schema=/person1.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "Required String parameter 'input' is not present")
   }
@@ -56,7 +56,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaSchemaParamMissing(): Unit = {
-    val url = "http://localhost:" + port + "/schema?input=/person1.json"
+    val url = s"http://localhost:$port/schema?input=/person1.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "Required String parameter 'schema' is not present")
   }
@@ -72,7 +72,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaInputResourceDoesNotBeginWithSlash1(): Unit = {
-    val url = "http://localhost:" + port + "/schema?input=person1.json&schema=person1_schema.json"
+    val url = s"http://localhost:$port/schema?input=person1.json&schema=person1_schema.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "resource path does not start with a '/'")
   }
@@ -88,7 +88,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaInputResourceDoesNotBeginWithSlash2(): Unit = {
-    val url = "http://localhost:" + port + "/schema?input=/person1.json&schema=person1_schema.json"
+    val url = s"http://localhost:$port/schema?input=/person1.json&schema=person1_schema.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "resource path does not start with a '/'")
   }
@@ -104,7 +104,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaInputResourceDoesNotBeginWithSlash3(): Unit = {
-    val url = "http://localhost:" + port + "/schema?input=person1.json&schema=/person1_schema.json"
+    val url = s"http://localhost:$port/schema?input=person1.json&schema=/person1_schema.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "resource path does not start with a '/'")
   }
@@ -136,7 +136,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaValidationFailure(): Unit = {
-    val url = "http://localhost:" + port + "/schema?input=/person1.json&schema=/person1_schema.json"
+    val url = s"http://localhost:$port/schema?input=/person1.json&schema=/person1_schema.json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "JSON Schema validation errors encountered.")
 
@@ -211,7 +211,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
     */
   @Test
   def schemaValidationFailure1(): Unit = {
-    val url = "http://localhost:" + port + "/schema_test1"
+    val url = s"http://localhost:$port/schema_test1"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "JSON Schema validation errors encountered.")
 
@@ -233,7 +233,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
         |}
       """.stripMargin
 
-    val url = "http://localhost:" + port + "/create_person1"
+    val url = s"http://localhost:$port/create_person1"
     val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
     val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.POST, "JSON Schema validation errors encountered.")
 
@@ -243,6 +243,74 @@ class JsonSchemaValidationControllerTest extends TestBase {
       new FieldError("/name",  "f", "string \"f\" is too short (length: 1, required minimum: 2)")
     )
     verifyFieldErrors(3, errorResponse, expectedFieldErrors)
+  }
+
+  /**
+    {
+      "status_code": 400,
+      "uri_path": "/create_person1",
+      "method": "POST",
+      "error_message": "Required request body is missing: public java.lang.String com.jsimone.controller.JsonSchemaValidationController.createPerson1(java.lang.String,javax.servlet.http.HttpServletRequest)",
+      "errors": [],
+    }
+    */
+  @Test
+  def schemaValidationFailureOnPostMissingJSON(): Unit = {
+    val json = ""
+
+    val url = s"http://localhost:$port/create_person1"
+    val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
+    val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.POST,
+      "Required request body is missing: public java.lang.String com.jsimone.controller.JsonSchemaValidationController.createPerson1(java.lang.String,javax.servlet.http.HttpServletRequest)")
+  }
+
+  /**
+    {
+      "status_code": 400,
+      "uri_path": "/create_person1",
+      "method": "POST",
+      "error_message": "Unexpected end-of-input: expected close marker for Object (start marker at [Source: { "name": "Fred", "age": 22, "job": "Artist" ; line: 1, column: 1]) at [Source: { "name": "Fred", "age": 22, "job": "Artist" ; line: 5, column: 56]",
+      "errors": [],
+    }
+    */
+  @Test
+  def schemaValidationFailureOnPostJSONException1(): Unit = {
+    val json =
+      """{
+        |  "name": "f",
+        |  "age": 17,
+        |  "job": "pi*lot"
+      """.stripMargin
+
+    val url = s"http://localhost:$port/create_person1"
+    val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
+    val errorResponse = verifyErrorResponsePrefix(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.POST,
+      "Unexpected end-of-input: expected close marker for Object (start marker at [Source:")
+  }
+
+  /**
+    {
+      "status_code": 400,
+      "uri_path": "/create_person1",
+      "method": "POST",
+      "error_message": "Unexpected character ('A' (code 65)): was expecting a colon to separate field name and value at [Source: { "name": "Fred", "age": 22, "job: "Artist" }; line: 4, column: 11]",
+      "errors": [],
+    }
+    */
+  @Test
+  def schemaValidationFailureOnPostJSONException2(): Unit = {
+    val json =
+      """{
+        |  "name": "Fred",
+        |  "age": 22,
+        |  "job: "Artist"
+        |}
+      """.stripMargin
+
+    val url = s"http://localhost:$port/create_person1"
+    val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
+    val errorResponse = verifyErrorResponsePrefix(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.POST,
+      "Unexpected character ('A' (code 65)): was expecting a colon to separate field name and value")
   }
 
   @Test
@@ -255,7 +323,7 @@ class JsonSchemaValidationControllerTest extends TestBase {
         |}
       """.stripMargin
 
-    val url = "http://localhost:" + port + "/create_person1"
+    val url = s"http://localhost:$port/create_person1"
     val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
 
     // verifySuccessResponse(responseEntity, HttpStatus.OK, MediaType.TEXT_PLAIN, "valid")  // TODO: fix this

@@ -59,7 +59,7 @@ class TestBase {
 
     Assert.assertEquals(expectedHttpStatus.value(), errorResponse.code)
     Assert.assertEquals(expectedMethod, errorResponse.method)
-    Assert.assertTrue(errorResponse.message.startsWith(messagePrefix))
+    Assert.assertTrue(s"message\n${errorResponse.message}\ndoes not start with\n$messagePrefix", errorResponse.message.startsWith(messagePrefix))
 
     Assert.assertEquals(expectedHttpStatus, responseEntity.getStatusCode)
 

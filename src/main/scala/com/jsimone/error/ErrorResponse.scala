@@ -51,14 +51,6 @@ class ErrorResponse() {
     }
   }
 
-//  def this(code: Int, path: String, message: String, errors: ListBuffer[FieldError]) = {
-//    this()
-//    this.code = code
-//    this.path = path
-//    this.message = message
-//    this.errors = errors
-//  }
-
   private def addBindingResultErrors(bindingResult: BindingResult): Unit = {
     bindingResult
       .getFieldErrors

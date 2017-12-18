@@ -361,7 +361,7 @@ definitions:
         description: URI path used for the request in error
         example: /hello
       method:
-        type: string
+        type: object
         description: HTTP method of the request in error
         enum:
           - GET
@@ -370,7 +370,6 @@ definitions:
           - DELETE
           - PATCH
           - HEAD
-          - CONNECT
           - OPTIONS
           - TRACE
       errors:

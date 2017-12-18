@@ -12,6 +12,9 @@ import com.jsimone.util.Logging
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.CrossOrigin
 
+/**
+  * @see <a href="https://spring.io/guides/gs/rest-service-cors/">Enabling Cross Origin Requests for a RESTful Web Service</a>
+  */
 @CrossOrigin(origins = Array("*"))
 class ControllerBase extends MyExceptionHandler with Logging {
 

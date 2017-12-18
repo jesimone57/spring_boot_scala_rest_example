@@ -40,7 +40,7 @@ class ErrorResponseControllerTest extends TestBase {
     */
   @Test
   def errorResponseTest(): Unit = {
-    val url = "http://localhost:" + port + "/error_response"
+    val url = s"http://localhost:$port/error_response"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "example request validation errors")
 
@@ -63,7 +63,7 @@ class ErrorResponseControllerTest extends TestBase {
     */
   @Test
   def thrownException1Response(): Unit = {
-    val url = "http://localhost:" + port +"/thrown_exception1"
+    val url = s"http://localhost:$port/thrown_exception1"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponsePrefix(responseEntity, HttpStatus.INTERNAL_SERVER_ERROR, HttpMethod.GET,
       "com.jsimone.controller.ErrorResponseController.throwingAnException1")
@@ -80,7 +80,7 @@ class ErrorResponseControllerTest extends TestBase {
     */
   @Test
   def thrownException2Response(): Unit = {
-    val url = "http://localhost:" + port +"/thrown_exception2"
+    val url = s"http://localhost:$port/thrown_exception2"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     verifyErrorResponsePrefix(responseEntity, HttpStatus.INTERNAL_SERVER_ERROR, HttpMethod.GET,
       "com.jsimone.controller.ErrorResponseController.throwingAnException2")

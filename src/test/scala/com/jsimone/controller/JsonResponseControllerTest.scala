@@ -14,7 +14,7 @@ class JsonResponseControllerTest extends TestBase {
 
   @Test
   def jsonResponseTest(): Unit = {
-    val url = "http://localhost:" + port + "/json"
+    val url = s"http://localhost:$port/json"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     val expectedResponse =
       """{"name":"john doe","age":18,"hasChild":true,"childs":[{"name":"dorothy","age":5,"hasChild":false},{"name":"bill","age":8,"hasChild":false}]}"""
