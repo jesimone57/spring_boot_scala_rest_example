@@ -29,8 +29,8 @@ class ErrorResponse() {
   def this(code: Int, request: HttpServletRequest, exception: Exception) = {
     this()
     this.code = code
-    this.path = if (request != null) request.getRequestURI else ""
-    this.message = if (exception != null) exception.getMessage else ""
+    this.path = Option(request).map(_.getRequestURI).getOrElse("")
+    this.message = Option(exception).map(_.getMessage).getOrElse("")
     this.method = if (request != null) HttpMethod.valueOf(request.getMethod) else null
     exception match {
       case e: BindException => this.addBindingResultErrors(e.getBindingResult)
@@ -88,9 +88,8 @@ class ErrorResponse() {
     }
   }
 
-  override def toString: String = {
+  override def toString: String =
     s"${this.getClass.getSimpleName} { code: $code, path: $path, message: $message, method: $method, errors: [${errors.toString()}] }"
-  }
 
   private def canEqual(a: Any) = a.isInstanceOf[ErrorResponse]
 

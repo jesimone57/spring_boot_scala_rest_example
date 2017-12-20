@@ -83,7 +83,6 @@ paths:
           description: Name to say hello to
           required: true
           type: string
-          default: World
       responses:
         200:
           description: successful operation

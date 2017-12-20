@@ -9,7 +9,7 @@ import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http._
 
-class TestBase {
+abstract class TestBase {
   protected val APPLICATION_JSON = "[application/json]"
   protected val TEXT_PLAIN = "[text/plain;charset=UTF-8]"
   protected val CONTENT_TYPE = "Content-Type"

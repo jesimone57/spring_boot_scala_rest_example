@@ -1,0 +1,1197 @@
+:dependencies
+
+------------------------------------------------------------
+Root project
+------------------------------------------------------------
+
+apiElements - API elements for main. (n)
+No dependencies
+
+archives - Configuration for archive artifacts.
+No dependencies
+
+compile - Dependencies for source set 'main' (deprecated, use 'implementation ' instead).
++--- org.scala-lang:scala-library:2.12.4
++--- org.springframework.boot:spring-boot-starter-actuator: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.3.13.RELEASE
+|    |    |         |    +--- org.springframework:spring-beans:4.3.13.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.3.13.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.5.9.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.11
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.11
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.22 -> 1.7.25
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.25
+|    |    |         \--- org.slf4j:slf4j-api:1.7.25
+|    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.17
+|    \--- org.springframework.boot:spring-boot-actuator:1.5.9.RELEASE
+|         +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|         +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10
+|         |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|         |    \--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         \--- org.springframework:spring-context:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-starter-web: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.5.9.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23
+|    |    |    \--- org.apache.tomcat:tomcat-annotations-api:8.5.23
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.5.23
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23 (*)
+|    +--- org.hibernate:hibernate-validator:5.3.6.Final
+|    |    +--- javax.validation:validation-api:1.1.0.Final
+|    |    +--- org.jboss.logging:jboss-logging:3.3.0.Final -> 3.3.1.Final
+|    |    \--- com.fasterxml:classmate:1.3.1 -> 1.3.4
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    +--- org.springframework:spring-web:4.3.13.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-webmvc:4.3.13.RELEASE
+|         +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         +--- org.springframework:spring-expression:4.3.13.RELEASE (*)
+|         \--- org.springframework:spring-web:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-devtools: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
++--- com.fasterxml.jackson.module:jackson-module-scala_2.12:2.8.10
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scala-lang:scala-reflect:2.12.3
+|    |    \--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.10 -> 2.8.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    \--- com.fasterxml.jackson.module:jackson-module-paranamer:2.8.10
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|         \--- com.thoughtworks.paranamer:paranamer:2.8
++--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
++--- org.apache.logging.log4j:log4j-core:2.10.0
+|    \--- org.apache.logging.log4j:log4j-api:2.10.0 -> 2.7
+\--- com.github.java-json-tools:json-schema-validator:2.2.8
+     +--- com.github.java-json-tools:json-schema-core:1.2.8
+     |    +--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    +--- org.mozilla:rhino:1.7R4
+     |    +--- com.github.fge:jackson-coreutils:1.8
+     |    |    +--- com.github.fge:msg-simple:1.1
+     |    |    |    +--- com.github.fge:btf:1.2
+     |    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.2.3 -> 2.8.10 (*)
+     |    |    +--- com.google.guava:guava:16.0.1
+     |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    \--- com.github.fge:uri-template:0.9
+     |         +--- com.github.fge:msg-simple:1.1 (*)
+     |         +--- com.google.guava:guava:16.0.1
+     |         \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     +--- javax.mail:mailapi:1.4.3
+     |    \--- javax.activation:activation:1.1
+     +--- joda-time:joda-time:2.9.7 -> 2.9.9
+     +--- com.googlecode.libphonenumber:libphonenumber:8.0.0
+     +--- com.google.code.findbugs:jsr305:3.0.1
+     \--- net.sf.jopt-simple:jopt-simple:5.0.3
+
+compileClasspath - Compile classpath for source set 'main'.
++--- org.scala-lang:scala-library:2.12.4
++--- org.springframework.boot:spring-boot-starter-actuator: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.3.13.RELEASE
+|    |    |         |    +--- org.springframework:spring-beans:4.3.13.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.3.13.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.5.9.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.11
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.11
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.22 -> 1.7.25
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.25
+|    |    |         \--- org.slf4j:slf4j-api:1.7.25
+|    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.17
+|    \--- org.springframework.boot:spring-boot-actuator:1.5.9.RELEASE
+|         +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|         +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10
+|         |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|         |    \--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         \--- org.springframework:spring-context:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-starter-web: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.5.9.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23
+|    |    |    \--- org.apache.tomcat:tomcat-annotations-api:8.5.23
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.5.23
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23 (*)
+|    +--- org.hibernate:hibernate-validator:5.3.6.Final
+|    |    +--- javax.validation:validation-api:1.1.0.Final
+|    |    +--- org.jboss.logging:jboss-logging:3.3.0.Final -> 3.3.1.Final
+|    |    \--- com.fasterxml:classmate:1.3.1 -> 1.3.4
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    +--- org.springframework:spring-web:4.3.13.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-webmvc:4.3.13.RELEASE
+|         +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         +--- org.springframework:spring-expression:4.3.13.RELEASE (*)
+|         \--- org.springframework:spring-web:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-devtools: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
++--- com.fasterxml.jackson.module:jackson-module-scala_2.12:2.8.10
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scala-lang:scala-reflect:2.12.3
+|    |    \--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.10 -> 2.8.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    \--- com.fasterxml.jackson.module:jackson-module-paranamer:2.8.10
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|         \--- com.thoughtworks.paranamer:paranamer:2.8
++--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
++--- org.apache.logging.log4j:log4j-core:2.10.0
+|    \--- org.apache.logging.log4j:log4j-api:2.10.0 -> 2.7
+\--- com.github.java-json-tools:json-schema-validator:2.2.8
+     +--- com.github.java-json-tools:json-schema-core:1.2.8
+     |    +--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    +--- org.mozilla:rhino:1.7R4
+     |    +--- com.github.fge:jackson-coreutils:1.8
+     |    |    +--- com.github.fge:msg-simple:1.1
+     |    |    |    +--- com.github.fge:btf:1.2
+     |    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.2.3 -> 2.8.10 (*)
+     |    |    +--- com.google.guava:guava:16.0.1
+     |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    \--- com.github.fge:uri-template:0.9
+     |         +--- com.github.fge:msg-simple:1.1 (*)
+     |         +--- com.google.guava:guava:16.0.1
+     |         \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     +--- javax.mail:mailapi:1.4.3
+     |    \--- javax.activation:activation:1.1
+     +--- joda-time:joda-time:2.9.7 -> 2.9.9
+     +--- com.googlecode.libphonenumber:libphonenumber:8.0.0
+     +--- com.google.code.findbugs:jsr305:3.0.1
+     \--- net.sf.jopt-simple:jopt-simple:5.0.3
+
+compileOnly - Compile only dependencies for source set 'main'.
+No dependencies
+
+default - Configuration for default artifacts.
++--- org.scala-lang:scala-library:2.12.4
++--- org.springframework.boot:spring-boot-starter-actuator: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.3.13.RELEASE
+|    |    |         |    +--- org.springframework:spring-beans:4.3.13.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.3.13.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.5.9.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.11
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.11
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.22 -> 1.7.25
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.25
+|    |    |         \--- org.slf4j:slf4j-api:1.7.25
+|    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.17
+|    \--- org.springframework.boot:spring-boot-actuator:1.5.9.RELEASE
+|         +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|         +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10
+|         |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|         |    \--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         \--- org.springframework:spring-context:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-starter-web: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.5.9.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23
+|    |    |    \--- org.apache.tomcat:tomcat-annotations-api:8.5.23
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.5.23
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23 (*)
+|    +--- org.hibernate:hibernate-validator:5.3.6.Final
+|    |    +--- javax.validation:validation-api:1.1.0.Final
+|    |    +--- org.jboss.logging:jboss-logging:3.3.0.Final -> 3.3.1.Final
+|    |    \--- com.fasterxml:classmate:1.3.1 -> 1.3.4
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    +--- org.springframework:spring-web:4.3.13.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-webmvc:4.3.13.RELEASE
+|         +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         +--- org.springframework:spring-expression:4.3.13.RELEASE (*)
+|         \--- org.springframework:spring-web:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-devtools: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
++--- com.fasterxml.jackson.module:jackson-module-scala_2.12:2.8.10
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scala-lang:scala-reflect:2.12.3
+|    |    \--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.10 -> 2.8.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    \--- com.fasterxml.jackson.module:jackson-module-paranamer:2.8.10
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|         \--- com.thoughtworks.paranamer:paranamer:2.8
++--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
++--- org.apache.logging.log4j:log4j-core:2.10.0
+|    \--- org.apache.logging.log4j:log4j-api:2.10.0 -> 2.7
+\--- com.github.java-json-tools:json-schema-validator:2.2.8
+     +--- com.github.java-json-tools:json-schema-core:1.2.8
+     |    +--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    +--- org.mozilla:rhino:1.7R4
+     |    +--- com.github.fge:jackson-coreutils:1.8
+     |    |    +--- com.github.fge:msg-simple:1.1
+     |    |    |    +--- com.github.fge:btf:1.2
+     |    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.2.3 -> 2.8.10 (*)
+     |    |    +--- com.google.guava:guava:16.0.1
+     |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    \--- com.github.fge:uri-template:0.9
+     |         +--- com.github.fge:msg-simple:1.1 (*)
+     |         +--- com.google.guava:guava:16.0.1
+     |         \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     +--- javax.mail:mailapi:1.4.3
+     |    \--- javax.activation:activation:1.1
+     +--- joda-time:joda-time:2.9.7 -> 2.9.9
+     +--- com.googlecode.libphonenumber:libphonenumber:8.0.0
+     +--- com.google.code.findbugs:jsr305:3.0.1
+     \--- net.sf.jopt-simple:jopt-simple:5.0.3
+
+implementation - Implementation only dependencies for source set 'main'. (n)
+No dependencies
+
+runtime - Runtime dependencies for source set 'main' (deprecated, use 'runtimeOnly ' instead).
++--- org.scala-lang:scala-library:2.12.4
++--- org.springframework.boot:spring-boot-starter-actuator: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.3.13.RELEASE
+|    |    |         |    +--- org.springframework:spring-beans:4.3.13.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.3.13.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.5.9.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.11
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.11
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.22 -> 1.7.25
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.25
+|    |    |         \--- org.slf4j:slf4j-api:1.7.25
+|    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.17
+|    \--- org.springframework.boot:spring-boot-actuator:1.5.9.RELEASE
+|         +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|         +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10
+|         |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|         |    \--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         \--- org.springframework:spring-context:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-starter-web: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.5.9.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23
+|    |    |    \--- org.apache.tomcat:tomcat-annotations-api:8.5.23
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.5.23
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23 (*)
+|    +--- org.hibernate:hibernate-validator:5.3.6.Final
+|    |    +--- javax.validation:validation-api:1.1.0.Final
+|    |    +--- org.jboss.logging:jboss-logging:3.3.0.Final -> 3.3.1.Final
+|    |    \--- com.fasterxml:classmate:1.3.1 -> 1.3.4
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    +--- org.springframework:spring-web:4.3.13.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-webmvc:4.3.13.RELEASE
+|         +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         +--- org.springframework:spring-expression:4.3.13.RELEASE (*)
+|         \--- org.springframework:spring-web:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-devtools: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
++--- com.fasterxml.jackson.module:jackson-module-scala_2.12:2.8.10
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scala-lang:scala-reflect:2.12.3
+|    |    \--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.10 -> 2.8.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    \--- com.fasterxml.jackson.module:jackson-module-paranamer:2.8.10
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|         \--- com.thoughtworks.paranamer:paranamer:2.8
++--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
++--- org.apache.logging.log4j:log4j-core:2.10.0
+|    \--- org.apache.logging.log4j:log4j-api:2.10.0 -> 2.7
+\--- com.github.java-json-tools:json-schema-validator:2.2.8
+     +--- com.github.java-json-tools:json-schema-core:1.2.8
+     |    +--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    +--- org.mozilla:rhino:1.7R4
+     |    +--- com.github.fge:jackson-coreutils:1.8
+     |    |    +--- com.github.fge:msg-simple:1.1
+     |    |    |    +--- com.github.fge:btf:1.2
+     |    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.2.3 -> 2.8.10 (*)
+     |    |    +--- com.google.guava:guava:16.0.1
+     |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    \--- com.github.fge:uri-template:0.9
+     |         +--- com.github.fge:msg-simple:1.1 (*)
+     |         +--- com.google.guava:guava:16.0.1
+     |         \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     +--- javax.mail:mailapi:1.4.3
+     |    \--- javax.activation:activation:1.1
+     +--- joda-time:joda-time:2.9.7 -> 2.9.9
+     +--- com.googlecode.libphonenumber:libphonenumber:8.0.0
+     +--- com.google.code.findbugs:jsr305:3.0.1
+     \--- net.sf.jopt-simple:jopt-simple:5.0.3
+
+runtimeClasspath - Runtime classpath of source set 'main'.
++--- org.scala-lang:scala-library:2.12.4
++--- org.springframework.boot:spring-boot-starter-actuator: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.3.13.RELEASE
+|    |    |         |    +--- org.springframework:spring-beans:4.3.13.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.3.13.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.5.9.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.11
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.11
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.22 -> 1.7.25
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.25
+|    |    |         \--- org.slf4j:slf4j-api:1.7.25
+|    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.17
+|    \--- org.springframework.boot:spring-boot-actuator:1.5.9.RELEASE
+|         +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|         +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10
+|         |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|         |    \--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         \--- org.springframework:spring-context:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-starter-web: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.5.9.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23
+|    |    |    \--- org.apache.tomcat:tomcat-annotations-api:8.5.23
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.5.23
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23 (*)
+|    +--- org.hibernate:hibernate-validator:5.3.6.Final
+|    |    +--- javax.validation:validation-api:1.1.0.Final
+|    |    +--- org.jboss.logging:jboss-logging:3.3.0.Final -> 3.3.1.Final
+|    |    \--- com.fasterxml:classmate:1.3.1 -> 1.3.4
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    +--- org.springframework:spring-web:4.3.13.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-webmvc:4.3.13.RELEASE
+|         +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         +--- org.springframework:spring-expression:4.3.13.RELEASE (*)
+|         \--- org.springframework:spring-web:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-devtools: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
++--- com.fasterxml.jackson.module:jackson-module-scala_2.12:2.8.10
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scala-lang:scala-reflect:2.12.3
+|    |    \--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.10 -> 2.8.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    \--- com.fasterxml.jackson.module:jackson-module-paranamer:2.8.10
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|         \--- com.thoughtworks.paranamer:paranamer:2.8
++--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
++--- org.apache.logging.log4j:log4j-core:2.10.0
+|    \--- org.apache.logging.log4j:log4j-api:2.10.0 -> 2.7
+\--- com.github.java-json-tools:json-schema-validator:2.2.8
+     +--- com.github.java-json-tools:json-schema-core:1.2.8
+     |    +--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    +--- org.mozilla:rhino:1.7R4
+     |    +--- com.github.fge:jackson-coreutils:1.8
+     |    |    +--- com.github.fge:msg-simple:1.1
+     |    |    |    +--- com.github.fge:btf:1.2
+     |    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.2.3 -> 2.8.10 (*)
+     |    |    +--- com.google.guava:guava:16.0.1
+     |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     |    \--- com.github.fge:uri-template:0.9
+     |         +--- com.github.fge:msg-simple:1.1 (*)
+     |         +--- com.google.guava:guava:16.0.1
+     |         \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+     +--- javax.mail:mailapi:1.4.3
+     |    \--- javax.activation:activation:1.1
+     +--- joda-time:joda-time:2.9.7 -> 2.9.9
+     +--- com.googlecode.libphonenumber:libphonenumber:8.0.0
+     +--- com.google.code.findbugs:jsr305:3.0.1
+     \--- net.sf.jopt-simple:jopt-simple:5.0.3
+
+runtimeElements - Elements of runtime for main. (n)
+No dependencies
+
+runtimeOnly - Runtime only dependencies for source set 'main'. (n)
+No dependencies
+
+testCompile - Dependencies for source set 'test' (deprecated, use 'testImplementation ' instead).
++--- org.scala-lang:scala-library:2.12.4
++--- org.springframework.boot:spring-boot-starter-actuator: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.3.13.RELEASE
+|    |    |         |    +--- org.springframework:spring-beans:4.3.13.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.3.13.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.5.9.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.11
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.11
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.22 -> 1.7.25
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.25
+|    |    |         \--- org.slf4j:slf4j-api:1.7.25
+|    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.17
+|    \--- org.springframework.boot:spring-boot-actuator:1.5.9.RELEASE
+|         +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|         +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10
+|         |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|         |    \--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         \--- org.springframework:spring-context:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-starter-web: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.5.9.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23
+|    |    |    \--- org.apache.tomcat:tomcat-annotations-api:8.5.23
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.5.23
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23 (*)
+|    +--- org.hibernate:hibernate-validator:5.3.6.Final
+|    |    +--- javax.validation:validation-api:1.1.0.Final
+|    |    +--- org.jboss.logging:jboss-logging:3.3.0.Final -> 3.3.1.Final
+|    |    \--- com.fasterxml:classmate:1.3.1 -> 1.3.4
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    +--- org.springframework:spring-web:4.3.13.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-webmvc:4.3.13.RELEASE
+|         +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         +--- org.springframework:spring-expression:4.3.13.RELEASE (*)
+|         \--- org.springframework:spring-web:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-devtools: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
++--- com.fasterxml.jackson.module:jackson-module-scala_2.12:2.8.10
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scala-lang:scala-reflect:2.12.3
+|    |    \--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.10 -> 2.8.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    \--- com.fasterxml.jackson.module:jackson-module-paranamer:2.8.10
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|         \--- com.thoughtworks.paranamer:paranamer:2.8
++--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
++--- org.apache.logging.log4j:log4j-core:2.10.0
+|    \--- org.apache.logging.log4j:log4j-api:2.10.0 -> 2.7
++--- com.github.java-json-tools:json-schema-validator:2.2.8
+|    +--- com.github.java-json-tools:json-schema-core:1.2.8
+|    |    +--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    +--- org.mozilla:rhino:1.7R4
+|    |    +--- com.github.fge:jackson-coreutils:1.8
+|    |    |    +--- com.github.fge:msg-simple:1.1
+|    |    |    |    +--- com.github.fge:btf:1.2
+|    |    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.2.3 -> 2.8.10 (*)
+|    |    |    +--- com.google.guava:guava:16.0.1
+|    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    \--- com.github.fge:uri-template:0.9
+|    |         +--- com.github.fge:msg-simple:1.1 (*)
+|    |         +--- com.google.guava:guava:16.0.1
+|    |         \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    +--- javax.mail:mailapi:1.4.3
+|    |    \--- javax.activation:activation:1.1
+|    +--- joda-time:joda-time:2.9.7 -> 2.9.9
+|    +--- com.googlecode.libphonenumber:libphonenumber:8.0.0
+|    +--- com.google.code.findbugs:jsr305:3.0.1
+|    \--- net.sf.jopt-simple:jopt-simple:5.0.3
++--- org.springframework.boot:spring-boot-starter-test: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-test:1.5.9.RELEASE
+|    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-test-autoconfigure:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-test:1.5.9.RELEASE (*)
+|    |    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|    +--- com.jayway.jsonpath:json-path:2.2.0
+|    |    +--- net.minidev:json-smart:2.2.1
+|    |    |    \--- net.minidev:accessors-smart:1.1
+|    |    |         \--- org.ow2.asm:asm:5.0.3
+|    |    \--- org.slf4j:slf4j-api:1.7.16 -> 1.7.25
+|    +--- junit:junit:4.12
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.assertj:assertj-core:2.6.0
+|    +--- org.mockito:mockito-core:1.10.19
+|    |    +--- org.hamcrest:hamcrest-core:1.1 -> 1.3
+|    |    \--- org.objenesis:objenesis:2.1
+|    +--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.hamcrest:hamcrest-library:1.3
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.skyscreamer:jsonassert:1.4.0
+|    |    \--- com.vaadin.external.google:android-json:0.0.20131108.vaadin1
+|    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-test:4.3.13.RELEASE
+|         \--- org.springframework:spring-core:4.3.13.RELEASE
++--- org.scalatest:scalatest_2.12:3.0.4
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scalactic:scalactic_2.12:3.0.4
+|    |    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    |    \--- org.scala-lang:scala-reflect:2.12.3 (*)
+|    +--- org.scala-lang:scala-reflect:2.12.3 (*)
+|    +--- org.scala-lang.modules:scala-xml_2.12:1.0.5
+|    |    \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+|    \--- org.scala-lang.modules:scala-parser-combinators_2.12:1.0.4
+|         \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+\--- com.typesafe.akka:akka-http-testkit_2.12:10.0.11
+     +--- org.scala-lang:scala-library:2.12.4
+     +--- com.typesafe.akka:akka-http_2.12:10.0.11
+     |    +--- org.scala-lang:scala-library:2.12.4
+     |    \--- com.typesafe.akka:akka-http-core_2.12:10.0.11
+     |         +--- org.scala-lang:scala-library:2.12.4
+     |         +--- com.typesafe.akka:akka-parsing_2.12:10.0.11
+     |         |    +--- org.scala-lang:scala-library:2.12.4
+     |         |    \--- com.typesafe.akka:akka-actor_2.12:2.4.20
+     |         |         +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+     |         |         +--- com.typesafe:config:1.3.0
+     |         |         \--- org.scala-lang.modules:scala-java8-compat_2.12:0.8.0
+     |         |              \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+     |         \--- com.typesafe.akka:akka-stream_2.12:2.4.20
+     |              +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+     |              +--- com.typesafe.akka:akka-actor_2.12:2.4.20 (*)
+     |              +--- org.reactivestreams:reactive-streams:1.0.0
+     |              \--- com.typesafe:ssl-config-core_2.12:0.2.1
+     |                   +--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+     |                   +--- com.typesafe:config:1.2.0 -> 1.3.0
+     |                   \--- org.scala-lang.modules:scala-parser-combinators_2.12:1.0.4 (*)
+     \--- com.typesafe.akka:akka-stream-testkit_2.12:2.4.20
+          +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+          +--- com.typesafe.akka:akka-stream_2.12:2.4.20 (*)
+          \--- com.typesafe.akka:akka-testkit_2.12:2.4.20
+               +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+               \--- com.typesafe.akka:akka-actor_2.12:2.4.20 (*)
+
+testCompileClasspath - Compile classpath for source set 'test'.
++--- org.scala-lang:scala-library:2.12.4
++--- org.springframework.boot:spring-boot-starter-actuator: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.3.13.RELEASE
+|    |    |         |    +--- org.springframework:spring-beans:4.3.13.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.3.13.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.5.9.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.11
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.11
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.22 -> 1.7.25
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.25
+|    |    |         \--- org.slf4j:slf4j-api:1.7.25
+|    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.17
+|    \--- org.springframework.boot:spring-boot-actuator:1.5.9.RELEASE
+|         +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|         +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10
+|         |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|         |    \--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         \--- org.springframework:spring-context:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-starter-web: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.5.9.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23
+|    |    |    \--- org.apache.tomcat:tomcat-annotations-api:8.5.23
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.5.23
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23 (*)
+|    +--- org.hibernate:hibernate-validator:5.3.6.Final
+|    |    +--- javax.validation:validation-api:1.1.0.Final
+|    |    +--- org.jboss.logging:jboss-logging:3.3.0.Final -> 3.3.1.Final
+|    |    \--- com.fasterxml:classmate:1.3.1 -> 1.3.4
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    +--- org.springframework:spring-web:4.3.13.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-webmvc:4.3.13.RELEASE
+|         +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         +--- org.springframework:spring-expression:4.3.13.RELEASE (*)
+|         \--- org.springframework:spring-web:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-devtools: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
++--- com.fasterxml.jackson.module:jackson-module-scala_2.12:2.8.10
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scala-lang:scala-reflect:2.12.3
+|    |    \--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.10 -> 2.8.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    \--- com.fasterxml.jackson.module:jackson-module-paranamer:2.8.10
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|         \--- com.thoughtworks.paranamer:paranamer:2.8
++--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
++--- org.apache.logging.log4j:log4j-core:2.10.0
+|    \--- org.apache.logging.log4j:log4j-api:2.10.0 -> 2.7
++--- com.github.java-json-tools:json-schema-validator:2.2.8
+|    +--- com.github.java-json-tools:json-schema-core:1.2.8
+|    |    +--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    +--- org.mozilla:rhino:1.7R4
+|    |    +--- com.github.fge:jackson-coreutils:1.8
+|    |    |    +--- com.github.fge:msg-simple:1.1
+|    |    |    |    +--- com.github.fge:btf:1.2
+|    |    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.2.3 -> 2.8.10 (*)
+|    |    |    +--- com.google.guava:guava:16.0.1
+|    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    \--- com.github.fge:uri-template:0.9
+|    |         +--- com.github.fge:msg-simple:1.1 (*)
+|    |         +--- com.google.guava:guava:16.0.1
+|    |         \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    +--- javax.mail:mailapi:1.4.3
+|    |    \--- javax.activation:activation:1.1
+|    +--- joda-time:joda-time:2.9.7 -> 2.9.9
+|    +--- com.googlecode.libphonenumber:libphonenumber:8.0.0
+|    +--- com.google.code.findbugs:jsr305:3.0.1
+|    \--- net.sf.jopt-simple:jopt-simple:5.0.3
++--- org.springframework.boot:spring-boot-starter-test: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-test:1.5.9.RELEASE
+|    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-test-autoconfigure:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-test:1.5.9.RELEASE (*)
+|    |    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|    +--- com.jayway.jsonpath:json-path:2.2.0
+|    |    +--- net.minidev:json-smart:2.2.1
+|    |    |    \--- net.minidev:accessors-smart:1.1
+|    |    |         \--- org.ow2.asm:asm:5.0.3
+|    |    \--- org.slf4j:slf4j-api:1.7.16 -> 1.7.25
+|    +--- junit:junit:4.12
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.assertj:assertj-core:2.6.0
+|    +--- org.mockito:mockito-core:1.10.19
+|    |    +--- org.hamcrest:hamcrest-core:1.1 -> 1.3
+|    |    \--- org.objenesis:objenesis:2.1
+|    +--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.hamcrest:hamcrest-library:1.3
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.skyscreamer:jsonassert:1.4.0
+|    |    \--- com.vaadin.external.google:android-json:0.0.20131108.vaadin1
+|    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-test:4.3.13.RELEASE
+|         \--- org.springframework:spring-core:4.3.13.RELEASE
++--- org.scalatest:scalatest_2.12:3.0.4
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scalactic:scalactic_2.12:3.0.4
+|    |    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    |    \--- org.scala-lang:scala-reflect:2.12.3 (*)
+|    +--- org.scala-lang:scala-reflect:2.12.3 (*)
+|    +--- org.scala-lang.modules:scala-xml_2.12:1.0.5
+|    |    \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+|    \--- org.scala-lang.modules:scala-parser-combinators_2.12:1.0.4
+|         \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+\--- com.typesafe.akka:akka-http-testkit_2.12:10.0.11
+     +--- org.scala-lang:scala-library:2.12.4
+     +--- com.typesafe.akka:akka-http_2.12:10.0.11
+     |    +--- org.scala-lang:scala-library:2.12.4
+     |    \--- com.typesafe.akka:akka-http-core_2.12:10.0.11
+     |         +--- org.scala-lang:scala-library:2.12.4
+     |         +--- com.typesafe.akka:akka-parsing_2.12:10.0.11
+     |         |    +--- org.scala-lang:scala-library:2.12.4
+     |         |    \--- com.typesafe.akka:akka-actor_2.12:2.4.20
+     |         |         +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+     |         |         +--- com.typesafe:config:1.3.0
+     |         |         \--- org.scala-lang.modules:scala-java8-compat_2.12:0.8.0
+     |         |              \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+     |         \--- com.typesafe.akka:akka-stream_2.12:2.4.20
+     |              +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+     |              +--- com.typesafe.akka:akka-actor_2.12:2.4.20 (*)
+     |              +--- org.reactivestreams:reactive-streams:1.0.0
+     |              \--- com.typesafe:ssl-config-core_2.12:0.2.1
+     |                   +--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+     |                   +--- com.typesafe:config:1.2.0 -> 1.3.0
+     |                   \--- org.scala-lang.modules:scala-parser-combinators_2.12:1.0.4 (*)
+     \--- com.typesafe.akka:akka-stream-testkit_2.12:2.4.20
+          +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+          +--- com.typesafe.akka:akka-stream_2.12:2.4.20 (*)
+          \--- com.typesafe.akka:akka-testkit_2.12:2.4.20
+               +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+               \--- com.typesafe.akka:akka-actor_2.12:2.4.20 (*)
+
+testCompileOnly - Compile only dependencies for source set 'test'.
+No dependencies
+
+testImplementation - Implementation only dependencies for source set 'test'. (n)
+No dependencies
+
+testRuntime - Runtime dependencies for source set 'test' (deprecated, use 'testRuntimeOnly ' instead).
++--- org.scala-lang:scala-library:2.12.4
++--- org.springframework.boot:spring-boot-starter-actuator: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.3.13.RELEASE
+|    |    |         |    +--- org.springframework:spring-beans:4.3.13.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.3.13.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.5.9.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.11
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.11
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.22 -> 1.7.25
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.25
+|    |    |         \--- org.slf4j:slf4j-api:1.7.25
+|    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.17
+|    \--- org.springframework.boot:spring-boot-actuator:1.5.9.RELEASE
+|         +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|         +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10
+|         |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|         |    \--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         \--- org.springframework:spring-context:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-starter-web: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.5.9.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23
+|    |    |    \--- org.apache.tomcat:tomcat-annotations-api:8.5.23
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.5.23
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23 (*)
+|    +--- org.hibernate:hibernate-validator:5.3.6.Final
+|    |    +--- javax.validation:validation-api:1.1.0.Final
+|    |    +--- org.jboss.logging:jboss-logging:3.3.0.Final -> 3.3.1.Final
+|    |    \--- com.fasterxml:classmate:1.3.1 -> 1.3.4
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    +--- org.springframework:spring-web:4.3.13.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-webmvc:4.3.13.RELEASE
+|         +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         +--- org.springframework:spring-expression:4.3.13.RELEASE (*)
+|         \--- org.springframework:spring-web:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-devtools: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
++--- com.fasterxml.jackson.module:jackson-module-scala_2.12:2.8.10
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scala-lang:scala-reflect:2.12.3
+|    |    \--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.10 -> 2.8.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    \--- com.fasterxml.jackson.module:jackson-module-paranamer:2.8.10
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|         \--- com.thoughtworks.paranamer:paranamer:2.8
++--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
++--- org.apache.logging.log4j:log4j-core:2.10.0
+|    \--- org.apache.logging.log4j:log4j-api:2.10.0 -> 2.7
++--- com.github.java-json-tools:json-schema-validator:2.2.8
+|    +--- com.github.java-json-tools:json-schema-core:1.2.8
+|    |    +--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    +--- org.mozilla:rhino:1.7R4
+|    |    +--- com.github.fge:jackson-coreutils:1.8
+|    |    |    +--- com.github.fge:msg-simple:1.1
+|    |    |    |    +--- com.github.fge:btf:1.2
+|    |    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.2.3 -> 2.8.10 (*)
+|    |    |    +--- com.google.guava:guava:16.0.1
+|    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    \--- com.github.fge:uri-template:0.9
+|    |         +--- com.github.fge:msg-simple:1.1 (*)
+|    |         +--- com.google.guava:guava:16.0.1
+|    |         \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    +--- javax.mail:mailapi:1.4.3
+|    |    \--- javax.activation:activation:1.1
+|    +--- joda-time:joda-time:2.9.7 -> 2.9.9
+|    +--- com.googlecode.libphonenumber:libphonenumber:8.0.0
+|    +--- com.google.code.findbugs:jsr305:3.0.1
+|    \--- net.sf.jopt-simple:jopt-simple:5.0.3
++--- org.springframework.boot:spring-boot-starter-test: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-test:1.5.9.RELEASE
+|    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-test-autoconfigure:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-test:1.5.9.RELEASE (*)
+|    |    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|    +--- com.jayway.jsonpath:json-path:2.2.0
+|    |    +--- net.minidev:json-smart:2.2.1
+|    |    |    \--- net.minidev:accessors-smart:1.1
+|    |    |         \--- org.ow2.asm:asm:5.0.3
+|    |    \--- org.slf4j:slf4j-api:1.7.16 -> 1.7.25
+|    +--- junit:junit:4.12
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.assertj:assertj-core:2.6.0
+|    +--- org.mockito:mockito-core:1.10.19
+|    |    +--- org.hamcrest:hamcrest-core:1.1 -> 1.3
+|    |    \--- org.objenesis:objenesis:2.1
+|    +--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.hamcrest:hamcrest-library:1.3
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.skyscreamer:jsonassert:1.4.0
+|    |    \--- com.vaadin.external.google:android-json:0.0.20131108.vaadin1
+|    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-test:4.3.13.RELEASE
+|         \--- org.springframework:spring-core:4.3.13.RELEASE
++--- org.scalatest:scalatest_2.12:3.0.4
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scalactic:scalactic_2.12:3.0.4
+|    |    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    |    \--- org.scala-lang:scala-reflect:2.12.3 (*)
+|    +--- org.scala-lang:scala-reflect:2.12.3 (*)
+|    +--- org.scala-lang.modules:scala-xml_2.12:1.0.5
+|    |    \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+|    \--- org.scala-lang.modules:scala-parser-combinators_2.12:1.0.4
+|         \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+\--- com.typesafe.akka:akka-http-testkit_2.12:10.0.11
+     +--- org.scala-lang:scala-library:2.12.4
+     +--- com.typesafe.akka:akka-http_2.12:10.0.11
+     |    +--- org.scala-lang:scala-library:2.12.4
+     |    \--- com.typesafe.akka:akka-http-core_2.12:10.0.11
+     |         +--- org.scala-lang:scala-library:2.12.4
+     |         +--- com.typesafe.akka:akka-parsing_2.12:10.0.11
+     |         |    +--- org.scala-lang:scala-library:2.12.4
+     |         |    \--- com.typesafe.akka:akka-actor_2.12:2.4.20
+     |         |         +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+     |         |         +--- com.typesafe:config:1.3.0
+     |         |         \--- org.scala-lang.modules:scala-java8-compat_2.12:0.8.0
+     |         |              \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+     |         \--- com.typesafe.akka:akka-stream_2.12:2.4.20
+     |              +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+     |              +--- com.typesafe.akka:akka-actor_2.12:2.4.20 (*)
+     |              +--- org.reactivestreams:reactive-streams:1.0.0
+     |              \--- com.typesafe:ssl-config-core_2.12:0.2.1
+     |                   +--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+     |                   +--- com.typesafe:config:1.2.0 -> 1.3.0
+     |                   \--- org.scala-lang.modules:scala-parser-combinators_2.12:1.0.4 (*)
+     \--- com.typesafe.akka:akka-stream-testkit_2.12:2.4.20
+          +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+          +--- com.typesafe.akka:akka-stream_2.12:2.4.20 (*)
+          \--- com.typesafe.akka:akka-testkit_2.12:2.4.20
+               +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+               \--- com.typesafe.akka:akka-actor_2.12:2.4.20 (*)
+
+testRuntimeClasspath - Runtime classpath of source set 'test'.
++--- org.scala-lang:scala-library:2.12.4
++--- org.springframework.boot:spring-boot-starter-actuator: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |    \--- org.springframework:spring-context:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.3.13.RELEASE
+|    |    |         |    +--- org.springframework:spring-beans:4.3.13.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    |         \--- org.springframework:spring-expression:4.3.13.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-starter-logging:1.5.9.RELEASE
+|    |    |    +--- ch.qos.logback:logback-classic:1.1.11
+|    |    |    |    +--- ch.qos.logback:logback-core:1.1.11
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.22 -> 1.7.25
+|    |    |    +--- org.slf4j:jcl-over-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    +--- org.slf4j:jul-to-slf4j:1.7.25
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.25
+|    |    |    \--- org.slf4j:log4j-over-slf4j:1.7.25
+|    |    |         \--- org.slf4j:slf4j-api:1.7.25
+|    |    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    |    \--- org.yaml:snakeyaml:1.17
+|    \--- org.springframework.boot:spring-boot-actuator:1.5.9.RELEASE
+|         +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|         +--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10
+|         |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0
+|         |    \--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         \--- org.springframework:spring-context:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-starter-web: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-starter:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-starter-tomcat:1.5.9.RELEASE
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23
+|    |    |    \--- org.apache.tomcat:tomcat-annotations-api:8.5.23
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.5.23
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.5.23
+|    |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.5.23 (*)
+|    +--- org.hibernate:hibernate-validator:5.3.6.Final
+|    |    +--- javax.validation:validation-api:1.1.0.Final
+|    |    +--- org.jboss.logging:jboss-logging:3.3.0.Final -> 3.3.1.Final
+|    |    \--- com.fasterxml:classmate:1.3.1 -> 1.3.4
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    +--- org.springframework:spring-web:4.3.13.RELEASE
+|    |    +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|    |    \--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-webmvc:4.3.13.RELEASE
+|         +--- org.springframework:spring-aop:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-beans:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-context:4.3.13.RELEASE (*)
+|         +--- org.springframework:spring-core:4.3.13.RELEASE
+|         +--- org.springframework:spring-expression:4.3.13.RELEASE (*)
+|         \--- org.springframework:spring-web:4.3.13.RELEASE (*)
++--- org.springframework.boot:spring-boot-devtools: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
++--- com.fasterxml.jackson.module:jackson-module-scala_2.12:2.8.10
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scala-lang:scala-reflect:2.12.3
+|    |    \--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- com.fasterxml.jackson.core:jackson-core:2.8.10
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.10 -> 2.8.0
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|    \--- com.fasterxml.jackson.module:jackson-module-paranamer:2.8.10
+|         +--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
+|         \--- com.thoughtworks.paranamer:paranamer:2.8
++--- com.fasterxml.jackson.core:jackson-databind:2.8.10 (*)
++--- org.apache.logging.log4j:log4j-core:2.10.0
+|    \--- org.apache.logging.log4j:log4j-api:2.10.0 -> 2.7
++--- com.github.java-json-tools:json-schema-validator:2.2.8
+|    +--- com.github.java-json-tools:json-schema-core:1.2.8
+|    |    +--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    +--- org.mozilla:rhino:1.7R4
+|    |    +--- com.github.fge:jackson-coreutils:1.8
+|    |    |    +--- com.github.fge:msg-simple:1.1
+|    |    |    |    +--- com.github.fge:btf:1.2
+|    |    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    |    +--- com.fasterxml.jackson.core:jackson-databind:2.2.3 -> 2.8.10 (*)
+|    |    |    +--- com.google.guava:guava:16.0.1
+|    |    |    \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    |    \--- com.github.fge:uri-template:0.9
+|    |         +--- com.github.fge:msg-simple:1.1 (*)
+|    |         +--- com.google.guava:guava:16.0.1
+|    |         \--- com.google.code.findbugs:jsr305:2.0.1 -> 3.0.1
+|    +--- javax.mail:mailapi:1.4.3
+|    |    \--- javax.activation:activation:1.1
+|    +--- joda-time:joda-time:2.9.7 -> 2.9.9
+|    +--- com.googlecode.libphonenumber:libphonenumber:8.0.0
+|    +--- com.google.code.findbugs:jsr305:3.0.1
+|    \--- net.sf.jopt-simple:jopt-simple:5.0.3
++--- org.springframework.boot:spring-boot-starter-test: -> 1.5.9.RELEASE
+|    +--- org.springframework.boot:spring-boot-test:1.5.9.RELEASE
+|    |    \--- org.springframework.boot:spring-boot:1.5.9.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-test-autoconfigure:1.5.9.RELEASE
+|    |    +--- org.springframework.boot:spring-boot-test:1.5.9.RELEASE (*)
+|    |    \--- org.springframework.boot:spring-boot-autoconfigure:1.5.9.RELEASE (*)
+|    +--- com.jayway.jsonpath:json-path:2.2.0
+|    |    +--- net.minidev:json-smart:2.2.1
+|    |    |    \--- net.minidev:accessors-smart:1.1
+|    |    |         \--- org.ow2.asm:asm:5.0.3
+|    |    \--- org.slf4j:slf4j-api:1.7.16 -> 1.7.25
+|    +--- junit:junit:4.12
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.assertj:assertj-core:2.6.0
+|    +--- org.mockito:mockito-core:1.10.19
+|    |    +--- org.hamcrest:hamcrest-core:1.1 -> 1.3
+|    |    \--- org.objenesis:objenesis:2.1
+|    +--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.hamcrest:hamcrest-library:1.3
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.skyscreamer:jsonassert:1.4.0
+|    |    \--- com.vaadin.external.google:android-json:0.0.20131108.vaadin1
+|    +--- org.springframework:spring-core:4.3.13.RELEASE
+|    \--- org.springframework:spring-test:4.3.13.RELEASE
+|         \--- org.springframework:spring-core:4.3.13.RELEASE
++--- org.scalatest:scalatest_2.12:3.0.4
+|    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    +--- org.scalactic:scalactic_2.12:3.0.4
+|    |    +--- org.scala-lang:scala-library:2.12.3 -> 2.12.4
+|    |    \--- org.scala-lang:scala-reflect:2.12.3 (*)
+|    +--- org.scala-lang:scala-reflect:2.12.3 (*)
+|    +--- org.scala-lang.modules:scala-xml_2.12:1.0.5
+|    |    \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+|    \--- org.scala-lang.modules:scala-parser-combinators_2.12:1.0.4
+|         \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+\--- com.typesafe.akka:akka-http-testkit_2.12:10.0.11
+     +--- org.scala-lang:scala-library:2.12.4
+     +--- com.typesafe.akka:akka-http_2.12:10.0.11
+     |    +--- org.scala-lang:scala-library:2.12.4
+     |    \--- com.typesafe.akka:akka-http-core_2.12:10.0.11
+     |         +--- org.scala-lang:scala-library:2.12.4
+     |         +--- com.typesafe.akka:akka-parsing_2.12:10.0.11
+     |         |    +--- org.scala-lang:scala-library:2.12.4
+     |         |    \--- com.typesafe.akka:akka-actor_2.12:2.4.20
+     |         |         +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+     |         |         +--- com.typesafe:config:1.3.0
+     |         |         \--- org.scala-lang.modules:scala-java8-compat_2.12:0.8.0
+     |         |              \--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+     |         \--- com.typesafe.akka:akka-stream_2.12:2.4.20
+     |              +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+     |              +--- com.typesafe.akka:akka-actor_2.12:2.4.20 (*)
+     |              +--- org.reactivestreams:reactive-streams:1.0.0
+     |              \--- com.typesafe:ssl-config-core_2.12:0.2.1
+     |                   +--- org.scala-lang:scala-library:2.12.0 -> 2.12.4
+     |                   +--- com.typesafe:config:1.2.0 -> 1.3.0
+     |                   \--- org.scala-lang.modules:scala-parser-combinators_2.12:1.0.4 (*)
+     \--- com.typesafe.akka:akka-stream-testkit_2.12:2.4.20
+          +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+          +--- com.typesafe.akka:akka-stream_2.12:2.4.20 (*)
+          \--- com.typesafe.akka:akka-testkit_2.12:2.4.20
+               +--- org.scala-lang:scala-library:2.12.2 -> 2.12.4
+               \--- com.typesafe.akka:akka-actor_2.12:2.4.20 (*)
+
+testRuntimeOnly - Runtime only dependencies for source set 'test'. (n)
+No dependencies
+
+zinc - The Zinc incremental compiler to be used for this Scala project.
+No dependencies
+
+(*) - dependencies omitted (listed previously)
+
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed

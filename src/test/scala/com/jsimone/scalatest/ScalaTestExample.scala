@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.web.client.TestRestTemplate
 
-import scala.collection.mutable.Stack
-
 // Trait `Matchers` enables constructs like `should be()`
 class ScalaTestExample extends FlatSpec with Matchers  {
 
@@ -20,18 +18,18 @@ class ScalaTestExample extends FlatSpec with Matchers  {
     assert(Set.empty.size == 0)
   }
 
-  "A Stack" should "pop values in last-in-first-out order" in {
-    val stack = new Stack[Int]
-    stack.push(1)
-    stack.push(2)
-    assert(stack.pop() === 2)
-    assert(stack.pop() === 1)
+  "A List" should "return values in order" in {
+    val list = List(3,-1,10)
+    assert(list.length === 3)
+    assert(list(1) === 3)
+    assert(list(2) === -1)
+    assert(list(3) === 10)
   }
 
-  it should "throw NoSuchElementException if an empty stack is popped" in {
-    val emptyStack = new Stack[String]
-    a [NoSuchElementException] should be thrownBy {
-      emptyStack.pop()
+  it should "throw IndexOutOfBoundsException if we get an index for a non-existing element" in {
+    val list = List(3,-1,10)
+    a [IndexOutOfBoundsException] should be thrownBy {
+      list(4)
     }
   }
 }
