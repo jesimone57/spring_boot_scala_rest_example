@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation._
 
 @RestController
 @RequestMapping(value = Array("/"), produces = Array(MediaType.APPLICATION_JSON_VALUE))
-class ErrorResponseController extends ControllerBase {
+class ErrorResponseController extends AbstractControllerBase {
 
   @GetMapping(value = Array("/error_response"))
   def sampleErrorResponse(request: HttpServletRequest): ResponseEntity[AnyRef] = {

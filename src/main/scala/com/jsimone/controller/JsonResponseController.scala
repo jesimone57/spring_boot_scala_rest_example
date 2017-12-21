@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation._
 
 @RestController
 @RequestMapping(value = Array("/"), produces = Array(MediaType.APPLICATION_JSON_VALUE))
-class JsonResponseController extends ControllerBase {
+class JsonResponseController extends AbstractControllerBase {
 
   /**
     * See ref https://stackoverflow.com/questions/12113010/scala-Response-and-map

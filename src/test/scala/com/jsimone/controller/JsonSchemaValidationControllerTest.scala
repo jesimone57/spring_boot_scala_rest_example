@@ -1,6 +1,6 @@
 package com.jsimone.controller
 
-import com.jsimone.TestBase
+import com.jsimone.AbstractTestBase
 import com.jsimone.error.FieldError
 import org.junit.runner.RunWith
 import org.junit.{Assert, Test}
@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-class JsonSchemaValidationControllerTest extends TestBase {
+class JsonSchemaValidationControllerTest extends AbstractTestBase {
 
   /**
     {

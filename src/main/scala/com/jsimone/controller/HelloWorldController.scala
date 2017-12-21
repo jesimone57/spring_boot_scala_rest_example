@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation._
 
 @RestController
 @RequestMapping(value = Array("/"), produces = Array(MediaType.TEXT_PLAIN_VALUE))
-class HelloWorldController extends ControllerBase {
+class HelloWorldController extends AbstractControllerBase {
 
   @GetMapping(value = Array("/"))
   def hello(): String = {

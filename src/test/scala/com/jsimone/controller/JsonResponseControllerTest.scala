@@ -1,6 +1,6 @@
 package com.jsimone.controller
 
-import com.jsimone.TestBase
+import com.jsimone.AbstractTestBase
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-class JsonResponseControllerTest extends TestBase {
+class JsonResponseControllerTest extends AbstractTestBase {
 
   @Test
   def jsonResponseTest(): Unit = {
