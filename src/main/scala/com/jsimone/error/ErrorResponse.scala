@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.github.fge.jsonschema.core.report.ProcessingReport
 import org.springframework.http.{HttpMethod, HttpStatus}
 import org.springframework.validation.{BindException, BindingResult}
+import org.springframework.web.bind.MethodArgumentNotValidException
 
 import scala.beans.BeanProperty
 import scala.collection.JavaConverters._
@@ -34,6 +35,7 @@ class ErrorResponse() {
     this.method = if (request != null) HttpMethod.valueOf(request.getMethod) else null
     exception match {
       case e: BindException => this.addBindingResultErrors(e.getBindingResult)
+      case e:  MethodArgumentNotValidException => this.addBindingResultErrors(e.getBindingResult)
       case _ =>
     }
   }
