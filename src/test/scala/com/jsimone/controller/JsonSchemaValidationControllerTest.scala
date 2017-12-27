@@ -234,7 +234,7 @@ class JsonSchemaValidationControllerTest extends AbstractTestBase {
       """.stripMargin
 
     val url = s"http://localhost:$port/create_person1"
-    val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
+    val responseEntity = restTemplate.exchange(url, HttpMethod.POST, buildHttpEntity(json), classOf[String])
     val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.POST, "JSON Schema validation errors encountered.")
 
     val expectedFieldErrors = List(
@@ -259,7 +259,7 @@ class JsonSchemaValidationControllerTest extends AbstractTestBase {
     val json = ""
 
     val url = s"http://localhost:$port/create_person1"
-    val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
+    val responseEntity = restTemplate.exchange(url, HttpMethod.POST, buildHttpEntity(json), classOf[String])
     val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.POST,
       "Required request body is missing: public java.lang.String com.jsimone.controller.JsonSchemaValidationController.createPerson1(java.lang.String,javax.servlet.http.HttpServletRequest)")
   }
@@ -283,7 +283,7 @@ class JsonSchemaValidationControllerTest extends AbstractTestBase {
       """.stripMargin
 
     val url = s"http://localhost:$port/create_person1"
-    val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
+    val responseEntity = restTemplate.exchange(url, HttpMethod.POST, buildHttpEntity(json), classOf[String])
     val errorResponse = verifyErrorResponsePrefix(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.POST,
       "Unexpected end-of-input: expected close marker for Object (start marker at [Source:")
   }
@@ -308,7 +308,7 @@ class JsonSchemaValidationControllerTest extends AbstractTestBase {
       """.stripMargin
 
     val url = s"http://localhost:$port/create_person1"
-    val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
+    val responseEntity = restTemplate.exchange(url, HttpMethod.POST, buildHttpEntity(json), classOf[String])
     val errorResponse = verifyErrorResponsePrefix(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.POST,
       "Unexpected character ('A' (code 65)): was expecting a colon to separate field name and value")
   }
@@ -324,7 +324,7 @@ class JsonSchemaValidationControllerTest extends AbstractTestBase {
       """.stripMargin
 
     val url = s"http://localhost:$port/create_person1"
-    val responseEntity = restTemplate.postForEntity(url, json, classOf[String])
+    val responseEntity = restTemplate.exchange(url, HttpMethod.POST, buildHttpEntity(json), classOf[String])
 
     // verifySuccessResponse(responseEntity, HttpStatus.OK, MediaType.TEXT_PLAIN, "valid")  // TODO: fix this
 

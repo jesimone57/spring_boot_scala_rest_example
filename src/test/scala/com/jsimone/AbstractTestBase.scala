@@ -21,6 +21,13 @@ abstract class AbstractTestBase {
   @Autowired
   protected val restTemplate: TestRestTemplate = null
 
+  protected def buildHttpEntity(json: String) = {
+    val headers: HttpHeaders  = new HttpHeaders()
+    headers.add(CONTENT_TYPE, "application/json")
+    import org.springframework.http.HttpEntity
+    new HttpEntity[String](json, headers)
+  }
+
 
   protected def verifySuccessResponse(responseEntity: ResponseEntity[String], expectedStatus: HttpStatus, expectedMediaType: MediaType, expectedResponseBody: String): Unit = {
     Assertions.assertThat(responseEntity.getBody).isEqualTo(expectedResponseBody)
