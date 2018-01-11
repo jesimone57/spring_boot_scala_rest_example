@@ -58,8 +58,8 @@ dependencies {
 
     compile group: 'com.github.java-json-tools', name: 'json-schema-validator', version: '2.2.8'
 
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 

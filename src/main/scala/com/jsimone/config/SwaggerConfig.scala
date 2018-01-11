@@ -34,7 +34,7 @@ class SwaggerConfig {
       "Terms of service",
       new Contact("Joseph Simone", "http://github.com/jesimone57", "jesimone57@yahoo.com"),
       "Apache License Version 2.0",
-      "https://www.apache.org/licenses/LICENSE-2.0",
-      new ArrayList[VendorExtension[_]])
+      "https://www.apache.org/licenses/LICENSE-2.0")
+      //new ArrayList[VendorExtension[_]])
   }
 }
