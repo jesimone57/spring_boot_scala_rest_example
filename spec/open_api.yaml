@@ -178,7 +178,7 @@ paths:
         - in: query
           name: age
           description: Person age to say hello to
-          required: false
+          required: true
           type: integer
         - in: query
           name: job

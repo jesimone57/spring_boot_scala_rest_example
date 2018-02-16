@@ -66,7 +66,7 @@ class HelloWorldController extends AbstractControllerBase {
 
   @GetMapping(value = Array("/hello3"))
   def helloByRequestClass(person: Person): String = {
-    log.info("/hello3 endpoint hit with person params: %s".format(person.toString))
+    log.info(s"/hello3 endpoint hit with person params: $person")
     s"Hello ${person.name}, whose age is ${person.age} and job is ${person.job}"
   }
 
@@ -75,7 +75,7 @@ class HelloWorldController extends AbstractControllerBase {
     */
   @GetMapping(value = Array("/hello4"))
   def helloByRequestClassValidate(@Valid person: Person): String = {
-    log.info("/hello4 endpoint hit with person params: %s".format(person.toString))
+    log.info(s"/hello4 endpoint hit with person params: $person")
     s"Hello ${person.name}, whose age is ${person.age} and job is ${person.job}"
   }
 
