@@ -1,0 +1,10 @@
+{
+  "type": "number",
+  "description": "Any number not between 5-10 and 50-100",
+  "not": {
+    "anyOf": [
+      {"type": "number", "minimum": 5,  "maximum": 10},
+      {"type": "number", "minimum": 50, "maximum": 100}
+    ]
+  }
+}
