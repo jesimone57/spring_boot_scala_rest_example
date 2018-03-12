@@ -1,0 +1,9 @@
+{
+  "pat-props": {
+    "on*e": true,
+    "two":  false,
+    "three": "true"
+  },
+  "extra-prop":  "asdf-asdf"
+}
+
