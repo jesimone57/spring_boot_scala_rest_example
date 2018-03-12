@@ -1,21 +1,21 @@
 {
-  "string-min": "f",
-  "string-max": "fffffff",
-  "int-min": 17,
-  "int-max": 1000,
-  "int-wrongtype": 23.1,
-  "string-pattern": "pi*lot",
-  "bool": "asdf",
-  "date": "2017",
-  "enum": "AZURE",
-  "email": "asdf",
-  "number-min":  1.0,
-  "number-max":  10000.0,
-  "number-multof": 100.001,
+  "string-min": "fffff",
+  "string-max": "f",
+  "int-min": 60,
+  "int-max": 99,
+  "int-wrongtype": 23,
+  "string-pattern": "pilot",
+  "bool": true,
+  "date": "2017-03-01T00:00:00.000Z",
+  "enum": "RED",
+  "email": "asdf@yahoo.com",
+  "number-min":  11.0,
+  "number-max":  99.0,
+  "number-multof": 100.01,
   "pat-props": {
     "one": true,
-    "two": false,
-    "three": "true"
+    "two":  false,
+    "three": true
   },
-  "extra-prop":  "asdf-asdf"
+  "required": "anything"
 }

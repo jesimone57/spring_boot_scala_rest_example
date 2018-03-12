@@ -1,7 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "tests all the different schema constraints",
-
   "type": "object",
   "properties": {
     "string-min": {
@@ -35,7 +32,7 @@
       "format": "date-time"
     },
     "enum": {
-      "enum": [ "RED", "BLACK", "BLUE" ]
+      "enum": ["RED", "BLACK", "BLUE"]
     },
     "email": {
       "type": "string",
@@ -53,14 +50,16 @@
       "type": "number",
       "multipleOf": 0.01
     },
+
     "pat-props": {
-      "type": "object",
-      "patternProperties": {
-        "^[A-Za-z]+$": {
-          "type": "boolean",
-          "maxProperties": 2
-        }
+      "propertyNames": {
+        "pattern": "^([0-9a-zA-Z]*)$"
+      },
+      "additionalProperties": {
+        "type": "boolean"
       }
     }
-  }
+  },
+  "required": ["required"],
+  "additionalProperties": false
 }
