@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation._
 @RequestMapping(value = Array("/"), produces = Array(MediaType.TEXT_PLAIN_VALUE))
 class JsonSchemaValidationController extends AbstractControllerBase {
 
-  @GetMapping(value = Array("/schema_test1"))
+  @GetMapping(value = Array("/schema_test2"))
   def validateAgainstSchema(request: HttpServletRequest): String = {
     log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
-    jsonSchemaValidateFromResource("/test1.json", "/test1_schema.json", request)
+    jsonSchemaValidateFromResource("/test2.json", "/test2_schema.json", request)
     "valid"
   }
 

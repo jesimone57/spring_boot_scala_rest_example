@@ -58,7 +58,8 @@
       "additionalProperties": {
         "type": "boolean"
       }
-    }
+    },
+    "required": {"type": "string"}
   },
   "required": ["required"],
   "additionalProperties": false

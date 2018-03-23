@@ -68,25 +68,35 @@ class ErrorResponse() {
     */
   private def setSchemaValidationProcessingMessageErrors(report: ProcessingReport): Unit = {
     errors = ListBuffer() ++ report.iterator().asScala.map { pm =>
-      val rejectedValue = pm.asJson.get("keyword").asText() match {
-        case "minimum" | "maximum" | "type" =>
-          pm.asJson.get("found").asText()
-        case "pattern" =>
-          pm.asJson.get("string").asText()
-        case "enum" | "format" | "minLength" | "maxLength" | "multipleOf" =>
-          pm.asJson.get("value").asText()
-        case "additionalProperties" =>
-          pm.asJson.get("unwanted").asText()
-        case "required" =>
-          pm.asJson.get("missing").asText()
-        case unknown =>
-          s"Unknown schema keyword $unknown encountered"
-      }
-      new FieldError(
-        pm.asJson.get("instance").elements().next().asText(),
-        rejectedValue,
-        pm.asJson.get("message").asText()
-      )
+        val jsonNodeKeyword = pm.asJson.get("keyword")
+        if (jsonNodeKeyword != null) {
+            val rejectedValue = jsonNodeKeyword.asText() match {
+                case "minimum" | "maximum" | "type" =>
+                    pm.asJson.get("found").asText()
+                case "pattern" =>
+                    pm.asJson.get("string").asText()
+                case "enum" | "format" | "minLength" | "maxLength" | "multipleOf" =>
+                    pm.asJson.get("value").asText()
+                case "additionalProperties" =>
+                    pm.asJson.get("unwanted").asText()
+                case "required" =>
+                    pm.asJson.get("missing").asText()
+                case unknown =>
+                    s"Unknown schema keyword $unknown encountered"
+            }
+            new FieldError(
+                pm.asJson.get("instance").elements().next().asText(),
+                rejectedValue,
+                pm.asJson.get("message").asText()
+            )
+        } else {
+            new FieldError(
+                pm.asJson.get("schema").asText(),
+                "",
+                pm.asJson.get("message").asText()
+            )
+        }
+
     }
   }
 

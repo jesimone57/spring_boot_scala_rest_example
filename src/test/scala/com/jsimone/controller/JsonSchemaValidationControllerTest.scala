@@ -149,78 +149,38 @@ class JsonSchemaValidationControllerTest extends AbstractTestBase {
   }
 
   /**
-      {
-        "status_code": 400,
-        "uri_path": "/schema_test1",
-        "error_message": "JSON Schema validation errors encountered.",
-        "method": "GET",
-        "errors": [{
-          "field_name": "/bool",
-          "error_message": "instance type (string) does not match any allowed primitive type (allowed: [\"boolean\"])",
-          "rejected_value": "string"
-        }, {
-          "field_name": "/date",
-          "error_message": "string \"2017\" is invalid against requested date format(s) [yyyy-MM-dd'T'HH:mm:ssZ, yyyy-MM-dd'T'HH:mm:ss.[0-9]{1,12}Z]",
-          "rejected_value": "2017"
-        }, {
-          "field_name": "/email",
-          "error_message": "string \"asdf\" is not a valid email address",
-          "rejected_value": "asdf"
-        }, {
-          "field_name": "/enum",
-          "error_message": "instance value (\"AZURE\") not found in enum (possible values: [\"RED\",\"BLACK\",\"BLUE\"])",
-          "rejected_value": "AZURE"
-        }, {
-          "field_name": "/int-max",
-          "error_message": "numeric instance is greater than the required maximum (maximum: 100, found: 1000)",
-          "rejected_value": "1000"
-        }, {
-          "field_name": "/int-min",
-          "error_message": "numeric instance is lower than the required minimum (minimum: 50, found: 17)",
-          "rejected_value": "17"
-        }, {
-          "field_name": "/int-wrongtype",
-          "error_message": "instance type (number) does not match any allowed primitive type (allowed: [\"integer\"])",
-          "rejected_value": "number"
-        }, {
-          "field_name": "/number-max",
-          "error_message": "numeric instance is greater than the required maximum (maximum: 100, found: 1E+4)",
-          "rejected_value": "1E+4"
-        }, {
-          "field_name": "/number-min",
-          "error_message": "numeric instance is lower than the required minimum (minimum: 10, found: 1)",
-          "rejected_value": "1"
-        }, {
-          "field_name": "/number-multof",
-          "error_message": "remainder of division is not zero (100.001 / 0.01)",
-          "rejected_value": "100.001"
-        }, {
-          "field_name": "/string-max",
-          "error_message": "string \"fffffff\" is too long (length: 7, maximum allowed: 2)",
-          "rejected_value": "fffffff"
-        }, {
-          "field_name": "/string-min",
-          "error_message": "string \"f\" is too short (length: 1, required minimum: 5)",
-          "rejected_value": "f"
-        }, {
-          "field_name": "/string-pattern",
-          "error_message": "ECMA 262 regex \"^[A-Za-z0-9]+$\" does not match input string \"pi*lot\"",
-          "rejected_value": "pi*lot"
-        }]
-      }
+          {
+            "status_code": 400,
+            "uri_path": "/schema_test2",
+            "method": "GET",
+            "error_message": "JSON Schema validation errors encountered.",
+            "errors": [{
+                "field_name": "",
+                "error_message": "the following keywords are unknown and will be ignored: [propertyNames]",
+                "rejected_value": ""
+            }, {
+                "field_name": "",
+                "error_message": "object instance has properties which are not allowed by the schema: [\"extra-prop\"]",
+                "rejected_value": ""
+            }, {
+                "field_name": "",
+                "error_message": "object has missing required properties ([\"required\"])",
+                "rejected_value": ""
+            }]
+        }
     */
   @Test
   def schemaValidationFailure1(): Unit = {
-    val url = s"http://localhost:$port/schema_test1"
+    val url = s"http://localhost:$port/schema_test2"
     val responseEntity = restTemplate.getForEntity(url, classOf[String])
     val errorResponse = verifyErrorResponse(responseEntity, HttpStatus.BAD_REQUEST, HttpMethod.GET, "JSON Schema validation errors encountered.")
 
     val someExpectedFieldErrors = List(
-      new FieldError("/int-min", "17", "numeric instance is lower than the required minimum (minimum: 50, found: 17)"),
-      new FieldError("/string-pattern", "pi*lot", """ECMA 262 regex "^[A-Za-z0-9]+$" does not match input string "pi*lot""""),
-      new FieldError("/string-min",  "f", "string \"f\" is too short (length: 1, required minimum: 5)")
+      new FieldError("", "", "the following keywords are unknown and will be ignored: [propertyNames]"),
+      new FieldError("", "", "object instance has properties which are not allowed by the schema: [\"extra-prop\"]"),
+      new FieldError("",  "", "object has missing required properties ([\"required\"])")
     )
-    verifyFieldErrors(13, errorResponse, someExpectedFieldErrors)
+    verifyFieldErrors(3, errorResponse, someExpectedFieldErrors)
   }
 
   @Test
