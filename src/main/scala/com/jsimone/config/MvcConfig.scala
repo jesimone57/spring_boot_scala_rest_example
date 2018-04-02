@@ -26,9 +26,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean
+    def requestLoggingFilter: Filter = new RequestLoggingFilter
+
+    @Bean
     def requestLoggingFilterRegistration = {
         val filterRegistrationBean = new FilterRegistrationBean
-        filterRegistrationBean.setFilter(new RequestLoggingFilter)
+        filterRegistrationBean.setFilter(requestLoggingFilter)
         filterRegistrationBean.addUrlPatterns("/*")
         //filterRegistrationBean.addInitParameter("paramName", "paramValue")
         filterRegistrationBean.setName("requestLoggingFilter")
@@ -37,9 +40,12 @@ class MvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
+    def jsonSchemaValidationFilter: Filter = new JsonSchemaValidationFilter
+
+    @Bean
     def jsonSchemaValidationFilterRegistration = {
         val filterRegistrationBean = new FilterRegistrationBean
-        filterRegistrationBean.setFilter(new JsonSchemaValidationFilter)
+        filterRegistrationBean.setFilter(jsonSchemaValidationFilter)
         filterRegistrationBean.addUrlPatterns("/*")
         //filterRegistrationBean.addInitParameter("paramName", "paramValue")
         filterRegistrationBean.setName("jsonSchemaValidationFilter")
