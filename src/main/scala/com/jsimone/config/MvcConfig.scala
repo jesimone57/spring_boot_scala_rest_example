@@ -15,3 +15,36 @@
 //      //.addResourceLocations("/resources/", "/swagger-ui.html")
 //  }
 //}
+
+import com.jsimone.filter.{JsonSchemaValidationFilter, RequestLoggingFilter}
+import javax.servlet.Filter
+import org.springframework.boot.web.servlet.FilterRegistrationBean
+import org.springframework.context.annotation.{Bean, Configuration}
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
+
+@Configuration
+class MvcConfig extends WebMvcConfigurerAdapter {
+
+    @Bean
+    def requestLoggingFilterRegistration = {
+        val filterRegistrationBean = new FilterRegistrationBean
+        filterRegistrationBean.setFilter(new RequestLoggingFilter)
+        filterRegistrationBean.addUrlPatterns("/*")
+        //filterRegistrationBean.addInitParameter("paramName", "paramValue")
+        filterRegistrationBean.setName("requestLoggingFilter")
+        filterRegistrationBean.setOrder(1)
+        filterRegistrationBean
+    }
+
+    @Bean
+    def jsonSchemaValidationFilterRegistration = {
+        val filterRegistrationBean = new FilterRegistrationBean
+        filterRegistrationBean.setFilter(new JsonSchemaValidationFilter)
+        filterRegistrationBean.addUrlPatterns("/*")
+        //filterRegistrationBean.addInitParameter("paramName", "paramValue")
+        filterRegistrationBean.setName("jsonSchemaValidationFilter")
+        filterRegistrationBean.setOrder(2)
+        filterRegistrationBean
+    }
+
+}

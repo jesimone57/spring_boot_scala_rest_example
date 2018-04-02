@@ -13,7 +13,6 @@ class JsonResponseController extends AbstractControllerBase {
     */
   @GetMapping(value = Array("/json"))
   def mapToJson(): String = {
-    log.info("/json endpoint hit.")
     val m = Map(
       "name" -> "john doe",
       "age" -> 18,

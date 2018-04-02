@@ -11,7 +11,6 @@ class JsonSchemaValidationController extends AbstractControllerBase {
 
   @GetMapping(value = Array("/schema_test2"))
   def validateAgainstSchema(request: HttpServletRequest): String = {
-    log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
     jsonSchemaValidateFromResource("/test2.json", "/test2_schema.json", request)
     "valid"
   }
@@ -19,7 +18,6 @@ class JsonSchemaValidationController extends AbstractControllerBase {
 
   @PostMapping(value = Array("/create_person1"))
   def createPerson1(@RequestBody requestBody: String, request: HttpServletRequest): String = {
-    log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
     jsonSchemaValidateFromString(requestBody, "/person1_schema.json", request)
     "valid"
   }
@@ -32,7 +30,6 @@ class JsonSchemaValidationController extends AbstractControllerBase {
                                         @RequestParam(value = "input", required = true) inputFilename: String,
                                         @RequestParam(value = "schema", required = true) schemaFilename: String,
                                         request: HttpServletRequest): String = {
-    log.info(s"${request.getMethod} method on endpoint ${request.getRequestURI} hit.")
     jsonSchemaValidateFromResource(inputFilename, schemaFilename, request)
     "valid"
   }
