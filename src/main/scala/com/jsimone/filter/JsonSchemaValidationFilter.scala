@@ -1,7 +1,5 @@
 package com.jsimone.filter
 
-import java.util.stream.Collectors
-
 import com.jsimone.util.Logging
 import javax.servlet._
 import javax.servlet.http.HttpServletRequest
@@ -36,8 +34,6 @@ class JsonSchemaValidationFilter extends Filter with Logging {
         // pass the request along the filter chain
         chain.doFilter(request, response)
     }
-
-    override def clone(): AnyRef = super.clone()
 
     override def destroy(): Unit = {
         //we can close resources here

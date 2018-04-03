@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.9.RELEASE'
+        springBootVersion = '1.5.10.RELEASE'
     }
 
     repositories {
@@ -15,8 +15,7 @@ buildscript {
 
 plugins {
     // a Gradle plugin that uses `git describe` to produce a version string.
-    id 'com.palantir.git-version' version '0.8.0'
-    id 'org.springframework.boot' version '1.5.9.RELEASE'
+    id 'org.springframework.boot' version '1.5.10.RELEASE'
 }
 
 version '1.0-SNAPSHOT'
@@ -26,7 +25,7 @@ apply plugin: 'scala'
 apply plugin: 'org.springframework.boot'
 
 jar {
-    manifest.attributes 'Implementation-Version': "${gitVersion()}"
+    manifest.attributes 'Implementation-Version': "$version"
 }
 
 sourceCompatibility = 1.8
