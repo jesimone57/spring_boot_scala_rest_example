@@ -2,8 +2,6 @@ package com.jsimone.entity
 
 import javax.validation.constraints._
 
-import org.hibernate.validator.constraints.NotBlank
-
 import scala.beans.BeanProperty
 
 /**
@@ -40,7 +38,7 @@ class Person() {
   @Max(value = 150, message = "Age should be a maximum of 150")
   @BeanProperty var age: Int = 0
 
-  @NotBlank   // Note: we'll use the default message since we did not provide a custom message
+  @NotNull   // Note: we'll use the default message since we did not provide a custom message
   @Pattern(regexp = "^[A-Za-z0-9]+$")   // Alpha numeric string
   @BeanProperty var job: String = _
 

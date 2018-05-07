@@ -5,7 +5,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation._
 
 @RestController
-@RequestMapping(value = Array("/"), produces = Array(MediaType.APPLICATION_JSON_VALUE))
+@RequestMapping(value = Array("/"), produces = Array(MediaType.APPLICATION_JSON_UTF8_VALUE))
 class JsonResponseController extends AbstractControllerBase {
 
   /**
@@ -21,7 +21,7 @@ class JsonResponseController extends AbstractControllerBase {
         Map("name" -> "dorothy", "age" -> 5, "hasChild" -> false),
         Map("name" -> "bill", "age" -> 8, "hasChild" -> false)))
 
-    JsonUtil.toJson(m)
+    JsonUtil.toJsonString(m)
   }
 
 }

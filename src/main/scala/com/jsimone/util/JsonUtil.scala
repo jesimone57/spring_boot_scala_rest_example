@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.TimeZone
 
-import com.fasterxml.jackson.databind.{DeserializationFeature, ObjectMapper}
+import com.fasterxml.jackson.databind.{DeserializationFeature, JsonNode, ObjectMapper}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 //import org.json4s._
@@ -28,46 +28,50 @@ import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
   *
   */
 object JsonUtil {
-  //implicit val formats = DefaultFormats
+    //implicit val formats = DefaultFormats
 
-  val W3C_UTC_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-  val W3C_UTC_DATE_FORMAT = new SimpleDateFormat(W3C_UTC_FORMAT)
-  W3C_UTC_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"))
+    val W3C_UTC_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    val W3C_UTC_DATE_FORMAT = new SimpleDateFormat(W3C_UTC_FORMAT)
+    W3C_UTC_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"))
 
-  val objectMapper = new ObjectMapper() with ScalaObjectMapper
-  objectMapper.registerModule(DefaultScalaModule)
-  objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-  objectMapper.setDateFormat(W3C_UTC_DATE_FORMAT)  // set a custom date format, or just take the default
+    val objectMapper = new ObjectMapper() with ScalaObjectMapper
+    objectMapper.registerModule(DefaultScalaModule)
+    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    objectMapper.setDateFormat(W3C_UTC_DATE_FORMAT) // set a custom date format, or just take the default
 
-  //  def toJson(value: Map[Symbol, Any]): String = {
-  //    toJson(value map { case (k, v) => k.name -> v })
-  //  }
+    //  def toJson(value: Map[Symbol, Any]): String = {
+    //    toJson(value map { case (k, v) => k.name -> v })
+    //  }
 
-  def toJson(value: Any): String = {
-    //mapper.writeValueAsString(value)
-    val out = new ByteArrayOutputStream()
-    objectMapper.writeValue(out, value)
-    out.toString
-  }
+    def toJsonString(value: Any): String = {
+        //mapper.writeValueAsString(value)
+        val out = new ByteArrayOutputStream()
+        objectMapper.writeValue(out, value)
+        out.toString
+    }
 
-  //  def toMap[V](json: String)(implicit m: Manifest[V]) = fromJson[Map[String, V]](json)
+    def toJson(value: Any): JsonNode = {
+        objectMapper.valueToTree(value)
+    }
 
-  def fromJson[T](json: String)(implicit m: Manifest[T]): T = {
-    objectMapper.readValue[T](json)
-  }
+    //  def toMap[V](json: String)(implicit m: Manifest[V]) = fromJson[Map[String, V]](json)
 
-  /*
-    Json4s implementation.   I could not get this to work.
+    def fromJson[T](json: String)(implicit m: Manifest[T]): T = {
+        objectMapper.readValue[T](json)
+    }
 
-  def toJson2(value: AnyRef): String = {
-    write(value)
-  }
+    /*
+      Json4s implementation.   I could not get this to work.
 
-  def fromJson2[T](json: String)(implicit m: Manifest[T]): T = {
-    read[T](json)
-   // or
-    parse(json).extract[T]
-  }
-  */
+    def toJson2(value: AnyRef): String = {
+      write(value)
+    }
+
+    def fromJson2[T](json: String)(implicit m: Manifest[T]): T = {
+      read[T](json)
+     // or
+      parse(json).extract[T]
+    }
+    */
 }
 

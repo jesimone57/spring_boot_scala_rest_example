@@ -6,9 +6,11 @@ import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.http.HttpStatus
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(classOf[SpringRunner])
+@ActiveProfiles(Array("test"))
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class NoHandlerFoundExceptionTest extends AbstractTestBase {
 
