@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.{conten
 @WebMvcTest(value = Array(classOf[HelloWorldController]), secure = false)
 class HelloWorldControllerTest {
 
-    private val contentType = "application/json;charset=UTF-8"
+    private val contentType = "text/plain;charset=UTF-8"
 
     @Autowired
     private val controller: HelloWorldController = null
