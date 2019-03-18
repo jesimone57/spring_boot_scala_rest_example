@@ -32,6 +32,12 @@ You can change the port in application.properties file):
 ### Check to make sure the REST API is running
 [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health)
 
+### Swagger API Documentation
+[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+### Swagger API Docs JSON Format
+[http://localhost:8080/v2/api-docs](http://localhost:8080/v2/api-docs)
+
 ### Hello World
 [http://localhost:8080](http://localhost:8080)
 
