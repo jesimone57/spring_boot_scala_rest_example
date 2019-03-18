@@ -30,7 +30,7 @@ Firefox browser also does an excellent job of formatting the JSON results withou
 You can change the port in application.properties file):
 
 ### Check to make sure the REST API is running
-[http://localhost:8080/health](http://localhost:8080/health)
+[http://localhost:8080/actuator/health](http://localhost:8080/actuator/health)
 
 ### Hello World
 [http://localhost:8080](http://localhost:8080)
