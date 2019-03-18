@@ -84,7 +84,7 @@ You can change the port in application.properties file):
 [http://localhost:8080/asdf](http://localhost:8080/asdf)
 
 ### Example of invalid JSON against a JSON schema
-[http://localhost:8080/schema_test1](http://localhost:8080/schema_test1)
+[http://localhost:8080/schema?input=/person1.json&schema=/person1_schema.json](http://localhost:8080/schema?input=/person1.json&schema=/person1_schema.json)
 
 ### Example of valid JSON against a JSON schema (Note: schemas and input JSON are in the resources directory)
 [http://localhost:8080/schema?input=/person2.json&schema=/person2_schema.json](http://localhost:8080/schema?input=/person2.json&schema=/person2_schema.json)
